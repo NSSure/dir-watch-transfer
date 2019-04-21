@@ -68,9 +68,6 @@ namespace dir_watch_transfer_ui
             // Progress column
             watchedDirs.Columns[3].Width = -2;
 
-            // Force column
-            watchedDirs.Columns[4].Width = -2;
-
             int itemHeight = 35;
             ImageList imgList = new ImageList();
             imgList.ImageSize = new Size(1, itemHeight);

@@ -45,7 +45,6 @@
             this.targetColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.status = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.progress = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.force = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.txtSourceDirectory = new System.Windows.Forms.TextBox();
             this.txtTargetDirectory = new System.Windows.Forms.TextBox();
             this.btnCreateWatcher = new System.Windows.Forms.Button();
@@ -90,7 +89,7 @@
             this.menuItemAddLink.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.menuItemAddLink.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.menuItemAddLink.Name = "menuItemAddLink";
-            this.menuItemAddLink.Size = new System.Drawing.Size(252, 30);
+            this.menuItemAddLink.Size = new System.Drawing.Size(150, 30);
             this.menuItemAddLink.Text = "Add Link";
             // 
             // watchersToolStripMenuItem
@@ -166,8 +165,7 @@
             this.sourceColumn,
             this.targetColumn,
             this.status,
-            this.progress,
-            this.force});
+            this.progress});
             this.watchedDirs.FullRowSelect = true;
             this.watchedDirs.Location = new System.Drawing.Point(3, 3);
             this.watchedDirs.Name = "watchedDirs";
@@ -194,10 +192,6 @@
             // progress
             // 
             this.progress.Text = "Progress";
-            // 
-            // force
-            // 
-            this.force.Text = "Force";
             // 
             // txtSourceDirectory
             // 
@@ -248,7 +242,7 @@
             // contextItemForceCopy
             // 
             this.contextItemForceCopy.Name = "contextItemForceCopy";
-            this.contextItemForceCopy.Size = new System.Drawing.Size(240, 30);
+            this.contextItemForceCopy.Size = new System.Drawing.Size(171, 30);
             this.contextItemForceCopy.Text = "Force copy";
             // 
             // flowLayoutPanel1
@@ -309,7 +303,6 @@
         private System.Windows.Forms.ContextMenuStrip contextMenu;
         private System.Windows.Forms.ToolStripMenuItem contextItemForceCopy;
         private System.Windows.Forms.ColumnHeader progress;
-        private System.Windows.Forms.ColumnHeader force;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }
