@@ -20,4 +20,6 @@ C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\bin
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\obj\Debug\dir_watch_transfer_ui.MainForm.resources
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\bin\Debug\x86\sqlite3.dll
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\bin\Debug\x64\sqlite3.dll
-C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\obj\Debug\dir-watch-transfer-ui.csprojAssemblyReference.cache
+C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\obj\Debug\dir_watch_transfer_ui.Forms.CreateLinkForm.resources
+C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\bin\Debug\Images\StatusInformation.png
+C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\bin\Debug\Images\LinkedFolder.png

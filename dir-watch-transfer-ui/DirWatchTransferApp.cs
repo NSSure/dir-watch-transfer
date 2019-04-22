@@ -28,6 +28,7 @@ namespace dir_watch_transfer_ui
             }
 
             DirectoryInfo[] dirs = dir.GetDirectories();
+
             // If the destination directory doesn't exist, create it.
             if (!Directory.Exists(destDirName))
             {
@@ -36,6 +37,7 @@ namespace dir_watch_transfer_ui
 
             // Get the files in the directory and copy them to the new location.
             FileInfo[] files = dir.GetFiles();
+
             foreach (FileInfo file in files)
             {
                 string temppath = Path.Combine(destDirName, file.Name);

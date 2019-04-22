@@ -29,48 +29,44 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.sourceDirectoryDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.targetDirectoryDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menu = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemAddLink = new System.Windows.Forms.ToolStripMenuItem();
             this.watchersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemStartWatchers = new System.Windows.Forms.ToolStripMenuItem();
             this.devToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemSeedTestLink = new System.Windows.Forms.ToolStripMenuItem();
-            this.listHistory = new System.Windows.Forms.ListBox();
             this.mainContainer = new System.Windows.Forms.SplitContainer();
             this.watchedDirs = new System.Windows.Forms.ListView();
             this.sourceColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.targetColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.status = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.progress = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.txtSourceDirectory = new System.Windows.Forms.TextBox();
-            this.txtTargetDirectory = new System.Windows.Forms.TextBox();
-            this.btnCreateWatcher = new System.Windows.Forms.Button();
+            this.listHistory = new System.Windows.Forms.ListView();
             this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.contextItemStartWatchingLink = new System.Windows.Forms.ToolStripMenuItem();
             this.contextItemForceCopy = new System.Windows.Forms.ToolStripMenuItem();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainContainer)).BeginInit();
             this.mainContainer.Panel1.SuspendLayout();
             this.mainContainer.Panel2.SuspendLayout();
             this.mainContainer.SuspendLayout();
             this.contextMenu.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
             this.menuStrip1.BackColor = System.Drawing.SystemColors.Window;
+            this.menuStrip1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(0);
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menu,
             this.watchersToolStripMenuItem,
             this.devToolStripMenuItem});
+            this.menuStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1498, 33);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(0);
+            this.menuStrip1.Size = new System.Drawing.Size(1498, 25);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -78,9 +74,8 @@
             // 
             this.menu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuItemAddLink});
-            this.menu.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menu.Name = "menu";
-            this.menu.Size = new System.Drawing.Size(46, 29);
+            this.menu.Size = new System.Drawing.Size(51, 25);
             this.menu.Text = "File";
             // 
             // menuItemAddLink
@@ -89,58 +84,34 @@
             this.menuItemAddLink.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.menuItemAddLink.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.menuItemAddLink.Name = "menuItemAddLink";
-            this.menuItemAddLink.Size = new System.Drawing.Size(150, 30);
+            this.menuItemAddLink.Size = new System.Drawing.Size(161, 30);
             this.menuItemAddLink.Text = "Add Link";
             // 
             // watchersToolStripMenuItem
             // 
-            this.watchersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemStartWatchers});
-            this.watchersToolStripMenuItem.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.watchersToolStripMenuItem.Name = "watchersToolStripMenuItem";
-            this.watchersToolStripMenuItem.Size = new System.Drawing.Size(85, 29);
+            this.watchersToolStripMenuItem.Size = new System.Drawing.Size(97, 25);
             this.watchersToolStripMenuItem.Text = "Watchers";
-            // 
-            // menuItemStartWatchers
-            // 
-            this.menuItemStartWatchers.Name = "menuItemStartWatchers";
-            this.menuItemStartWatchers.Size = new System.Drawing.Size(244, 30);
-            this.menuItemStartWatchers.Text = "Start existing watchers";
             // 
             // devToolStripMenuItem
             // 
             this.devToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuItemSeedTestLink});
             this.devToolStripMenuItem.Name = "devToolStripMenuItem";
-            this.devToolStripMenuItem.Size = new System.Drawing.Size(55, 29);
+            this.devToolStripMenuItem.Size = new System.Drawing.Size(54, 25);
             this.devToolStripMenuItem.Text = "Dev";
             // 
             // menuItemSeedTestLink
             // 
             this.menuItemSeedTestLink.Name = "menuItemSeedTestLink";
-            this.menuItemSeedTestLink.Size = new System.Drawing.Size(201, 30);
+            this.menuItemSeedTestLink.Size = new System.Drawing.Size(200, 30);
             this.menuItemSeedTestLink.Text = "Seed test link";
-            // 
-            // listHistory
-            // 
-            this.listHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.listHistory.FormattingEnabled = true;
-            this.listHistory.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.listHistory.ItemHeight = 20;
-            this.listHistory.Location = new System.Drawing.Point(3, 0);
-            this.listHistory.Margin = new System.Windows.Forms.Padding(0);
-            this.listHistory.Name = "listHistory";
-            this.listHistory.Size = new System.Drawing.Size(1463, 404);
-            this.listHistory.TabIndex = 5;
             // 
             // mainContainer
             // 
-            this.mainContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.mainContainer.Location = new System.Drawing.Point(12, 91);
+            this.mainContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mainContainer.Location = new System.Drawing.Point(0, 25);
+            this.mainContainer.Margin = new System.Windows.Forms.Padding(0);
             this.mainContainer.Name = "mainContainer";
             this.mainContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -152,24 +123,23 @@
             // 
             this.mainContainer.Panel2.Controls.Add(this.listHistory);
             this.mainContainer.Panel2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.mainContainer.Size = new System.Drawing.Size(1474, 830);
-            this.mainContainer.SplitterDistance = 414;
+            this.mainContainer.Size = new System.Drawing.Size(1498, 973);
+            this.mainContainer.SplitterDistance = 448;
+            this.mainContainer.SplitterWidth = 5;
             this.mainContainer.TabIndex = 6;
             // 
             // watchedDirs
             // 
-            this.watchedDirs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.watchedDirs.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.sourceColumn,
             this.targetColumn,
-            this.status,
-            this.progress});
+            this.status});
+            this.watchedDirs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.watchedDirs.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.watchedDirs.FullRowSelect = true;
-            this.watchedDirs.Location = new System.Drawing.Point(3, 3);
+            this.watchedDirs.Location = new System.Drawing.Point(0, 0);
             this.watchedDirs.Name = "watchedDirs";
-            this.watchedDirs.Size = new System.Drawing.Size(1463, 408);
+            this.watchedDirs.Size = new System.Drawing.Size(1498, 448);
             this.watchedDirs.TabIndex = 0;
             this.watchedDirs.TileSize = new System.Drawing.Size(268, 44);
             this.watchedDirs.UseCompatibleStateImageBehavior = false;
@@ -189,84 +159,49 @@
             // 
             this.status.Text = "Status";
             // 
-            // progress
+            // listHistory
             // 
-            this.progress.Text = "Progress";
-            // 
-            // txtSourceDirectory
-            // 
-            this.txtSourceDirectory.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSourceDirectory.Location = new System.Drawing.Point(5, 5);
-            this.txtSourceDirectory.Margin = new System.Windows.Forms.Padding(5);
-            this.txtSourceDirectory.Name = "txtSourceDirectory";
-            this.txtSourceDirectory.ReadOnly = true;
-            this.txtSourceDirectory.ShortcutsEnabled = false;
-            this.txtSourceDirectory.Size = new System.Drawing.Size(384, 26);
-            this.txtSourceDirectory.TabIndex = 1;
-            this.txtSourceDirectory.Text = "Select source directory";
-            // 
-            // txtTargetDirectory
-            // 
-            this.txtTargetDirectory.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTargetDirectory.Location = new System.Drawing.Point(399, 5);
-            this.txtTargetDirectory.Margin = new System.Windows.Forms.Padding(5);
-            this.txtTargetDirectory.Name = "txtTargetDirectory";
-            this.txtTargetDirectory.ReadOnly = true;
-            this.txtTargetDirectory.Size = new System.Drawing.Size(771, 26);
-            this.txtTargetDirectory.TabIndex = 1;
-            // 
-            // btnCreateWatcher
-            // 
-            this.btnCreateWatcher.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCreateWatcher.FlatAppearance.BorderSize = 0;
-            this.btnCreateWatcher.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnCreateWatcher.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCreateWatcher.Location = new System.Drawing.Point(1180, 5);
-            this.btnCreateWatcher.Margin = new System.Windows.Forms.Padding(5);
-            this.btnCreateWatcher.Name = "btnCreateWatcher";
-            this.btnCreateWatcher.Size = new System.Drawing.Size(287, 26);
-            this.btnCreateWatcher.TabIndex = 2;
-            this.btnCreateWatcher.Text = "Create Watcher";
-            this.btnCreateWatcher.UseVisualStyleBackColor = true;
+            this.listHistory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listHistory.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listHistory.Location = new System.Drawing.Point(0, 0);
+            this.listHistory.Name = "listHistory";
+            this.listHistory.Size = new System.Drawing.Size(1498, 520);
+            this.listHistory.TabIndex = 7;
+            this.listHistory.UseCompatibleStateImageBehavior = false;
+            this.listHistory.View = System.Windows.Forms.View.List;
             // 
             // contextMenu
             // 
             this.contextMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.contextItemStartWatchingLink,
             this.contextItemForceCopy});
             this.contextMenu.Name = "contextMenu";
-            this.contextMenu.Size = new System.Drawing.Size(172, 34);
+            this.contextMenu.Size = new System.Drawing.Size(229, 64);
+            // 
+            // contextItemStartWatchingLink
+            // 
+            this.contextItemStartWatchingLink.Name = "contextItemStartWatchingLink";
+            this.contextItemStartWatchingLink.Size = new System.Drawing.Size(228, 30);
+            this.contextItemStartWatchingLink.Text = "Start watching link";
             // 
             // contextItemForceCopy
             // 
             this.contextItemForceCopy.Name = "contextItemForceCopy";
-            this.contextItemForceCopy.Size = new System.Drawing.Size(171, 30);
+            this.contextItemForceCopy.Size = new System.Drawing.Size(228, 30);
             this.contextItemForceCopy.Text = "Force copy";
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Controls.Add(this.txtSourceDirectory);
-            this.flowLayoutPanel1.Controls.Add(this.txtTargetDirectory);
-            this.flowLayoutPanel1.Controls.Add(this.btnCreateWatcher);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 48);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1474, 37);
-            this.flowLayoutPanel1.TabIndex = 8;
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Menu;
-            this.ClientSize = new System.Drawing.Size(1498, 933);
-            this.Controls.Add(this.flowLayoutPanel1);
+            this.ClientSize = new System.Drawing.Size(1498, 998);
             this.Controls.Add(this.mainContainer);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.Text = "Dir-Watch-Transfer";
+            this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.mainContainer.Panel1.ResumeLayout(false);
@@ -274,36 +209,28 @@
             ((System.ComponentModel.ISupportInitialize)(this.mainContainer)).EndInit();
             this.mainContainer.ResumeLayout(false);
             this.contextMenu.ResumeLayout(false);
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.flowLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.FolderBrowserDialog sourceDirectoryDialog;
-        private System.Windows.Forms.FolderBrowserDialog targetDirectoryDialog;
+
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem menu;
         private System.Windows.Forms.ToolStripMenuItem menuItemAddLink;
-        private System.Windows.Forms.ListBox listHistory;
         private System.Windows.Forms.SplitContainer mainContainer;
         private System.Windows.Forms.ListView watchedDirs;
         private System.Windows.Forms.ColumnHeader sourceColumn;
         private System.Windows.Forms.ColumnHeader targetColumn;
         private System.Windows.Forms.ColumnHeader status;
-        private System.Windows.Forms.TextBox txtSourceDirectory;
-        private System.Windows.Forms.TextBox txtTargetDirectory;
-        private System.Windows.Forms.Button btnCreateWatcher;
         private System.Windows.Forms.ToolStripMenuItem watchersToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem menuItemStartWatchers;
         private System.Windows.Forms.ToolStripMenuItem devToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem menuItemSeedTestLink;
         private System.Windows.Forms.ContextMenuStrip contextMenu;
+        private System.Windows.Forms.ToolStripMenuItem contextItemStartWatchingLink;
+        private System.Windows.Forms.ListView listHistory;
         private System.Windows.Forms.ToolStripMenuItem contextItemForceCopy;
-        private System.Windows.Forms.ColumnHeader progress;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }
 
