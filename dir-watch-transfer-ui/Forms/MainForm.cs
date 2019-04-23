@@ -21,29 +21,9 @@ namespace dir_watch_transfer_ui
             }
         }
 
-        public Color ColorSuccess
-        {
-            get
-            {
-                return Color.FromArgb(101, 180, 100);
-            }
-        }
-
-        public Color ColorDanger
-        {
-            get
-            {
-                return Color.FromArgb(220, 53, 69);
-            }
-        }
-
         public MainForm()   
         {
             InitializeComponent();
-
-            this.Width = 800;
-            this.Height = 600;
-
             watchedDirs.DoubleBuffer();
 
             // Register control events.
@@ -81,7 +61,7 @@ namespace dir_watch_transfer_ui
 
             foreach (SymbolicLink symbolicLink in DirWatchTransferApp.SymbolicLinks)
             {
-                this.AddSymbolicLinkToList(symbolicLink.Source, symbolicLink.Target, ignoreHistoryLog: true);
+                this.AddSymbolicLinkToList(symbolicLink.Source, symbolicLink.Target);
             }
 
             base.CreateHandle();
@@ -92,19 +72,16 @@ namespace dir_watch_transfer_ui
         /// </summary>
         /// <param name="sourcePath">Path of the source directory.</param>
         /// <param name="targetPath">Path of the target directory.</param>
-        private void AddSymbolicLinkToList(string sourcePath, string targetPath, bool ignoreHistoryLog = false)
+        private void AddSymbolicLinkToList(string sourcePath, string targetPath)
         {
             string[] data = new string[] { sourcePath, targetPath, "Stopped" };
             ListViewItem item = new ListViewItem(data);
             item.UseItemStyleForSubItems = false;
             ListViewItem.ListViewSubItem statusSubItem = item.SubItems[2];
-            statusSubItem.ForeColor = this.ColorDanger;
+            statusSubItem.ForeColor = Color.FromArgb(220, 53, 69);
             watchedDirs.Items.Add(item);
 
-            if (!ignoreHistoryLog)
-            {
-                this.AddHistoryItem($"Linked created between {sourcePath} and {targetPath}", DirWatchTransferApp.LinkedFolderImageConfig.ImageIndex);
-            }
+            this.AddHistoryItem($"Linked created between {sourcePath} and {targetPath}", DirWatchTransferApp.LinkedFolderImageConfig.ImageIndex);
         }
 
         public async Task CreateSymbolicLink(string sourcePath, string targetPath)
@@ -114,24 +91,18 @@ namespace dir_watch_transfer_ui
             {
                 Source = sourcePath,
                 Target = targetPath,
-                Monitor = new SymbolicLinkMonitor(this.OnCopyCompleted)
+                Monitor = new SymbolicLinkMonitor()
             });
-
-            if (watchersToolStripMenuItem.DropDownItems[0].Enabled == false && DirWatchTransferApp.SymbolicLinks.Count != 0)
-            {
-                watchersToolStripMenuItem.DropDownItems[0].Enabled = true;
-            }
 
             // UI methods.
             this.AddSymbolicLinkToList(sourcePath, targetPath);
+            this.AddHistoryItem($"Linked created between {sourcePath} and {targetPath}", DirWatchTransferApp.LinkedFolderImageConfig.ImageIndex);
         }
 
         private void AddHistoryItem(string text, int imageIndex)
         {
-            this.Invoke((MethodInvoker) delegate {
-                ListViewItem item = new ListViewItem(text, imageIndex);
-                listHistory.Items.Add(item);
-            });
+            ListViewItem item = new ListViewItem(text, imageIndex);
+            listHistory.Items.Add(item);
         }
 
         #region Events
@@ -177,12 +148,12 @@ namespace dir_watch_transfer_ui
 
         private async void MenuItemSeedTestLink_Click(object sender, EventArgs e)
         {
-            await this.CreateSymbolicLink(@"C:\DirTempSource", @"C:\DirTargetSource");
+            await this.CreateSymbolicLink(@"C:\Users\Nick\Documents\Sample", @"C:\Users\Nick\Documents\Target");
         }
 
         private void StartWatchers_Click(object sender, EventArgs e)
         {
-            this.SymbolicLinkUtil.BulkStartWatchers(this.OnCopyCompleted);
+            this.SymbolicLinkUtil.BulkStartWatchers();
 
             // Remove "Start watchers" menu item for main menu.
             watchersToolStripMenuItem.DropDownItems.RemoveAt(0);
@@ -191,12 +162,6 @@ namespace dir_watch_transfer_ui
             ToolStripMenuItem stopWatchers = new ToolStripMenuItem("Stop watchers");
             stopWatchers.Click += StopWatchers_Click;
             watchersToolStripMenuItem.DropDownItems.Insert(0, stopWatchers);
-
-            foreach (ListViewItem item in watchedDirs.Items)
-            {
-                item.SubItems[2].ForeColor = this.ColorSuccess;
-                item.SubItems[2].Text = "Watching...";
-            }
 
             this.AddHistoryItem($"Initialized the watcher(s) for ({DirWatchTransferApp.SymbolicLinks.Count}) symbolic links", DirWatchTransferApp.TimeImageConfig.ImageIndex);
         }
@@ -213,25 +178,10 @@ namespace dir_watch_transfer_ui
             startWatchers.Click += StartWatchers_Click;
             watchersToolStripMenuItem.DropDownItems.Insert(0, startWatchers);
 
-            foreach (ListViewItem item in watchedDirs.Items)
-            {
-                item.SubItems[2].ForeColor = this.ColorDanger;
-                item.SubItems[2].Text = "Stopped";
-            }
-
             this.AddHistoryItem($"Stopped the watcher(s) for ({DirWatchTransferApp.SymbolicLinks.Count}) symbolic links", DirWatchTransferApp.StatusOfflineConfig.ImageIndex);
         }
 
         // this.AddHistoryItem($"Link created copy of {copyDiagnostics.SourcePath} at {copyDiagnostics.TargetPath} ({copyDiagnostics.ElapsedTime} ms)", DirWatchTransferApp.LinkImageConfig.ImageIndex);
-
-        #endregion
-
-        #region Callbacks
-
-        private void OnCopyCompleted(CopyDiagnostics copyDiagnostics)
-        {
-            this.AddHistoryItem($"File contents synced between {copyDiagnostics.SourcePath} and {copyDiagnostics.TargetPath} ({copyDiagnostics.ElapsedTime} ms)", DirWatchTransferApp.LinkImageConfig.ImageIndex);
-        }
 
         #endregion
     }
