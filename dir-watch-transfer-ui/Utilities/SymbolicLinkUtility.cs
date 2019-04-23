@@ -1,5 +1,6 @@
 ﻿using dir_watch_transfer_ui.DB;
 using dir_watch_transfer_ui.Model;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -22,11 +23,11 @@ namespace dir_watch_transfer_ui.Utilities
             return base.AddAsync(entity);
         }
 
-        public void BulkStartWatchers()
+        public void BulkStartWatchers(Action<CopyDiagnostics> copyCompleted)
         {
             foreach (SymbolicLink symbolicLink in DirWatchTransferApp.SymbolicLinks)
             {
-                symbolicLink.Monitor = new SymbolicLinkMonitor();
+                symbolicLink.Monitor = new SymbolicLinkMonitor(copyCompleted);
                 symbolicLink.Monitor.StartWatcher(symbolicLink.Source);
             }
         }
@@ -63,7 +64,7 @@ namespace dir_watch_transfer_ui.Utilities
 
             return new CopyDiagnostics()
             {
-                SourcePath = sourceDirectoryPath,
+                SourcePath = sourceFilePath,
                 TargetPath = targetFilePath,
                 ElapsedTime = stopwatch.ElapsedMilliseconds
             };
@@ -77,8 +78,6 @@ namespace dir_watch_transfer_ui.Utilities
             SymbolicLink symbolicLink = DirWatchTransferApp.SymbolicLinks.FirstOrDefault(a => a.Source == sourcePath);
 
             CopyUtility copyUtility = new CopyUtility();
-            copyUtility.OnDirectoryProgress += CopyUtility_OnDirectoryProgress;
-
             copyUtility.CopyDirectory(symbolicLink.Source, symbolicLink.Target);
 
             stopwatch.Stop();
@@ -89,11 +88,6 @@ namespace dir_watch_transfer_ui.Utilities
                 TargetPath = symbolicLink.Target,
                 ElapsedTime = stopwatch.ElapsedMilliseconds
             };
-        }
-
-        private void CopyUtility_OnDirectoryProgress(double percentage)
-        {
-            this.OnDirectoryCopyProgress?.Invoke(percentage);
         }
     }
 }

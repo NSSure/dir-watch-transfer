@@ -97,9 +97,20 @@ namespace dir_watch_transfer_ui.Utilities
         {
             byte[] buffer = new byte[1024 * 1024]; // 1MB buffer
 
+            if (IsFileLocked(new FileInfo(sourcePath)))
+            {
+                return;
+            }
+
             using (FileStream sourceFile = new FileStream(sourcePath, FileMode.Open, FileAccess.Read))
             {
                 long fileLength = sourceFile.Length;
+
+                if (IsFileLocked(new FileInfo(targetPath)))
+                {
+                    return;
+                }
+
                 using (FileStream targetFile = new FileStream(targetPath, FileMode.Create, FileAccess.Write))
                 {
                     long totalBytes = 0;
@@ -116,6 +127,37 @@ namespace dir_watch_transfer_ui.Utilities
             }
 
             OnComplete();
+        }
+
+        /// <summary>
+        /// Source - https://stackoverflow.com/questions/876473/is-there-a-way-to-check-if-a-file-is-in-use
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        protected virtual bool IsFileLocked(FileInfo file)
+        {
+            FileStream stream = null;
+
+            try
+            {
+                stream = file.Open(FileMode.Open, FileAccess.Read, FileShare.None);
+            }
+            catch (IOException)
+            {
+                //the file is unavailable because it is:
+                //still being written to
+                //or being processed by another thread
+                //or does not exist (has already been processed)
+                return true;
+            }
+            finally
+            {
+                if (stream != null)
+                    stream.Close();
+            }
+
+            //file is not locked
+            return false;
         }
     }
 }
