@@ -2,19 +2,35 @@
 using System;
 using System.IO;
 using System.Linq;
-using System.Timers;
 
 namespace dir_watch_transfer_ui.Model
 {
     public class SymbolicLinkMonitor
     {
+        public delegate void CopyCompletedDelegate(CopyDiagnostics copyDiagnostics);
+        public event CopyCompletedDelegate OnCopyCompleted;
+
+        public DateTime LastTimeWatcherFired { get; set; }
+
         private FileSystemWatcher watcher { get; set; } = new FileSystemWatcher();
+
+        private Action<CopyDiagnostics> copyCompleted;
+
+        public SymbolicLinkMonitor(Action<CopyDiagnostics> copyCompleted)
+        {
+            this.copyCompleted = copyCompleted;
+        }
 
         public FileSystemWatcher StartWatcher(string sourcePath)
         {
             SymbolicLink symbolicLink = DirWatchTransferApp.SymbolicLinks.FirstOrDefault(a => a.Source == sourcePath);
 
-            symbolicLink.Monitor = new SymbolicLinkMonitor();
+            symbolicLink.Monitor = this;
+
+            if (!Directory.Exists(sourcePath))
+            {
+                Directory.CreateDirectory(sourcePath);
+            }
 
             this.watcher.Path = sourcePath;
             this.watcher.IncludeSubdirectories = true;
@@ -42,13 +58,13 @@ namespace dir_watch_transfer_ui.Model
         private void SymbolicLinkWatcher_Created(object sender, FileSystemEventArgs e)
         {
             CopyDiagnostics copyDiagnostics = new SymbolicLinkUtility().SyncLinkedFile(e.Name, e.FullPath);
-            // this.OnWatcherFired?.Invoke(Path.Combine(e.FullPath, e.Name));
+            this.copyCompleted?.Invoke(copyDiagnostics);
         }
 
         private void SymbolicLinkWatcher_Changed(object sender, FileSystemEventArgs e)
         {
             CopyDiagnostics copyDiagnostics = new SymbolicLinkUtility().SyncLinkedFile(e.Name, e.FullPath);
-            // this.OnWatcherFired?.Invoke(Path.Combine(e.FullPath, e.Name));
+            this.copyCompleted?.Invoke(copyDiagnostics);
         }
     }
 }
