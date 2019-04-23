@@ -25,7 +25,7 @@ namespace dir_watch_transfer_ui.DB
             }
         }
 
-        public async Task AddAsync(TEntity entity)
+        public virtual async Task AddAsync(TEntity entity)
         {
             try
             {

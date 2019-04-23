@@ -8,10 +8,10 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
- 
+
 namespace dir_watch_transfer_ui
 {
-    public partial class MainForm : Form
+    public partial class MainForm : BaseForm
     {
         public SymbolicLinkUtility SymbolicLinkUtil
         {
@@ -21,51 +21,30 @@ namespace dir_watch_transfer_ui
             }
         }
 
-        public MainForm()
+        public MainForm()   
         {
             InitializeComponent();
             watchedDirs.DoubleBuffer();
-
-            ImageList imageList = new ImageList();
-            imageList.ImageSize = new Size(16,16);
-            imageList.Images.Add(Image.FromFile(Path.Combine(Environment.CurrentDirectory, "Images/LinkedFolder.png")));
-            imageList.Images.Add(Image.FromFile(Path.Combine(Environment.CurrentDirectory, "Images/StatusInformation.png")));
-
-            listHistory.SmallImageList = imageList;
-
-            //progressCopy.Maximum = 100;
-            //progressCopy.Step = 1;
-            //progressCopy.Value = 0;
-
-            ToolStripMenuItem startWatchers = new ToolStripMenuItem("Start watchers");
-            watchersToolStripMenuItem.DropDownItems.Add(startWatchers);
 
             // Register control events.
             menuItemAddLink.Click += MenuItemAddLink_Click;
             menuItemSeedTestLink.Click += MenuItemSeedTestLink_Click;
             watchedDirs.MouseClick += WatchedDirs_MouseClick;
-            contextItemStartWatchingLink.Click += ContextItemForceCopy_Click;
-            startWatchers.Click += StartWatchers_Click;
-
-            //// Source column
-            //watchedDirs.Columns[0].Width = -2;
-
-            //// Target column
-            //watchedDirs.Columns[1].Width = -2;
-
-            //// Status column
-            //watchedDirs.Columns[2].Width = -2;
+            contextItemStartWatchingLink.Click += ContextItemStartWatchingLink_Click;
+            contextItemForceCopy.Click += ContextItemForceCopy_Click;
+            watchedDirs.Resize += WatchedDirs_Resize;
 
             // Add some padding to the the list view cells with this image workaround.
-            ImageList imgList = new ImageList();
-            imgList.ImageSize = new Size(1,16);
-            watchedDirs.SmallImageList = imgList;
-        }
+            ImageList emptyImageList = new ImageList();
+            emptyImageList.ImageSize = new Size(1, 16);
+            watchedDirs.SmallImageList = emptyImageList;
 
-        private void MenuItemAddLink_Click(object sender, EventArgs e)
-        {
-            CreateLinkForm createLinkForm = new CreateLinkForm();
-            createLinkForm.ShowDialog(this);
+            ImageList imageList = new ImageList();
+            imageList.ImageSize = new Size(16, 16);
+
+            DirWatchTransferApp.ListViewImageList.ForEach((imageConfig) => imageList.Images.Add(Image.FromFile(Path.Combine(Environment.CurrentDirectory, imageConfig.Path))));
+
+            listHistory.SmallImageList = imageList;
         }
 
         /// <summary>
@@ -74,6 +53,11 @@ namespace dir_watch_transfer_ui
         protected override async void CreateHandle()
         {
             DirWatchTransferApp.SymbolicLinks = await this.SymbolicLinkUtil.ListAllAsync();
+
+            ToolStripMenuItem startWatchers = new ToolStripMenuItem("Start watchers");
+            startWatchers.Enabled = DirWatchTransferApp.SymbolicLinks.Count != 0;
+            watchersToolStripMenuItem.DropDownItems.Add(startWatchers);
+            startWatchers.Click += StartWatchers_Click;
 
             foreach (SymbolicLink symbolicLink in DirWatchTransferApp.SymbolicLinks)
             {
@@ -90,59 +74,53 @@ namespace dir_watch_transfer_ui
         /// <param name="targetPath">Path of the target directory.</param>
         private void AddSymbolicLinkToList(string sourcePath, string targetPath)
         {
-            string[] data = new string[] { sourcePath, targetPath, "Stopped", "Force copy" };
+            string[] data = new string[] { sourcePath, targetPath, "Stopped" };
             ListViewItem item = new ListViewItem(data);
-            item.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             item.UseItemStyleForSubItems = false;
             ListViewItem.ListViewSubItem statusSubItem = item.SubItems[2];
             statusSubItem.ForeColor = Color.FromArgb(220, 53, 69);
             watchedDirs.Items.Add(item);
+
+            this.AddHistoryItem($"Linked created between {sourcePath} and {targetPath}", DirWatchTransferApp.LinkedFolderImageConfig.ImageIndex);
         }
 
         public async Task CreateSymbolicLink(string sourcePath, string targetPath)
         {
-            this.AddSymbolicLinkToList(sourcePath, targetPath);
-
-            SymbolicLink symbolicLink = new SymbolicLink()
+            // Adds symbolic link to SQLite and application variable.
+            await this.SymbolicLinkUtil.AddAsync(new SymbolicLink()
             {
                 Source = sourcePath,
                 Target = targetPath,
-                Watcher = this.StartWatcher(sourcePath)
-            };
+                Watcher = await this.SymbolicLinkUtil.StartWatcher(sourcePath)
+            });
 
-            await this.SymbolicLinkUtil.AddAsync(symbolicLink);
-            DirWatchTransferApp.SymbolicLinks.Add(symbolicLink);
-
-            ListViewItem historyItem = new ListViewItem($"Linked created between {sourcePath} and {targetPath}");
-            historyItem.ImageIndex = 0;
-            listHistory.Items.Add(historyItem);
+            // UI methods.
+            this.AddSymbolicLinkToList(sourcePath, targetPath);
+            this.AddHistoryItem($"Linked created between {sourcePath} and {targetPath}", DirWatchTransferApp.LinkedFolderImageConfig.ImageIndex);
         }
 
-        private FileSystemWatcher StartWatcher(string path)
+        private void AddHistoryItem(string text, int imageIndex)
         {
-            FileSystemWatcher watcher = new FileSystemWatcher();
-
-            watcher.Path = path;
-            watcher.IncludeSubdirectories = true;
-            watcher.NotifyFilter = NotifyFilters.LastWrite;
-
-            watcher.Changed += Watcher_Fired;
-            watcher.Created += Watcher_Fired;
-
-            // Begin watching directory
-            watcher.EnableRaisingEvents = true;
-
-            return watcher;
+            ListViewItem item = new ListViewItem(text, imageIndex);
+            listHistory.Items.Add(item);
         }
 
-        private void StopWatcher(FileSystemWatcher watcher)
+        #region Events
+
+        private void MainForm_Load(object sender, EventArgs e)
         {
-            watcher.EnableRaisingEvents = false;
+            base.AutoSizeColumns(watchedDirs);
+        }
 
-            watcher.Changed -= Watcher_Fired;
-            watcher.Created -= Watcher_Fired;
+        private void WatchedDirs_Resize(object sender, EventArgs e)
+        {
+            base.AutoSizeColumns((ListView)sender);
+        }
 
-            watcher.Dispose();
+        private void MenuItemAddLink_Click(object sender, EventArgs e)
+        {
+            CreateLinkForm createLinkForm = new CreateLinkForm();
+            createLinkForm.ShowDialog(this);
         }
 
         private void WatchedDirs_MouseClick(object sender, MouseEventArgs e)
@@ -156,29 +134,16 @@ namespace dir_watch_transfer_ui
             }
         }
 
-        private void ContextItemForceCopy_Click(object sender, EventArgs e)
+        private void ContextItemStartWatchingLink_Click(object sender, EventArgs e)
         {
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
+        }
 
+        private async void ContextItemForceCopy_Click(object sender, EventArgs e)
+        {
             string sourcePath = watchedDirs.FocusedItem.Text;
-            SymbolicLink symbolicLink = DirWatchTransferApp.SymbolicLinks.FirstOrDefault(a => a.Source == sourcePath);
-            // DirWatchTransferApp.DirectoryCopy(symbolicLink.Source, symbolicLink.Target, true);
+            CopyDiagnostics copyDiagnostics = await this.SymbolicLinkUtil.SyncLinkedDirectory(sourcePath);
 
-            CopyReporter copyReporter = new CopyReporter();
-
-            copyReporter.OnDirectoryProgress += CopyReporter_OnDirectoryProgress;
-
-            copyReporter.CopyDirectory(symbolicLink.Source, symbolicLink.Target, () =>
-            {
-                // progressCopy.Value = 0;
-            });
-
-            stopwatch.Stop();
-
-            ListViewItem historyItem = new ListViewItem($"Directory contents copied from {symbolicLink.Source} to {symbolicLink.Target} ({stopwatch.ElapsedMilliseconds} ms)");
-            historyItem.ImageIndex = 1;
-            listHistory.Items.Add(historyItem);
+            this.AddHistoryItem($"Directory contents copied from {copyDiagnostics.SourcePath} to {copyDiagnostics.TargetPath} ({copyDiagnostics.ElapsedTime} ms)", DirWatchTransferApp.StatusInformationImageConfig.ImageIndex);
         }
 
         private void CopyReporter_OnDirectoryProgress(double percentage, ref bool cancel)
@@ -186,7 +151,7 @@ namespace dir_watch_transfer_ui
             if (percentage != double.PositiveInfinity)
             {
                 this.Invoke((MethodInvoker)delegate {
-                    // progressCopy.Value = (int)percentage;
+                    progressCopy.Value = (int)percentage;
                 });
             }
         }
@@ -196,215 +161,32 @@ namespace dir_watch_transfer_ui
             await this.CreateSymbolicLink(@"C:\Users\Nick\Documents\Sample", @"C:\Users\Nick\Documents\Target");
         }
 
-        private void StartWatchers_Click(object sender, EventArgs e)
+        private async void StartWatchers_Click(object sender, EventArgs e)
         {
-            int index = 0;
+            await this.SymbolicLinkUtil.BulkStartWatchers();
 
-            foreach (SymbolicLink symbolicLink in DirWatchTransferApp.SymbolicLinks)
-            {
-                this.StartWatcher(symbolicLink.Source);
-
-                ListViewItem item = watchedDirs.Items[index];
-                ListViewItem.ListViewSubItem subItem = item.SubItems[2];
-                subItem.Text = "Watching";
-                subItem.ForeColor = Color.FromArgb(40, 167, 69);
-
-                index++;
-            }
-
+            // Remove "Start watchers" menu item for main menu.
             watchersToolStripMenuItem.DropDownItems.RemoveAt(0);
 
+            // Add a "Stop watchers" menu item to the main menu.
             ToolStripMenuItem stopWatchers = new ToolStripMenuItem("Stop watchers");
             stopWatchers.Click += StopWatchers_Click;
             watchersToolStripMenuItem.DropDownItems.Insert(0, stopWatchers);
+
+            this.AddHistoryItem($"Initialized the watcher(s) for ({DirWatchTransferApp.SymbolicLinks.Count}) symbolic links", DirWatchTransferApp.TimeImageConfig.ImageIndex);
         }
 
-        private void StopWatchers_Click(object sender, EventArgs e)
+        private async void StopWatchers_Click(object sender, EventArgs e)
         {
-            foreach (SymbolicLink symbolicLink in DirWatchTransferApp.SymbolicLinks)
-            {
-                this.StopWatcher(symbolicLink.Watcher);
-            }
+            await this.SymbolicLinkUtil.BulkStopWatchers();
         }
 
-        private void Watcher_Fired(object sender, FileSystemEventArgs e)
+        private async void Watcher_Fired(object sender, FileSystemEventArgs e)
         {
-            if (true)
-            {
-                Stopwatch stopwatch = new Stopwatch();
-                stopwatch.Start();
-
-                string sourcePath = e.FullPath.Replace(@"\" + e.Name, string.Empty);
-
-                this.Invoke((MethodInvoker)delegate {
-                    watchedDirs.Items[0].SubItems[2].Text = "Copying...";
-                });
-
-                SymbolicLink symbolicLink = DirWatchTransferApp.SymbolicLinks.FirstOrDefault(a => a.Source == sourcePath);
-
-                string targetFilePath = Path.Combine(symbolicLink.Target, e.Name);
-                string targetDirectoryPath = Path.GetDirectoryName(targetFilePath);
-
-                if (!Directory.Exists(targetDirectoryPath))
-                {
-                    Directory.CreateDirectory(targetDirectoryPath);
-                }
-
-                CopyReporter fileCopier = new CopyReporter();
-                fileCopier.Copy(e.FullPath, targetFilePath);
-
-                stopwatch.Stop();
-
-                this.Invoke((MethodInvoker)delegate {
-                    watchedDirs.Items[0].SubItems[2].Text = $"Copied ({stopwatch.ElapsedMilliseconds} ms)";
-                });
-
-                this.Invoke((MethodInvoker)delegate {
-                    listHistory.Items.Add($"Link created copy of {sourcePath} at {targetFilePath} ({stopwatch.ElapsedMilliseconds} ms)");
-                });
-            }
+            CopyDiagnostics copyDiagnostics = await this.SymbolicLinkUtil.SyncLinkedFile(e.Name, e.FullPath);
+            this.AddHistoryItem($"Link created copy of {copyDiagnostics.SourcePath} at {copyDiagnostics.TargetPath} ({copyDiagnostics.ElapsedTime} ms)", DirWatchTransferApp.LinkImageConfig.ImageIndex);
         }
 
-        class CopyReporter
-        {
-            public delegate void ProgressChangedDelegate(double Persentage, ref bool Cancel);
-            public delegate void CompletedDelegate();
-
-            public CopyReporter()
-            {
-                OnProgressChanged += delegate { };
-                OnComplete += delegate { };
-            }
-
-            public void CopyDirectory(string sourcePath, string targetPath, Action completedCallback = null)
-            {
-                // Get the subdirectories for the specified directory.
-                DirectoryInfo dir = new DirectoryInfo(sourcePath);
-
-                if (!dir.Exists)
-                {
-                    throw new DirectoryNotFoundException("Source directory does not exist or could not be found: " + sourcePath);
-                }
-
-                // Subdirs
-                DirectoryInfo[] dirs = dir.GetDirectories();
-
-                // If the destination directory doesn't exist, create it.
-                if (!Directory.Exists(targetPath))
-                {
-                    Directory.CreateDirectory(targetPath);
-                }
-
-                // Size of directory and all sub directories.
-                long directoryByteLength = 0;
-                long processByteLength = 0;
-
-                // Get the files in the directory and copy them to the new location.
-                FileInfo[] files = dir.GetFiles();
-
-                foreach (FileInfo fileInfo in files)
-                {
-                    directoryByteLength += fileInfo.Length;
-                }
-
-                foreach (FileInfo fileInfo in files)
-                {
-                    string sourceFilePath = Path.Combine(sourcePath, fileInfo.Name);
-                    string targetFilePath = Path.Combine(targetPath, fileInfo.Name);
-
-                    byte[] buffer = new byte[1024 * 1024]; // 1MB buffer
-                    bool cancelFlag = false;
-
-                    using (FileStream sourceFile = new FileStream(sourceFilePath, FileMode.Open, FileAccess.Read))
-                    {
-                        using (FileStream targetFile = new FileStream(targetFilePath, FileMode.Create, FileAccess.Write))
-                        {
-                            int currentBlockSize = 0;
-
-                            while ((currentBlockSize = sourceFile.Read(buffer, 0, buffer.Length)) > 0)
-                            {
-                                processByteLength += currentBlockSize;
-                                double percentage = (double)processByteLength * 100.0 / directoryByteLength;
-
-                                targetFile.Write(buffer, 0, currentBlockSize);
-
-                                cancelFlag = false;
-                                OnDirectoryProgress(percentage, ref cancelFlag);
-
-                                if (cancelFlag == true)
-                                {
-                                    // Delete dest file here
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                }
-
-                foreach (DirectoryInfo subdir in dirs)
-                {
-                    string temppath = Path.Combine(targetPath, subdir.Name);
-                    this.CopyDirectory(subdir.FullName, temppath);
-                }
-
-                if (completedCallback != null)
-                {
-                    completedCallback.Invoke();
-                }
-            }
-
-            public void Copy(string sourcePath, string targetPath)
-            {
-                byte[] buffer = new byte[1024 * 1024]; // 1MB buffer
-                bool cancelFlag = false;
-
-                using (FileStream sourceFile = new FileStream(sourcePath, FileMode.Open, FileAccess.Read))
-                {
-                    long fileLength = sourceFile.Length;
-                    using (FileStream targetFile = new FileStream(targetPath, FileMode.Create, FileAccess.Write))
-                    {
-                        long totalBytes = 0;
-                        int currentBlockSize = 0;
-
-                        while ((currentBlockSize = sourceFile.Read(buffer, 0, buffer.Length)) > 0)
-                        {
-                            totalBytes += currentBlockSize;
-                            double percentage = (double)totalBytes * 100.0 / fileLength;
-
-                            targetFile.Write(buffer, 0, currentBlockSize);
-
-                            cancelFlag = false;
-                            OnProgressChanged(percentage, ref cancelFlag);
-
-                            if (cancelFlag == true)
-                            {
-                                // Delete dest file here
-                                break;
-                            }
-                        }
-                    }
-                }
-
-                OnComplete();
-            }
-
-            public string SourceFilePath { get; set; }
-            public string DestFilePath { get; set; }
-
-            public event ProgressChangedDelegate OnProgressChanged;
-            public event ProgressChangedDelegate OnDirectoryProgress;
-            public event CompletedDelegate OnComplete;
-        }
-
-        private void ResizeColumnHeaders()
-        {
-            for (int i = 0; i < watchedDirs.Columns.Count - 1; i++) watchedDirs.AutoResizeColumn(i, ColumnHeaderAutoResizeStyle.ColumnContent);
-            watchedDirs.Columns[watchedDirs.Columns.Count - 1].Width = -2;
-        }
-
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            this.ResizeColumnHeaders();
-        }
+        #endregion
     }
 }

@@ -44,12 +44,18 @@
             this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.contextItemStartWatchingLink = new System.Windows.Forms.ToolStripMenuItem();
             this.contextItemForceCopy = new System.Windows.Forms.ToolStripMenuItem();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.progressCopy = new System.Windows.Forms.ProgressBar();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainContainer)).BeginInit();
             this.mainContainer.Panel1.SuspendLayout();
             this.mainContainer.Panel2.SuspendLayout();
             this.mainContainer.SuspendLayout();
             this.contextMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -110,7 +116,7 @@
             // mainContainer
             // 
             this.mainContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mainContainer.Location = new System.Drawing.Point(0, 25);
+            this.mainContainer.Location = new System.Drawing.Point(0, 0);
             this.mainContainer.Margin = new System.Windows.Forms.Padding(0);
             this.mainContainer.Name = "mainContainer";
             this.mainContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
@@ -123,8 +129,8 @@
             // 
             this.mainContainer.Panel2.Controls.Add(this.listHistory);
             this.mainContainer.Panel2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.mainContainer.Size = new System.Drawing.Size(1498, 973);
-            this.mainContainer.SplitterDistance = 448;
+            this.mainContainer.Size = new System.Drawing.Size(1498, 930);
+            this.mainContainer.SplitterDistance = 428;
             this.mainContainer.SplitterWidth = 5;
             this.mainContainer.TabIndex = 6;
             // 
@@ -139,7 +145,7 @@
             this.watchedDirs.FullRowSelect = true;
             this.watchedDirs.Location = new System.Drawing.Point(0, 0);
             this.watchedDirs.Name = "watchedDirs";
-            this.watchedDirs.Size = new System.Drawing.Size(1498, 448);
+            this.watchedDirs.Size = new System.Drawing.Size(1498, 428);
             this.watchedDirs.TabIndex = 0;
             this.watchedDirs.TileSize = new System.Drawing.Size(268, 44);
             this.watchedDirs.UseCompatibleStateImageBehavior = false;
@@ -163,9 +169,10 @@
             // 
             this.listHistory.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listHistory.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listHistory.FullRowSelect = true;
             this.listHistory.Location = new System.Drawing.Point(0, 0);
             this.listHistory.Name = "listHistory";
-            this.listHistory.Size = new System.Drawing.Size(1498, 520);
+            this.listHistory.Size = new System.Drawing.Size(1498, 497);
             this.listHistory.TabIndex = 7;
             this.listHistory.UseCompatibleStateImageBehavior = false;
             this.listHistory.View = System.Windows.Forms.View.List;
@@ -191,11 +198,38 @@
             this.contextItemForceCopy.Size = new System.Drawing.Size(228, 30);
             this.contextItemForceCopy.Text = "Force copy";
             // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.IsSplitterFixed = true;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 25);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.mainContainer);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.progressCopy);
+            this.splitContainer1.Size = new System.Drawing.Size(1498, 973);
+            this.splitContainer1.SplitterDistance = 930;
+            this.splitContainer1.TabIndex = 7;
+            // 
+            // progressCopy
+            // 
+            this.progressCopy.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.progressCopy.Location = new System.Drawing.Point(0, 0);
+            this.progressCopy.Name = "progressCopy";
+            this.progressCopy.Size = new System.Drawing.Size(1498, 39);
+            this.progressCopy.TabIndex = 0;
+            // 
             // MainForm
             // 
             this.BackColor = System.Drawing.SystemColors.Menu;
             this.ClientSize = new System.Drawing.Size(1498, 998);
-            this.Controls.Add(this.mainContainer);
+            this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
@@ -209,6 +243,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.mainContainer)).EndInit();
             this.mainContainer.ResumeLayout(false);
             this.contextMenu.ResumeLayout(false);
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -231,6 +269,8 @@
         private System.Windows.Forms.ToolStripMenuItem contextItemStartWatchingLink;
         private System.Windows.Forms.ListView listHistory;
         private System.Windows.Forms.ToolStripMenuItem contextItemForceCopy;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.ProgressBar progressCopy;
     }
 }
 
