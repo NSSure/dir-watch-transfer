@@ -1,6 +1,8 @@
 ﻿using dir_watch_transfer_ui.Utilities;
+using System;
 using System.IO;
 using System.Linq;
+using System.Timers;
 
 namespace dir_watch_transfer_ui.Model
 {
@@ -16,7 +18,7 @@ namespace dir_watch_transfer_ui.Model
 
             this.watcher.Path = sourcePath;
             this.watcher.IncludeSubdirectories = true;
-            this.watcher.NotifyFilter = NotifyFilters.LastWrite;
+            this.watcher.NotifyFilter = NotifyFilters.FileName | NotifyFilters.Size;
 
             this.watcher.Changed += SymbolicLinkWatcher_Changed;
             this.watcher.Created += SymbolicLinkWatcher_Created;

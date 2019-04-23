@@ -39,14 +39,14 @@ namespace dir_watch_transfer_ui.Utilities
             }
         }
 
-        public CopyDiagnostics SyncLinkedFile(string fileName, string sourceDirectoryPath)
+        public CopyDiagnostics SyncLinkedFile(string fileName, string sourceFilePath)
         {
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            string sourceFilePath = sourceDirectoryPath.Replace(@"\" + fileName, string.Empty);
+            string sourceDirectoryPath = sourceFilePath.Replace(@"\" + fileName, string.Empty);
 
-            SymbolicLink symbolicLink = DirWatchTransferApp.SymbolicLinks.FirstOrDefault(a => a.Source == sourceFilePath);
+            SymbolicLink symbolicLink = DirWatchTransferApp.SymbolicLinks.FirstOrDefault(a => a.Source == sourceDirectoryPath);
 
             string targetFilePath = Path.Combine(symbolicLink.Target, fileName);
             string targetDirectoryPath = Path.GetDirectoryName(targetFilePath);
@@ -63,7 +63,7 @@ namespace dir_watch_transfer_ui.Utilities
 
             return new CopyDiagnostics()
             {
-                SourcePath = sourceFilePath,
+                SourcePath = sourceDirectoryPath,
                 TargetPath = targetFilePath,
                 ElapsedTime = stopwatch.ElapsedMilliseconds
             };
