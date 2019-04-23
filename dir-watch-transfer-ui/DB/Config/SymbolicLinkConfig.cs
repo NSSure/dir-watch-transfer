@@ -13,7 +13,7 @@ namespace dir_watch_transfer_ui.DB.Config
             this.Property(p => p.Target);
             this.Property(p => p.Recursive);
 
-            Ignore(a => a.Watcher);
+            Ignore(a => a.Monitor);
         }
     }
 }

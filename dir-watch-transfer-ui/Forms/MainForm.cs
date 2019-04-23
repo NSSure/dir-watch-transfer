@@ -91,7 +91,7 @@ namespace dir_watch_transfer_ui
             {
                 Source = sourcePath,
                 Target = targetPath,
-                Watcher = await this.SymbolicLinkUtil.StartWatcher(sourcePath)
+                Monitor = new SymbolicLinkMonitor()
             });
 
             // UI methods.
@@ -138,22 +138,12 @@ namespace dir_watch_transfer_ui
         {
         }
 
-        private async void ContextItemForceCopy_Click(object sender, EventArgs e)
+        private void ContextItemForceCopy_Click(object sender, EventArgs e)
         {
             string sourcePath = watchedDirs.FocusedItem.Text;
-            CopyDiagnostics copyDiagnostics = await this.SymbolicLinkUtil.SyncLinkedDirectory(sourcePath);
+            CopyDiagnostics copyDiagnostics = this.SymbolicLinkUtil.SyncLinkedDirectory(sourcePath);
 
             this.AddHistoryItem($"Directory contents copied from {copyDiagnostics.SourcePath} to {copyDiagnostics.TargetPath} ({copyDiagnostics.ElapsedTime} ms)", DirWatchTransferApp.StatusInformationImageConfig.ImageIndex);
-        }
-
-        private void CopyReporter_OnDirectoryProgress(double percentage, ref bool cancel)
-        {
-            if (percentage != double.PositiveInfinity)
-            {
-                this.Invoke((MethodInvoker)delegate {
-                    progressCopy.Value = (int)percentage;
-                });
-            }
         }
 
         private async void MenuItemSeedTestLink_Click(object sender, EventArgs e)
@@ -161,9 +151,9 @@ namespace dir_watch_transfer_ui
             await this.CreateSymbolicLink(@"C:\Users\Nick\Documents\Sample", @"C:\Users\Nick\Documents\Target");
         }
 
-        private async void StartWatchers_Click(object sender, EventArgs e)
+        private void StartWatchers_Click(object sender, EventArgs e)
         {
-            await this.SymbolicLinkUtil.BulkStartWatchers();
+            this.SymbolicLinkUtil.BulkStartWatchers();
 
             // Remove "Start watchers" menu item for main menu.
             watchersToolStripMenuItem.DropDownItems.RemoveAt(0);
@@ -176,16 +166,22 @@ namespace dir_watch_transfer_ui
             this.AddHistoryItem($"Initialized the watcher(s) for ({DirWatchTransferApp.SymbolicLinks.Count}) symbolic links", DirWatchTransferApp.TimeImageConfig.ImageIndex);
         }
 
-        private async void StopWatchers_Click(object sender, EventArgs e)
+        private void StopWatchers_Click(object sender, EventArgs e)
         {
-            await this.SymbolicLinkUtil.BulkStopWatchers();
+            this.SymbolicLinkUtil.BulkStopWatchers();
+
+            // Remove "Start watchers" menu item for main menu.
+            watchersToolStripMenuItem.DropDownItems.RemoveAt(0);
+
+            // Add a "Stop watchers" menu item to the main menu.
+            ToolStripMenuItem startWatchers = new ToolStripMenuItem("Start watchers");
+            startWatchers.Click += StartWatchers_Click;
+            watchersToolStripMenuItem.DropDownItems.Insert(0, startWatchers);
+
+            this.AddHistoryItem($"Stopped the watcher(s) for ({DirWatchTransferApp.SymbolicLinks.Count}) symbolic links", DirWatchTransferApp.StatusOfflineConfig.ImageIndex);
         }
 
-        private async void Watcher_Fired(object sender, FileSystemEventArgs e)
-        {
-            CopyDiagnostics copyDiagnostics = await this.SymbolicLinkUtil.SyncLinkedFile(e.Name, e.FullPath);
-            this.AddHistoryItem($"Link created copy of {copyDiagnostics.SourcePath} at {copyDiagnostics.TargetPath} ({copyDiagnostics.ElapsedTime} ms)", DirWatchTransferApp.LinkImageConfig.ImageIndex);
-        }
+        // this.AddHistoryItem($"Link created copy of {copyDiagnostics.SourcePath} at {copyDiagnostics.TargetPath} ({copyDiagnostics.ElapsedTime} ms)", DirWatchTransferApp.LinkImageConfig.ImageIndex);
 
         #endregion
     }

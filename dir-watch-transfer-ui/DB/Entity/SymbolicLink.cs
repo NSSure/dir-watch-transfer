@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using dir_watch_transfer_ui.Utilities;
+using System.IO;
 
 namespace dir_watch_transfer_ui.Model
 {
@@ -8,6 +9,6 @@ namespace dir_watch_transfer_ui.Model
         public string Source { get; set; }
         public string Target { get; set; }
         public bool Recursive { get; set; }
-        public FileSystemWatcher Watcher { get; set; }
+        public SymbolicLinkMonitor Monitor { get; set; }
     }
 }

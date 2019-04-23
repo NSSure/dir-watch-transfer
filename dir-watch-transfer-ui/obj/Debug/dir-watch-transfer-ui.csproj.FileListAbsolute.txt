@@ -25,4 +25,4 @@ C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\bin
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\bin\Debug\Images\LinkedFolder.png
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\bin\Debug\Images\Time.png
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\bin\Debug\Images\Link.png
-C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\obj\Debug\dir-watch-transfer-ui.csprojAssemblyReference.cache
+C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\bin\Debug\Images\StatusOffline.png

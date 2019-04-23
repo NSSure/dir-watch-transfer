@@ -22,62 +22,24 @@ namespace dir_watch_transfer_ui.Utilities
             return base.AddAsync(entity);
         }
 
-        public async Task<FileSystemWatcher> StartWatcher(string sourcePath)
-        {
-            SymbolicLink symbolicLink = DirWatchTransferApp.SymbolicLinks.FirstOrDefault(a => a.Source == sourcePath);
-
-            symbolicLink.Watcher = new FileSystemWatcher();
-
-            symbolicLink.Watcher.Path = sourcePath;
-            symbolicLink.Watcher.IncludeSubdirectories = true;
-            symbolicLink.Watcher.NotifyFilter = NotifyFilters.LastWrite;
-
-            symbolicLink.Watcher.Changed += Watcher_Changed;
-            symbolicLink.Watcher.Created += Watcher_Created;
-
-            // Begin watching directory
-            symbolicLink.Watcher.EnableRaisingEvents = true;
-
-            return symbolicLink.Watcher;
-        }
-
-        public async Task BulkStartWatchers()
+        public void BulkStartWatchers()
         {
             foreach (SymbolicLink symbolicLink in DirWatchTransferApp.SymbolicLinks)
             {
-                symbolicLink.Watcher = new FileSystemWatcher();
-
-                symbolicLink.Watcher.Path = symbolicLink.Source;
-                symbolicLink.Watcher.IncludeSubdirectories = true;
-                symbolicLink.Watcher.NotifyFilter = NotifyFilters.LastWrite;
-
-                symbolicLink.Watcher.Changed += Watcher_Changed;
-                symbolicLink.Watcher.Created += Watcher_Created;
-
-                // Begin watching directory
-                symbolicLink.Watcher.EnableRaisingEvents = true;
+                symbolicLink.Monitor = new SymbolicLinkMonitor();
+                symbolicLink.Monitor.StartWatcher(symbolicLink.Source);
             }
         }
 
-        public async Task StopWatcher(SymbolicLink symbolicLink)
-        {
-            symbolicLink.Watcher.EnableRaisingEvents = false;
-
-            symbolicLink.Watcher.Changed -= Watcher_Changed;
-            symbolicLink.Watcher.Created -= Watcher_Changed;
-
-            symbolicLink.Watcher.Dispose();
-        }
-
-        public async Task BulkStopWatchers()
+        public void BulkStopWatchers()
         {
             foreach (SymbolicLink symbolicLink in DirWatchTransferApp.SymbolicLinks)
             {
-                await this.StopWatcher(symbolicLink);
+                symbolicLink.Monitor.StopWatcher();
             }
         }
 
-        public async Task<CopyDiagnostics> SyncLinkedFile(string fileName, string sourceDirectoryPath)
+        public CopyDiagnostics SyncLinkedFile(string fileName, string sourceDirectoryPath)
         {
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -107,7 +69,7 @@ namespace dir_watch_transfer_ui.Utilities
             };
         }
 
-        public async Task<CopyDiagnostics> SyncLinkedDirectory(string sourcePath)
+        public CopyDiagnostics SyncLinkedDirectory(string sourcePath)
         {
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -132,16 +94,6 @@ namespace dir_watch_transfer_ui.Utilities
         private void CopyUtility_OnDirectoryProgress(double percentage)
         {
             this.OnDirectoryCopyProgress?.Invoke(percentage);
-        }
-
-        private void Watcher_Created(object sender, FileSystemEventArgs e)
-        {
-            this.OnWatcherFired?.Invoke(Path.Combine(e.FullPath, e.Name));
-        }
-
-        private void Watcher_Changed(object sender, FileSystemEventArgs e)
-        {
-            this.OnWatcherFired?.Invoke(Path.Combine(e.FullPath, e.Name));
         }
     }
 }

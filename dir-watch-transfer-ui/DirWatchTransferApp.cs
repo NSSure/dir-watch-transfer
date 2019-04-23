@@ -13,7 +13,7 @@ namespace dir_watch_transfer_ui
             {
                 return new List<ImageConfig>()
                 {
-                    LinkedFolderImageConfig, StatusInformationImageConfig, TimeImageConfig, LinkImageConfig
+                    LinkedFolderImageConfig, StatusInformationImageConfig, TimeImageConfig, LinkImageConfig, StatusOfflineConfig
                 };
             }
         }
@@ -40,6 +40,12 @@ namespace dir_watch_transfer_ui
         {
             ImageIndex = 3,
             Path = "Images/Link.png"
+        };
+
+        public static ImageConfig StatusOfflineConfig = new ImageConfig()
+        {
+            ImageIndex = 4,
+            Path = "Images/StatusOffline.png"
         };
     }
 }

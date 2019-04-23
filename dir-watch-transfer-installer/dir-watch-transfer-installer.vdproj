@@ -16,19 +16,19 @@
         "Entry"
         {
         "MsmKey" = "8:_1CE78772A0867A3D40CEEE5AB1EF56F1"
-        "OwnerKey" = "8:_B821D4A7291F4CB4B232094066DCECF1"
+        "OwnerKey" = "8:_453518B113EF437283C9CED5826B490D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_2767742E3CAD81603E3AA73E443B974B"
-        "OwnerKey" = "8:_B821D4A7291F4CB4B232094066DCECF1"
+        "OwnerKey" = "8:_453518B113EF437283C9CED5826B490D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_2EAAB1FAC78402DD0A9404E8BF66ABCB"
-        "OwnerKey" = "8:_B821D4A7291F4CB4B232094066DCECF1"
+        "OwnerKey" = "8:_453518B113EF437283C9CED5826B490D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -52,7 +52,7 @@
         "Entry"
         {
         "MsmKey" = "8:_34E72DB45936B666D977614C1F733D5B"
-        "OwnerKey" = "8:_B821D4A7291F4CB4B232094066DCECF1"
+        "OwnerKey" = "8:_453518B113EF437283C9CED5826B490D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -69,20 +69,20 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_453518B113EF437283C9CED5826B490D"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_5F381944E58DACF66B797FB2E5ADF093"
-        "OwnerKey" = "8:_B821D4A7291F4CB4B232094066DCECF1"
+        "OwnerKey" = "8:_453518B113EF437283C9CED5826B490D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_9BD824B9FB926F36BD039C9D1AFC39DD"
-        "OwnerKey" = "8:_B821D4A7291F4CB4B232094066DCECF1"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_B821D4A7291F4CB4B232094066DCECF1"
-        "OwnerKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_453518B113EF437283C9CED5826B490D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -94,7 +94,7 @@
         "Entry"
         {
         "MsmKey" = "8:_FB3574E2B1084A66236FD45707BD8EF5"
-        "OwnerKey" = "8:_B821D4A7291F4CB4B232094066DCECF1"
+        "OwnerKey" = "8:_453518B113EF437283C9CED5826B490D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -106,7 +106,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_B821D4A7291F4CB4B232094066DCECF1"
+        "OwnerKey" = "8:_453518B113EF437283C9CED5826B490D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -202,6 +202,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                }
             }
         }
     }
@@ -524,9 +532,9 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:dir-watch-transfer-installer"
+        "ProductName" = "8:dir-watch-transfer"
         "ProductCode" = "8:{7BC7B1D5-11C0-4705-A123-4F52F89EB9DF}"
-        "PackageCode" = "8:{E1104781-C837-45EC-A1C2-3AEF18CDB166}"
+        "PackageCode" = "8:{89EEFFD1-DAB1-404D-99AC-CE052279F790}"
         "UpgradeCode" = "8:{F6ADAF2A-8D85-4E6B-9D93-116DB9406960}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -1045,7 +1053,7 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_B821D4A7291F4CB4B232094066DCECF1"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_453518B113EF437283C9CED5826B490D"
             {
             "SourcePath" = "8:..\\dir-watch-transfer-ui\\obj\\Debug\\dir-watch-transfer-ui.exe"
             "TargetName" = "8:"
