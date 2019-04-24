@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using dir_watch_transfer_ui.Model;
+using System;
 using System.Windows.Forms;
 
 namespace dir_watch_transfer_ui.Forms
@@ -51,7 +45,19 @@ namespace dir_watch_transfer_ui.Forms
                 return;
             }
 
-            await mainForm.CreateSymbolicLink(txtSourceDirectory.Text, txtTargetDirectory.Text);
+            await mainForm.CreateSymbolicLink(new SymbolicLink()
+            {
+                Source = txtSourceDirectory.Text,
+                Target = txtTargetDirectory.Text,
+                WatchFileName = chkFileName.Checked,
+                WatchDirectoryName = chkDirectoryName.Checked,
+                WatchSize = chkSize.Checked,
+                WatchLastWrite = chkLastWrite.Checked,
+                WatchLastAccess = chkLastAccess.Checked,
+                WatchCreationTime = chkCreationTime.Checked,
+                WatchSecurity = chkSecurity.Checked,
+                Monitor = new SymbolicLinkMonitor()
+            });
         }
     }
 }

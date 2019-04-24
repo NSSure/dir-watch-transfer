@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace dir_watch_transfer_ui
 {
-    public partial class MainForm : BaseForm
+    public partial class MainForm : Form
     {
         public SymbolicLinkUtility SymbolicLinkUtil
         {
@@ -107,23 +107,21 @@ namespace dir_watch_transfer_ui
             }
         }
 
-        public async Task CreateSymbolicLink(string sourcePath, string targetPath)
+        public async Task CreateSymbolicLink(SymbolicLink symbolicLink)
         {
-            // Adds symbolic link to SQLite and application variable.
-            await this.SymbolicLinkUtil.AddAsync(new SymbolicLink()
-            {
-                Source = sourcePath,
-                Target = targetPath,
-                Monitor = new SymbolicLinkMonitor(this.OnCopyCompleted)
-            });
+            symbolicLink.Monitor.CopyCompletedAction = this.OnCopyCompleted;
 
+            // Adds symbolic link to SQLite and application variable.
+            await this.SymbolicLinkUtil.AddAsync(symbolicLink);
+
+            // If the watchers drop down item "Start watchers" is disabled make sure to enable it.
             if (watchersToolStripMenuItem.DropDownItems[0].Enabled == false && DirWatchTransferApp.SymbolicLinks.Count != 0)
             {
                 watchersToolStripMenuItem.DropDownItems[0].Enabled = true;
             }
 
             // UI methods.
-            this.AddSymbolicLinkToList(sourcePath, targetPath);
+            this.AddSymbolicLinkToList(symbolicLink.Source, symbolicLink.Target);
         }
 
         private void AddHistoryItem(string text, int imageIndex)
@@ -134,16 +132,25 @@ namespace dir_watch_transfer_ui
             });
         }
 
+        private void AutoSizeColumns(ListView listView)
+        {
+            int width = (listView.Width / 3);
+
+            listView.Columns[0].Width = width;
+            listView.Columns[1].Width = width;
+            listView.Columns[2].Width = -2;
+        }
+
         #region Events
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            base.AutoSizeColumns(watchedDirs);
+            this.AutoSizeColumns(watchedDirs);
         }
 
         private void WatchedDirs_Resize(object sender, EventArgs e)
         {
-            base.AutoSizeColumns((ListView)sender);
+            this.AutoSizeColumns((ListView)sender);
         }
 
         private void MenuItemAddLink_Click(object sender, EventArgs e)
@@ -173,11 +180,6 @@ namespace dir_watch_transfer_ui
             CopyDiagnostics copyDiagnostics = this.SymbolicLinkUtil.SyncLinkedDirectory(sourcePath);
 
             this.AddHistoryItem($"Directory contents copied from {copyDiagnostics.SourcePath} to {copyDiagnostics.TargetPath} ({copyDiagnostics.ElapsedTime} ms)", DirWatchTransferApp.StatusInformationImageConfig.ImageIndex);
-        }
-
-        private async void MenuItemSeedTestLink_Click(object sender, EventArgs e)
-        {
-            await this.CreateSymbolicLink(@"C:\DirTempSource", @"C:\DirTargetSource");
         }
 
         private void StartWatchers_Click(object sender, EventArgs e)
@@ -231,6 +233,21 @@ namespace dir_watch_transfer_ui
         private void OnCopyCompleted(CopyDiagnostics copyDiagnostics)
         {
             this.AddHistoryItem($"File contents synced between {copyDiagnostics.SourcePath} and {copyDiagnostics.TargetPath} ({copyDiagnostics.ElapsedTime} ms)", DirWatchTransferApp.LinkImageConfig.ImageIndex);
+        }
+
+        #endregion
+
+        #region Temporary Dev Functions
+
+        private async void MenuItemSeedTestLink_Click(object sender, EventArgs e)
+        {
+            await this.CreateSymbolicLink(new SymbolicLink()
+            {
+                Source = @"C:\DirTempSource",
+                Target = @"C:\DirTargetSource",
+                WatchSecurity = true,
+                Monitor = new SymbolicLinkMonitor()
+            });
         }
 
         #endregion

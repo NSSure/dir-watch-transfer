@@ -11,7 +11,7 @@ namespace dir_watch_transfer_ui.DB
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            var sqliteConnectionInitializer = new SqliteCreateDatabaseIfNotExists<DirWatchTransferContext>(modelBuilder);
+            var sqliteConnectionInitializer = new SqliteDropCreateDatabaseAlways<DirWatchTransferContext>(modelBuilder);
             Database.SetInitializer(sqliteConnectionInitializer);
 
             modelBuilder.Configurations.Add(new SymbolicLinkConfig());

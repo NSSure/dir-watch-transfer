@@ -37,3 +37,10 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+*.suo
+*.user
+_ReSharper.*
+bin
+obj
+packages

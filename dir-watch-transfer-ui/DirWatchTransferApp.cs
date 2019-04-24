@@ -7,6 +7,7 @@ namespace dir_watch_transfer_ui
     {
         public static List<SymbolicLink> SymbolicLinks { get; set; } = new List<SymbolicLink>();
 
+
         public static List<ImageConfig> ListViewImageList
         {
             get

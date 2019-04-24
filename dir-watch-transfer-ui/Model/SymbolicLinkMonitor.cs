@@ -10,15 +10,20 @@ namespace dir_watch_transfer_ui.Model
         public delegate void CopyCompletedDelegate(CopyDiagnostics copyDiagnostics);
         public event CopyCompletedDelegate OnCopyCompleted;
 
+        public Action<CopyDiagnostics> CopyCompletedAction;
+
         public DateTime LastTimeWatcherFired { get; set; }
 
         private FileSystemWatcher watcher { get; set; } = new FileSystemWatcher();
 
-        private Action<CopyDiagnostics> copyCompleted;
+        public SymbolicLinkMonitor()
+        {
+
+        }
 
         public SymbolicLinkMonitor(Action<CopyDiagnostics> copyCompleted)
         {
-            this.copyCompleted = copyCompleted;
+            this.CopyCompletedAction = copyCompleted;
         }
 
         public FileSystemWatcher StartWatcher(string sourcePath)
@@ -34,7 +39,7 @@ namespace dir_watch_transfer_ui.Model
 
             this.watcher.Path = sourcePath;
             this.watcher.IncludeSubdirectories = true;
-            this.watcher.NotifyFilter = NotifyFilters.FileName | NotifyFilters.Size;
+            this.watcher.NotifyFilter = this.ProcessFilters(symbolicLink);
 
             this.watcher.Changed += SymbolicLinkWatcher_Changed;
             this.watcher.Created += SymbolicLinkWatcher_Created;
@@ -55,16 +60,44 @@ namespace dir_watch_transfer_ui.Model
             this.watcher.Dispose();
         }
 
+        private NotifyFilters ProcessFilters(SymbolicLink symbolicLink)
+        {
+            NotifyFilters filters = NotifyFilters.Size;
+
+            if (symbolicLink.WatchFileName)
+                filters = filters | NotifyFilters.FileName;
+
+            if (symbolicLink.WatchDirectoryName)
+                filters = filters | NotifyFilters.DirectoryName;
+
+            if (symbolicLink.WatchSize)
+                filters = filters | NotifyFilters.Size;
+
+            if (symbolicLink.WatchLastWrite)
+                filters = filters | NotifyFilters.LastWrite;
+
+            if (symbolicLink.WatchLastAccess)
+                filters = filters | NotifyFilters.LastAccess;
+
+            if (symbolicLink.WatchCreationTime)
+                filters = filters | NotifyFilters.CreationTime;
+
+            if (symbolicLink.WatchSecurity)
+                filters = filters | NotifyFilters.Security;
+
+            return filters;
+        }
+
         private void SymbolicLinkWatcher_Created(object sender, FileSystemEventArgs e)
         {
             CopyDiagnostics copyDiagnostics = new SymbolicLinkUtility().SyncLinkedFile(e.Name, e.FullPath);
-            this.copyCompleted?.Invoke(copyDiagnostics);
+            this.CopyCompletedAction?.Invoke(copyDiagnostics);
         }
 
         private void SymbolicLinkWatcher_Changed(object sender, FileSystemEventArgs e)
         {
             CopyDiagnostics copyDiagnostics = new SymbolicLinkUtility().SyncLinkedFile(e.Name, e.FullPath);
-            this.copyCompleted?.Invoke(copyDiagnostics);
+            this.CopyCompletedAction?.Invoke(copyDiagnostics);
         }
     }
 }
