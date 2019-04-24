@@ -44,20 +44,23 @@ namespace dir_watch_transfer_ui
             this.Width = 800;
             this.Height = 600;
 
-            watchedDirs.DoubleBuffer();
+            this.listSymbolicLinks.DoubleBuffer();
+            this.listWatchers.DoubleBuffer();
+            this.listSyncs.DoubleBuffer();
 
             // Register control events.
             menuItemAddLink.Click += MenuItemAddLink_Click;
-            menuItemSeedTestLink.Click += MenuItemSeedTestLink_Click;
-            watchedDirs.MouseClick += WatchedDirs_MouseClick;
+            listSymbolicLinks.MouseClick += listSymbolicLinks_MouseClick;
             contextItemStartWatchingLink.Click += ContextItemStartWatchingLink_Click;
             contextItemForceCopy.Click += ContextItemForceCopy_Click;
-            watchedDirs.Resize += WatchedDirs_Resize;
+            listSymbolicLinks.Resize += listSymbolicLinks_Resize;
+            startWatchers.Click += StartWatchers_Click;
+            stopWatchers.Click += StopWatchers_Click;
 
             // Add some padding to the the list view cells with this image workaround.
             ImageList emptyImageList = new ImageList();
             emptyImageList.ImageSize = new Size(1, 16);
-            watchedDirs.SmallImageList = emptyImageList;
+            listSymbolicLinks.SmallImageList = emptyImageList;
 
             ImageList imageList = new ImageList();
             imageList.ImageSize = new Size(16, 16);
@@ -74,14 +77,9 @@ namespace dir_watch_transfer_ui
         {
             DirWatchTransferApp.SymbolicLinks = await this.SymbolicLinkUtil.ListAllAsync();
 
-            ToolStripMenuItem startWatchers = new ToolStripMenuItem("Start watchers");
-            startWatchers.Enabled = DirWatchTransferApp.SymbolicLinks.Count != 0;
-            watchersToolStripMenuItem.DropDownItems.Add(startWatchers);
-            startWatchers.Click += StartWatchers_Click;
-
             foreach (SymbolicLink symbolicLink in DirWatchTransferApp.SymbolicLinks)
             {
-                this.AddSymbolicLinkToList(symbolicLink.Source, symbolicLink.Target, ignoreHistoryLog: true);
+                this.AddSymbolicLinkToList(symbolicLink.Name, symbolicLink.Source, symbolicLink.Target, ignoreHistoryLog: true);
             }
 
             base.CreateHandle();
@@ -92,18 +90,18 @@ namespace dir_watch_transfer_ui
         /// </summary>
         /// <param name="sourcePath">Path of the source directory.</param>
         /// <param name="targetPath">Path of the target directory.</param>
-        private void AddSymbolicLinkToList(string sourcePath, string targetPath, bool ignoreHistoryLog = false)
+        private void AddSymbolicLinkToList(string name, string sourcePath, string targetPath, bool ignoreHistoryLog = false)
         {
-            string[] data = new string[] { sourcePath, targetPath, "Stopped" };
+            string[] data = new string[] { name, sourcePath, targetPath };
             ListViewItem item = new ListViewItem(data);
             item.UseItemStyleForSubItems = false;
-            ListViewItem.ListViewSubItem statusSubItem = item.SubItems[2];
-            statusSubItem.ForeColor = this.ColorDanger;
-            watchedDirs.Items.Add(item);
+            // ListViewItem.ListViewSubItem statusSubItem = item.SubItems[2];
+            // statusSubItem.ForeColor = this.ColorDanger;
+            listSymbolicLinks.Items.Add(item);
 
             if (!ignoreHistoryLog)
             {
-                this.AddHistoryItem($"Linked created between {sourcePath} and {targetPath}", DirWatchTransferApp.LinkedFolderImageConfig.ImageIndex);
+                this.AddHistoryItem($"Linked created between {sourcePath} and {targetPath}", DirWatchTransferApp.LinkedFolderImageConfig.ImageIndex, ignore: ignoreHistoryLog);
             }
         }
 
@@ -121,34 +119,56 @@ namespace dir_watch_transfer_ui
             }
 
             // UI methods.
-            this.AddSymbolicLinkToList(symbolicLink.Source, symbolicLink.Target);
+            this.AddSymbolicLinkToList(symbolicLink.Name, symbolicLink.Source, symbolicLink.Target);
         }
 
-        private void AddHistoryItem(string text, int imageIndex)
+        private void AddHistoryItem(string text, int imageIndex, bool ignore = false)
         {
-            this.Invoke((MethodInvoker) delegate {
-                ListViewItem item = new ListViewItem(text, imageIndex);
-                listHistory.Items.Add(item);
-            });
+            if (!ignore)
+            {
+                this.Invoke((MethodInvoker)delegate {
+                    ListViewItem item = new ListViewItem(text, imageIndex);
+                    listHistory.Items.Add(item);
+                });
+            }
         }
 
         private void AutoSizeColumns(ListView listView)
         {
-            int width = (listView.Width / 3);
+            int width = (listView.Width / listView.Columns.Count);
 
-            listView.Columns[0].Width = width;
-            listView.Columns[1].Width = width;
-            listView.Columns[2].Width = -2;
+            foreach (int columnIndex in Enumerable.Range(0, listView.Columns.Count))
+            {
+                if (columnIndex == (listView.Columns.Count - 1))
+                {
+                    listView.Columns[columnIndex].Width = -2;
+                }
+                else
+                {
+                    listView.Columns[columnIndex].Width = width;
+                }
+            }
         }
 
         #region Events
 
-        private void MainForm_Load(object sender, EventArgs e)
+        private async void MainForm_Load(object sender, EventArgs e)
         {
-            this.AutoSizeColumns(watchedDirs);
+            await this.CreateSymbolicLink(new SymbolicLink()
+            {
+                Name = "Sample symbolic link",
+                Source = @"C:\DirTestSource",
+                Target = @"C:\DirTestTarget",
+                WatchSecurity = true,
+                Monitor = new SymbolicLinkMonitor()
+            });
+
+            this.AutoSizeColumns(this.listSymbolicLinks);
+            this.AutoSizeColumns(this.listWatchers);
+            this.AutoSizeColumns(this.listSyncs);
         }
 
-        private void WatchedDirs_Resize(object sender, EventArgs e)
+        private void listSymbolicLinks_Resize(object sender, EventArgs e)
         {
             this.AutoSizeColumns((ListView)sender);
         }
@@ -159,11 +179,11 @@ namespace dir_watch_transfer_ui
             createLinkForm.ShowDialog(this);
         }
 
-        private void WatchedDirs_MouseClick(object sender, MouseEventArgs e)
+        private void listSymbolicLinks_MouseClick(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
             {
-                if (watchedDirs.FocusedItem.Bounds.Contains(e.Location))
+                if (listSymbolicLinks.FocusedItem.Bounds.Contains(e.Location))
                 {
                     contextMenu.Show(Cursor.Position);
                 }
@@ -176,7 +196,7 @@ namespace dir_watch_transfer_ui
 
         private void ContextItemForceCopy_Click(object sender, EventArgs e)
         {
-            string sourcePath = watchedDirs.FocusedItem.Text;
+            string sourcePath = listSymbolicLinks.FocusedItem.Text;
             CopyDiagnostics copyDiagnostics = this.SymbolicLinkUtil.SyncLinkedDirectory(sourcePath);
 
             this.AddHistoryItem($"Directory contents copied from {copyDiagnostics.SourcePath} to {copyDiagnostics.TargetPath} ({copyDiagnostics.ElapsedTime} ms)", DirWatchTransferApp.StatusInformationImageConfig.ImageIndex);
@@ -190,11 +210,10 @@ namespace dir_watch_transfer_ui
             watchersToolStripMenuItem.DropDownItems.RemoveAt(0);
 
             // Add a "Stop watchers" menu item to the main menu.
-            ToolStripMenuItem stopWatchers = new ToolStripMenuItem("Stop watchers");
-            stopWatchers.Click += StopWatchers_Click;
-            watchersToolStripMenuItem.DropDownItems.Insert(0, stopWatchers);
+            startWatchers.Enabled = false;
+            stopWatchers.Enabled = true;
 
-            foreach (ListViewItem item in watchedDirs.Items)
+            foreach (ListViewItem item in listSymbolicLinks.Items)
             {
                 item.SubItems[2].ForeColor = this.ColorSuccess;
                 item.SubItems[2].Text = "Watching...";
@@ -211,11 +230,10 @@ namespace dir_watch_transfer_ui
             watchersToolStripMenuItem.DropDownItems.RemoveAt(0);
 
             // Add a "Stop watchers" menu item to the main menu.
-            ToolStripMenuItem startWatchers = new ToolStripMenuItem("Start watchers");
-            startWatchers.Click += StartWatchers_Click;
-            watchersToolStripMenuItem.DropDownItems.Insert(0, startWatchers);
+            startWatchers.Enabled = true;
+            stopWatchers.Enabled = false;
 
-            foreach (ListViewItem item in watchedDirs.Items)
+            foreach (ListViewItem item in listSymbolicLinks.Items)
             {
                 item.SubItems[2].ForeColor = this.ColorDanger;
                 item.SubItems[2].Text = "Stopped";
@@ -233,21 +251,6 @@ namespace dir_watch_transfer_ui
         private void OnCopyCompleted(CopyDiagnostics copyDiagnostics)
         {
             this.AddHistoryItem($"File contents synced between {copyDiagnostics.SourcePath} and {copyDiagnostics.TargetPath} ({copyDiagnostics.ElapsedTime} ms)", DirWatchTransferApp.LinkImageConfig.ImageIndex);
-        }
-
-        #endregion
-
-        #region Temporary Dev Functions
-
-        private async void MenuItemSeedTestLink_Click(object sender, EventArgs e)
-        {
-            await this.CreateSymbolicLink(new SymbolicLink()
-            {
-                Source = @"C:\DirTempSource",
-                Target = @"C:\DirTargetSource",
-                WatchSecurity = true,
-                Monitor = new SymbolicLinkMonitor()
-            });
         }
 
         #endregion

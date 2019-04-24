@@ -15,6 +15,7 @@ namespace dir_watch_transfer_ui.Model
         }
 
         public int ID { get; set; }
+        public string Name { get; set; }
         public string Source { get; set; }
         public string Target { get; set; }
         public bool Recursive { get; set; }
