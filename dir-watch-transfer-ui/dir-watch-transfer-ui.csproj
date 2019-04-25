@@ -90,11 +90,11 @@
     <Compile Include="DB\DirWatchTransferContext.cs" />
     <Compile Include="DirWatchTransferApp.cs" />
     <Compile Include="Extension\ControlExtensions.cs" />
-    <Compile Include="Forms\CreateLinkForm.cs">
+    <Compile Include="Forms\CreateSymbolicLinkForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\CreateLinkForm.Designer.cs">
-      <DependentUpon>CreateLinkForm.cs</DependentUpon>
+    <Compile Include="Forms\CreateSymbolicLinkForm.Designer.cs">
+      <DependentUpon>CreateSymbolicLinkForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
@@ -110,8 +110,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\CopyUtility.cs" />
     <Compile Include="Utilities\SymbolicLinkUtility.cs" />
-    <EmbeddedResource Include="Forms\CreateLinkForm.resx">
-      <DependentUpon>CreateLinkForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\CreateSymbolicLinkForm.resx">
+      <DependentUpon>CreateSymbolicLinkForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

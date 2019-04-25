@@ -175,7 +175,7 @@ namespace dir_watch_transfer_ui
 
         private void MenuItemAddLink_Click(object sender, EventArgs e)
         {
-            CreateLinkForm createLinkForm = new CreateLinkForm();
+            CreateSymbolicLinkForm createLinkForm = new CreateSymbolicLinkForm();
             createLinkForm.ShowDialog(this);
         }
 

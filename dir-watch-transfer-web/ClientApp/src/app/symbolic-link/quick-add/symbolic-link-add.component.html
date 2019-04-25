@@ -1,0 +1,26 @@
+<form *ngIf="symbolicLink">
+  <div class="row">
+    <div class="col">
+      <input type="text" class="form-control" name="name" [(ngModel)]="symbolicLink.name" placeholder="Symbolic link name" />
+    </div>
+    <div class="col">
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" name="source" [(ngModel)]="symbolicLink.source" placeholder="Source Directory" />
+        <div class="input-group-append">
+          <button type="button" class="btn btn-secondary">...</button>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" name="target" [(ngModel)]="symbolicLink.target" placeholder="Target Directory" />
+        <div class="input-group-append">
+          <button type="button" class="btn btn-secondary">...</button>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <button type="button" class="btn btn-success" (click)="add()">Create link</button>
+    </div>
+  </div>
+</form>

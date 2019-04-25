@@ -35,6 +35,8 @@
             this.menuItemAddLink = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.watchersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.startWatchers = new System.Windows.Forms.ToolStripMenuItem();
+            this.stopWatchers = new System.Windows.Forms.ToolStripMenuItem();
             this.syncsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createSyncToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,18 +59,16 @@
             this.splitContent = new System.Windows.Forms.SplitContainer();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.listWatchers = new System.Windows.Forms.ListView();
             this.symbolicLinkColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.statusColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.listSyncs = new System.Windows.Forms.ListView();
             this.symbolicLinkSyncColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.enabledColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.scheduledColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lastSyncColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.intervalColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.startWatchers = new System.Windows.Forms.ToolStripMenuItem();
-            this.stopWatchers = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.contextMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitMain)).BeginInit();
@@ -100,7 +100,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(0);
-            this.menuStrip1.Size = new System.Drawing.Size(1498, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1498, 25);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -110,7 +110,7 @@
             this.menuItemAddLink,
             this.exitToolStripMenuItem});
             this.menu.Name = "menu";
-            this.menu.Size = new System.Drawing.Size(51, 28);
+            this.menu.Size = new System.Drawing.Size(51, 25);
             this.menu.Text = "File";
             // 
             // menuItemAddLink
@@ -134,15 +134,28 @@
             this.startWatchers,
             this.stopWatchers});
             this.watchersToolStripMenuItem.Name = "watchersToolStripMenuItem";
-            this.watchersToolStripMenuItem.Size = new System.Drawing.Size(97, 28);
+            this.watchersToolStripMenuItem.Size = new System.Drawing.Size(97, 25);
             this.watchersToolStripMenuItem.Text = "Watchers";
+            // 
+            // startWatchers
+            // 
+            this.startWatchers.Name = "startWatchers";
+            this.startWatchers.Size = new System.Drawing.Size(207, 30);
+            this.startWatchers.Text = "Start watchers";
+            // 
+            // stopWatchers
+            // 
+            this.stopWatchers.Enabled = false;
+            this.stopWatchers.Name = "stopWatchers";
+            this.stopWatchers.Size = new System.Drawing.Size(207, 30);
+            this.stopWatchers.Text = "Stop watchers";
             // 
             // syncsToolStripMenuItem
             // 
             this.syncsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.createSyncToolStripMenuItem});
             this.syncsToolStripMenuItem.Name = "syncsToolStripMenuItem";
-            this.syncsToolStripMenuItem.Size = new System.Drawing.Size(71, 28);
+            this.syncsToolStripMenuItem.Size = new System.Drawing.Size(71, 25);
             this.syncsToolStripMenuItem.Text = "Syncs";
             // 
             // createSyncToolStripMenuItem
@@ -156,7 +169,7 @@
             this.logsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem});
             this.logsToolStripMenuItem.Name = "logsToolStripMenuItem";
-            this.logsToolStripMenuItem.Size = new System.Drawing.Size(61, 28);
+            this.logsToolStripMenuItem.Size = new System.Drawing.Size(61, 25);
             this.logsToolStripMenuItem.Text = "Logs";
             // 
             // openToolStripMenuItem
@@ -173,7 +186,7 @@
             this.aboutToolStripMenuItem,
             this.sourceToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(59, 28);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(59, 25);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // versionToolStripMenuItem
@@ -211,7 +224,7 @@
             this.listSymbolicLinks.FullRowSelect = true;
             this.listSymbolicLinks.Location = new System.Drawing.Point(0, 0);
             this.listSymbolicLinks.Name = "listSymbolicLinks";
-            this.listSymbolicLinks.Size = new System.Drawing.Size(1050, 398);
+            this.listSymbolicLinks.Size = new System.Drawing.Size(1050, 399);
             this.listSymbolicLinks.TabIndex = 0;
             this.listSymbolicLinks.TileSize = new System.Drawing.Size(268, 44);
             this.listSymbolicLinks.UseCompatibleStateImageBehavior = false;
@@ -239,7 +252,7 @@
             this.listHistory.FullRowSelect = true;
             this.listHistory.Location = new System.Drawing.Point(0, 0);
             this.listHistory.Name = "listHistory";
-            this.listHistory.Size = new System.Drawing.Size(444, 970);
+            this.listHistory.Size = new System.Drawing.Size(444, 973);
             this.listHistory.TabIndex = 7;
             this.listHistory.UseCompatibleStateImageBehavior = false;
             this.listHistory.View = System.Windows.Forms.View.List;
@@ -252,30 +265,30 @@
             this.contextItemForceCopy,
             this.createLinkWatcherToolStripMenuItem});
             this.contextMenu.Name = "contextMenu";
-            this.contextMenu.Size = new System.Drawing.Size(233, 94);
+            this.contextMenu.Size = new System.Drawing.Size(241, 127);
             // 
             // contextItemStartWatchingLink
             // 
             this.contextItemStartWatchingLink.Name = "contextItemStartWatchingLink";
-            this.contextItemStartWatchingLink.Size = new System.Drawing.Size(232, 30);
+            this.contextItemStartWatchingLink.Size = new System.Drawing.Size(240, 30);
             this.contextItemStartWatchingLink.Text = "Start watching link";
             // 
             // contextItemForceCopy
             // 
             this.contextItemForceCopy.Name = "contextItemForceCopy";
-            this.contextItemForceCopy.Size = new System.Drawing.Size(232, 30);
+            this.contextItemForceCopy.Size = new System.Drawing.Size(240, 30);
             this.contextItemForceCopy.Text = "Force copy";
             // 
             // createLinkWatcherToolStripMenuItem
             // 
             this.createLinkWatcherToolStripMenuItem.Name = "createLinkWatcherToolStripMenuItem";
-            this.createLinkWatcherToolStripMenuItem.Size = new System.Drawing.Size(232, 30);
-            this.createLinkWatcherToolStripMenuItem.Text = "Create link watcher";
+            this.createLinkWatcherToolStripMenuItem.Size = new System.Drawing.Size(240, 30);
+            this.createLinkWatcherToolStripMenuItem.Text = "Create as watcher";
             // 
             // splitMain
             // 
             this.splitMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitMain.Location = new System.Drawing.Point(0, 28);
+            this.splitMain.Location = new System.Drawing.Point(0, 25);
             this.splitMain.Name = "splitMain";
             // 
             // splitMain.Panel1
@@ -285,7 +298,7 @@
             // splitMain.Panel2
             // 
             this.splitMain.Panel2.Controls.Add(this.listHistory);
-            this.splitMain.Size = new System.Drawing.Size(1498, 970);
+            this.splitMain.Size = new System.Drawing.Size(1498, 973);
             this.splitMain.SplitterDistance = 1050;
             this.splitMain.TabIndex = 8;
             // 
@@ -303,8 +316,8 @@
             // splitContent.Panel2
             // 
             this.splitContent.Panel2.Controls.Add(this.tabControl1);
-            this.splitContent.Size = new System.Drawing.Size(1050, 970);
-            this.splitContent.SplitterDistance = 398;
+            this.splitContent.Size = new System.Drawing.Size(1050, 973);
+            this.splitContent.SplitterDistance = 399;
             this.splitContent.TabIndex = 0;
             // 
             // tabControl1
@@ -315,7 +328,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1050, 568);
+            this.tabControl1.Size = new System.Drawing.Size(1050, 570);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -324,21 +337,10 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 29);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1042, 536);
+            this.tabPage1.Size = new System.Drawing.Size(1042, 537);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Watchers";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.listSyncs);
-            this.tabPage2.Location = new System.Drawing.Point(4, 29);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1042, 535);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Syncs";
-            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // listWatchers
             // 
@@ -348,7 +350,7 @@
             this.listWatchers.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listWatchers.Location = new System.Drawing.Point(3, 3);
             this.listWatchers.Name = "listWatchers";
-            this.listWatchers.Size = new System.Drawing.Size(1036, 530);
+            this.listWatchers.Size = new System.Drawing.Size(1036, 531);
             this.listWatchers.TabIndex = 0;
             this.listWatchers.UseCompatibleStateImageBehavior = false;
             this.listWatchers.View = System.Windows.Forms.View.Details;
@@ -361,6 +363,17 @@
             // 
             this.statusColumn.Text = "Status";
             // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.listSyncs);
+            this.tabPage2.Location = new System.Drawing.Point(4, 29);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1042, 537);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Syncs";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
             // listSyncs
             // 
             this.listSyncs.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -372,7 +385,7 @@
             this.listSyncs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listSyncs.Location = new System.Drawing.Point(3, 3);
             this.listSyncs.Name = "listSyncs";
-            this.listSyncs.Size = new System.Drawing.Size(1036, 529);
+            this.listSyncs.Size = new System.Drawing.Size(1036, 531);
             this.listSyncs.TabIndex = 0;
             this.listSyncs.UseCompatibleStateImageBehavior = false;
             this.listSyncs.View = System.Windows.Forms.View.Details;
@@ -396,19 +409,6 @@
             // intervalColumn
             // 
             this.intervalColumn.Text = "Interval";
-            // 
-            // startWatchers
-            // 
-            this.startWatchers.Name = "startWatchers";
-            this.startWatchers.Size = new System.Drawing.Size(252, 30);
-            this.startWatchers.Text = "Start watchers";
-            // 
-            // stopWatchers
-            // 
-            this.stopWatchers.Enabled = false;
-            this.stopWatchers.Name = "stopWatchers";
-            this.stopWatchers.Size = new System.Drawing.Size(252, 30);
-            this.stopWatchers.Text = "Stop watchers";
             // 
             // MainForm
             // 

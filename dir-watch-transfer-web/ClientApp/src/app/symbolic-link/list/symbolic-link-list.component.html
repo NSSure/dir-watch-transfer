@@ -1,0 +1,14 @@
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th>Name</th>
+      <th>Source</th>
+      <th>Target</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let symbolicLink of symbolicLinks">
+    <td>{{symbolicLink.name}}</td>
+    <td>{{symbolicLink.source}}</td>
+    <td>{{symbolicLink.target}}</td>
+  </tbody>
+</table>

@@ -4,18 +4,18 @@ using System.Windows.Forms;
 
 namespace dir_watch_transfer_ui.Forms
 {
-    public partial class CreateLinkForm : Form
+    public partial class CreateSymbolicLinkForm : Form
     {
-        public CreateLinkForm()
+        public CreateSymbolicLinkForm()
         {
             InitializeComponent();
 
-            txtSourceDirectory.Click += TxtSourceDirectory_Click;
-            txtTargetDirectory.Click += TxtTargetDirectory_Click;
+            btnSourceDirectory.Click += BtnSourceDirectory_Click;
+            btnTargetDirectory.Click += BtnTargetDirectory_Click;
             btnCreateWatcher.Click += BtnCreateWatcher_Click;
         }
 
-        private void TxtSourceDirectory_Click(object sender, EventArgs e)
+        private void BtnSourceDirectory_Click(object sender, EventArgs e)
         {
             if (sourceDirectoryDialog.ShowDialog() == DialogResult.OK)
             {
@@ -25,7 +25,7 @@ namespace dir_watch_transfer_ui.Forms
             }
         }
 
-        private void TxtTargetDirectory_Click(object sender, EventArgs e)
+        private void BtnTargetDirectory_Click(object sender, EventArgs e)
         {
             if (targetDirectoryDialog.ShowDialog() == DialogResult.OK)
             {
