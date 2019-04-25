@@ -1,11 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DirWatchTransfer.Entity;
+using DirWatchTransfer.Utilities;
+using DirWatchTransfer.Entity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace dir_watch_transfer_web.DB
+namespace DirWatchTransfer.DB
 {
     public class BaseRepository<TEntity> where TEntity : class
     {
@@ -38,6 +41,45 @@ namespace dir_watch_transfer_web.DB
                 this.Context.Entry(entity).State = EntityState.Added;
                 await this.Table.AddAsync(entity);
                 await this.Context.SaveChangesAsync();
+
+                Type entityType = typeof(TEntity);
+
+                if (entityType != typeof(ActivityHistory))
+                {
+                    ActivityHistory activityHistory = null;
+
+                    if (typeof(TEntity) == typeof(SymbolicLink))
+                    {
+                        SymbolicLink symbolicLink = entity as SymbolicLink;
+
+                        activityHistory = new ActivityHistory()
+                        {
+                            Title = "Link Created",
+                            Description = $"{symbolicLink.Source} now linked with {symbolicLink.Target}",
+                            DateAdded = DateTime.Now
+                        };
+                    }
+
+                    if (typeof(TEntity) == typeof(Watcher))
+                    {
+                        Watcher watcher = entity as Watcher;
+
+                        SymbolicLink symbolicLink = await new SymbolicLinkUtility().FirstOrDefaultAsync(a => a.ID == watcher.SymbolicLinkID);
+
+                        activityHistory = new ActivityHistory()
+                        {
+                            Title = "Watcher Created",
+                            Description = $"Watcher created for ${symbolicLink.Name}",
+                            DateAdded = DateTime.Now
+                        };
+                    }
+
+                    if (activityHistory != null)
+                    {
+                        await new ActivityHistoryUtility().AddAsync(activityHistory);
+                    }
+                }
+
             }
             catch (Exception ex)
             {

@@ -1,10 +1,10 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
-using dir_watch_transfer_web.Entity;
+using DirWatchTransfer.Entity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace dir_watch_transfer_web.Pages
+namespace DirWatchTransfer.Pages
 {
     public class IndexModel : PageModel
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace dir_watch_transfer_web.Utilities
+namespace DirWatchTransfer.Utilities
 {
     public class CopyUtility
     {

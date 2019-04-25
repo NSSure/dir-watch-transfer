@@ -1,6 +1,6 @@
-﻿using dir_watch_transfer_web.DB;
-using dir_watch_transfer_web.Entity;
-using dir_watch_transfer_web.Model;
+﻿using DirWatchTransfer.DB;
+using DirWatchTransfer.Entity;
+using DirWatchTransfer.Model;
 using DirWatchTransfer;
 using System;
 using System.Diagnostics;
@@ -8,7 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace dir_watch_transfer_web.Utilities
+namespace DirWatchTransfer.Utilities
 {
     public class SymbolicLinkUtility : BaseRepository<SymbolicLink>
     {
@@ -29,8 +29,8 @@ namespace dir_watch_transfer_web.Utilities
         {
             foreach (SymbolicLink symbolicLink in DirWatchTransferApp.SymbolicLinks)
             {
-                symbolicLink.Monitor = new SymbolicLinkMonitor(copyCompleted);
-                symbolicLink.Monitor.StartWatcher(symbolicLink.Source);
+                //symbolicLink.Monitor = new Monitor(copyCompleted);
+                //symbolicLink.Monitor.StartWatcher(symbolicLink.Source);
             }
         }
 
@@ -38,7 +38,7 @@ namespace dir_watch_transfer_web.Utilities
         {
             foreach (SymbolicLink symbolicLink in DirWatchTransferApp.SymbolicLinks)
             {
-                symbolicLink.Monitor.StopWatcher();
+                // symbolicLink.Monitor.StopWatcher();
             }
         }
 

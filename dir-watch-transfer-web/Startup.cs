@@ -1,4 +1,4 @@
-using dir_watch_transfer_web.DB;
+using DirWatchTransfer.DB;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;

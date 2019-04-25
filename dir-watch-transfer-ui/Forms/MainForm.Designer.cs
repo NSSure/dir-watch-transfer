@@ -265,24 +265,24 @@
             this.contextItemForceCopy,
             this.createLinkWatcherToolStripMenuItem});
             this.contextMenu.Name = "contextMenu";
-            this.contextMenu.Size = new System.Drawing.Size(241, 127);
+            this.contextMenu.Size = new System.Drawing.Size(229, 94);
             // 
             // contextItemStartWatchingLink
             // 
             this.contextItemStartWatchingLink.Name = "contextItemStartWatchingLink";
-            this.contextItemStartWatchingLink.Size = new System.Drawing.Size(240, 30);
+            this.contextItemStartWatchingLink.Size = new System.Drawing.Size(228, 30);
             this.contextItemStartWatchingLink.Text = "Start watching link";
             // 
             // contextItemForceCopy
             // 
             this.contextItemForceCopy.Name = "contextItemForceCopy";
-            this.contextItemForceCopy.Size = new System.Drawing.Size(240, 30);
+            this.contextItemForceCopy.Size = new System.Drawing.Size(228, 30);
             this.contextItemForceCopy.Text = "Force copy";
             // 
             // createLinkWatcherToolStripMenuItem
             // 
             this.createLinkWatcherToolStripMenuItem.Name = "createLinkWatcherToolStripMenuItem";
-            this.createLinkWatcherToolStripMenuItem.Size = new System.Drawing.Size(240, 30);
+            this.createLinkWatcherToolStripMenuItem.Size = new System.Drawing.Size(228, 30);
             this.createLinkWatcherToolStripMenuItem.Text = "Create as watcher";
             // 
             // splitMain
@@ -389,26 +389,32 @@
             this.listSyncs.TabIndex = 0;
             this.listSyncs.UseCompatibleStateImageBehavior = false;
             this.listSyncs.View = System.Windows.Forms.View.Details;
+            this.listSyncs.SelectedIndexChanged += new System.EventHandler(this.ListSyncs_SelectedIndexChanged);
             // 
             // symbolicLinkSyncColumn
             // 
             this.symbolicLinkSyncColumn.Text = "Symbolic Link";
+            this.symbolicLinkSyncColumn.Width = 121;
             // 
             // enabledColumn
             // 
             this.enabledColumn.Text = "Enabled";
+            this.enabledColumn.Width = 216;
             // 
             // scheduledColumn
             // 
             this.scheduledColumn.Text = "Scheduled";
+            this.scheduledColumn.Width = 142;
             // 
             // lastSyncColumn
             // 
             this.lastSyncColumn.Text = "Last Sync";
+            this.lastSyncColumn.Width = 121;
             // 
             // intervalColumn
             // 
             this.intervalColumn.Text = "Interval";
+            this.intervalColumn.Width = 193;
             // 
             // MainForm
             // 

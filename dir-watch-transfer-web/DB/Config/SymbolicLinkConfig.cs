@@ -1,8 +1,8 @@
-﻿using dir_watch_transfer_web.Entity;
+﻿using DirWatchTransfer.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace dir_watch_transfer_web.DB.Config
+namespace DirWatchTransfer.DB.Config
 {
     public class SymbolicLinkConfig : IEntityTypeConfiguration<SymbolicLink>
     {
@@ -12,18 +12,9 @@ namespace dir_watch_transfer_web.DB.Config
 
             builder.HasKey(p => p.ID);
 
+            builder.Property(p => p.Name);
             builder.Property(p => p.Source);
             builder.Property(p => p.Target);
-            builder.Property(p => p.Recursive);
-            builder.Property(p => p.WatchFileName);
-            builder.Property(p => p.WatchDirectoryName);
-            builder.Property(p => p.WatchSize);
-            builder.Property(p => p.WatchLastWrite);
-            builder.Property(p => p.WatchLastAccess);
-            builder.Property(p => p.WatchCreationTime);
-            builder.Property(p => p.WatchSecurity);
-
-            builder.Ignore(a => a.Monitor);
         }
     }
 }

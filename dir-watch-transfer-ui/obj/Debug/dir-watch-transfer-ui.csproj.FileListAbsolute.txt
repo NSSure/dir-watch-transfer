@@ -31,6 +31,7 @@ C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\bin
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\bin\Debug\x64\sqlite3.dll
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\bin\Debug\Images\LinkedFolder.png
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\bin\Debug\Images\Link.png
+C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\bin\Debug\Images\YellowFolderOpen.ico
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\bin\Debug\Images\StatusInformation.png
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\bin\Debug\Images\StatusOffline.png
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\bin\Debug\Images\Time.png
@@ -47,6 +48,7 @@ C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\bin
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\bin\Debug\System.Data.SQLite.xml
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\bin\Debug\System.Data.SQLite.dll.config
+C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\obj\Debug\dir_watch_transfer_ui.Forms.CreateSymbolicLinkForm.resources
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\obj\Debug\dir_watch_transfer_ui.MainForm.resources
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\obj\Debug\dir_watch_transfer_ui.Properties.Resources.resources
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\obj\Debug\dir-watch-transfer-ui.csproj.GenerateResource.cache
@@ -54,5 +56,3 @@ C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\obj
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\obj\Debug\dir-watch-transfer-ui.csproj.CopyComplete
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\obj\Debug\dir-watch-transfer-ui.exe
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\obj\Debug\dir-watch-transfer-ui.pdb
-C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\bin\Debug\Images\YellowFolderOpen.ico
-C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\obj\Debug\dir_watch_transfer_ui.Forms.CreateSymbolicLinkForm.resources

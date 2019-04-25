@@ -1,4 +1,4 @@
-﻿namespace dir_watch_transfer_web.Model
+﻿namespace DirWatchTransfer.Model
 {
     public class CopyDiagnostics
     {

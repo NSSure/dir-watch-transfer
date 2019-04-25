@@ -1,4 +1,4 @@
-﻿using dir_watch_transfer_web.Entity;
+﻿using DirWatchTransfer.Entity;
 using System.Collections.Generic;
 
 namespace DirWatchTransfer

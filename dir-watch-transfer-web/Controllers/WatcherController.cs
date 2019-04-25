@@ -7,17 +7,17 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace test.Controllers
 {
-    [Route("api/symbolic/link")]
-    public class SymbolicLinkController : Controller
+    [Route("api/watcher")]
+    public class WatcherController : Controller
     {
         [HttpPost]
         [Route("add")]
-        public async Task<IActionResult> Add([FromBody] SymbolicLink symbolicLink)
+        public async Task<IActionResult> Add([FromBody] Watcher watcher)
         {
             try
             {
-                SymbolicLinkUtility symbolicLinkUtil = new SymbolicLinkUtility();
-                await symbolicLinkUtil.AddAsync(symbolicLink);
+                WatcherUtility watcherUtil = new WatcherUtility();
+                await watcherUtil.AddAsync(watcher);
                 return StatusCode(200);
             }
             catch (Exception ex)
@@ -32,9 +32,9 @@ namespace test.Controllers
         {
             try
             {
-                SymbolicLinkUtility symbolicLinkUtil = new SymbolicLinkUtility();
-                List<SymbolicLink> symbolicLinks = await symbolicLinkUtil.ListAllAsync();
-                return StatusCode(200, symbolicLinks);
+                WatcherUtility watcherUtil = new WatcherUtility();
+                List<Watcher> watchers = await watcherUtil.ListAllAsync();
+                return StatusCode(200, watchers);
             }
             catch(Exception ex)
             {

@@ -7,17 +7,17 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace test.Controllers
 {
-    [Route("api/symbolic/link")]
-    public class SymbolicLinkController : Controller
+    [Route("api/scheduled/sync")]
+    public class ScheduledSyncController : Controller
     {
         [HttpPost]
         [Route("add")]
-        public async Task<IActionResult> Add([FromBody] SymbolicLink symbolicLink)
+        public async Task<IActionResult> Add([FromBody] ScheduledSync scheduledSync)
         {
             try
             {
-                SymbolicLinkUtility symbolicLinkUtil = new SymbolicLinkUtility();
-                await symbolicLinkUtil.AddAsync(symbolicLink);
+                ScheduledSyncUtility scheduledSyncUtil = new ScheduledSyncUtility();
+                await scheduledSyncUtil.AddAsync(scheduledSync);
                 return StatusCode(200);
             }
             catch (Exception ex)
@@ -32,9 +32,9 @@ namespace test.Controllers
         {
             try
             {
-                SymbolicLinkUtility symbolicLinkUtil = new SymbolicLinkUtility();
-                List<SymbolicLink> symbolicLinks = await symbolicLinkUtil.ListAllAsync();
-                return StatusCode(200, symbolicLinks);
+                ScheduledSyncUtility scheduledSyncUtil = new ScheduledSyncUtility();
+                List<ScheduledSync> scheduledSyncs = await scheduledSyncUtil.ListAllAsync();
+                return StatusCode(200, scheduledSyncs);
             }
             catch(Exception ex)
             {

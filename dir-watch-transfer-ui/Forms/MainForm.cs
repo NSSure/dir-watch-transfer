@@ -254,5 +254,10 @@ namespace dir_watch_transfer_ui
         }
 
         #endregion
+
+        private void ListSyncs_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

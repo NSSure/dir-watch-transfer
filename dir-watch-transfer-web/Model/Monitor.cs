@@ -1,14 +1,15 @@
-﻿using dir_watch_transfer_web.Entity;
-using dir_watch_transfer_web.Utilities;
-using DirWatchTransfer;
+﻿using DirWatchTransfer.Entity;
+using DirWatchTransfer.Utilities;
 using System;
 using System.IO;
 using System.Linq;
 
-namespace dir_watch_transfer_web.Model
+namespace DirWatchTransfer.Model
 {
-    public class SymbolicLinkMonitor
+    public class Monitor
     {
+        public int ID { get; set; }
+
         public delegate void CopyCompletedDelegate(CopyDiagnostics copyDiagnostics);
         public event CopyCompletedDelegate OnCopyCompleted;
 
@@ -18,12 +19,12 @@ namespace dir_watch_transfer_web.Model
 
         private FileSystemWatcher watcher { get; set; } = new FileSystemWatcher();
 
-        public SymbolicLinkMonitor()
+        public Monitor()
         {
 
         }
 
-        public SymbolicLinkMonitor(Action<CopyDiagnostics> copyCompleted)
+        public Monitor(Action<CopyDiagnostics> copyCompleted)
         {
             this.CopyCompletedAction = copyCompleted;
         }
@@ -32,7 +33,7 @@ namespace dir_watch_transfer_web.Model
         {
             SymbolicLink symbolicLink = DirWatchTransferApp.SymbolicLinks.FirstOrDefault(a => a.Source == sourcePath);
 
-            symbolicLink.Monitor = this;
+             //symbolicLink.Monitor = this;
 
             if (!Directory.Exists(sourcePath))
             {
@@ -41,7 +42,7 @@ namespace dir_watch_transfer_web.Model
 
             this.watcher.Path = sourcePath;
             this.watcher.IncludeSubdirectories = true;
-            this.watcher.NotifyFilter = this.ProcessFilters(symbolicLink);
+            // this.watcher.NotifyFilter = this.ProcessFilters(symbolicLink);
 
             this.watcher.Changed += SymbolicLinkWatcher_Changed;
             this.watcher.Created += SymbolicLinkWatcher_Created;
@@ -62,29 +63,29 @@ namespace dir_watch_transfer_web.Model
             this.watcher.Dispose();
         }
 
-        private NotifyFilters ProcessFilters(SymbolicLink symbolicLink)
+        private NotifyFilters ProcessFilters(Watcher watcher)
         {
             NotifyFilters filters = NotifyFilters.Size;
 
-            if (symbolicLink.WatchFileName)
+            if (watcher.WatchFileName)
                 filters = filters | NotifyFilters.FileName;
 
-            if (symbolicLink.WatchDirectoryName)
+            if (watcher.WatchDirectoryName)
                 filters = filters | NotifyFilters.DirectoryName;
 
-            if (symbolicLink.WatchSize)
+            if (watcher.WatchSize)
                 filters = filters | NotifyFilters.Size;
 
-            if (symbolicLink.WatchLastWrite)
+            if (watcher.WatchLastWrite)
                 filters = filters | NotifyFilters.LastWrite;
 
-            if (symbolicLink.WatchLastAccess)
+            if (watcher.WatchLastAccess)
                 filters = filters | NotifyFilters.LastAccess;
 
-            if (symbolicLink.WatchCreationTime)
+            if (watcher.WatchCreationTime)
                 filters = filters | NotifyFilters.CreationTime;
 
-            if (symbolicLink.WatchSecurity)
+            if (watcher.WatchSecurity)
                 filters = filters | NotifyFilters.Security;
 
             return filters;

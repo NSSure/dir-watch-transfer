@@ -13,6 +13,7 @@ import { SyncListComponent } from './sync/sync-list.component';
 import { WatcherListComponent } from './watcher/watcher-list.component';
 import { SymbolicLinkAddComponent } from './symbolic-link/quick-add/symbolic-link-add.component';
 import { SymbolicLinkListComponent } from './symbolic-link/list/symbolic-link-list.component';
+import { SyncAddComponent } from './sync/quick-add/sync-add.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { SymbolicLinkListComponent } from './symbolic-link/list/symbolic-link-li
     CounterComponent,
     FetchDataComponent,
     SyncListComponent,
+    SyncAddComponent,
     WatcherListComponent,
     SymbolicLinkAddComponent,
     SymbolicLinkListComponent
