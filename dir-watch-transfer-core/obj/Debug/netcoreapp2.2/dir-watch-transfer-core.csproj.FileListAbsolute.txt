@@ -1,0 +1,8 @@
+C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-core\bin\Debug\netcoreapp2.2\DirWatchTransfer.Core.deps.json
+C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-core\bin\Debug\netcoreapp2.2\DirWatchTransfer.Core.dll
+C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-core\obj\Debug\netcoreapp2.2\dir-watch-transfer-core.csproj.CoreCompileInputs.cache
+C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-core\obj\Debug\netcoreapp2.2\dir-watch-transfer-core.AssemblyInfoInputs.cache
+C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-core\obj\Debug\netcoreapp2.2\dir-watch-transfer-core.AssemblyInfo.cs
+C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-core\bin\Debug\netcoreapp2.2\DirWatchTransfer.Core.pdb
+C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-core\obj\Debug\netcoreapp2.2\DirWatchTransfer.Core.dll
+C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-core\obj\Debug\netcoreapp2.2\DirWatchTransfer.Core.pdb

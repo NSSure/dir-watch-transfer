@@ -1,32 +1,20 @@
-using DirWatchTransfer.DB;
+using DirWatchTransfer.SignalR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.Collections.Generic;
-using System.Linq;
+using System;
+using System.Threading.Tasks;
 
-namespace test
+namespace DirWatchTransfer
 {
     public class Startup
     {
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-
-            using (DirWatchTransferContext context = new DirWatchTransferContext())
-            {
-                List<string> pendingMigrations = context.Database.GetPendingMigrations().ToList();
-
-                if (pendingMigrations.Count != 0)
-                {
-                    context.Database.Migrate();
-                }
-            }
         }
 
         public IConfiguration Configuration { get; }
@@ -42,11 +30,20 @@ namespace test
                 configuration.RootPath = "ClientApp/dist";
             });
 
+            services.AddCors(options => options.AddPolicy("CorsPolicy", builder =>
+            {
+               builder.AllowAnyMethod().AllowAnyHeader()
+                      .WithOrigins("http://localhost:4200")
+                      .AllowCredentials();
+            }));
+
+            services.AddSignalR();
+
             services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider provider)
         {
             if (env.IsDevelopment())
             {
@@ -59,12 +56,7 @@ namespace test
                 app.UseHsts();
             }
 
-            app.UseCors((options) =>
-            {
-                options.AllowAnyOrigin();
-                options.AllowAnyHeader();
-                options.AllowAnyMethod();
-            });
+            app.UseCors("CorsPolicy");
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -75,6 +67,11 @@ namespace test
                 routes.MapRoute(
                     name: "default",
                     template: "{controller}/{action=Index}/{id?}");
+            });
+
+            app.UseSignalR(route =>
+            {
+                route.MapHub<FileSystemHub>("/hub");
             });
 
             app.UseSpa(spa =>
@@ -89,6 +86,9 @@ namespace test
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
+
+            // DirWatchTransferApp.FileSystemHub = provider.GetRequiredService<IHubContext<FileSystemHub>>();
+            Task.Run(async () => { await ConnectionManager.Connect(); });
         }
     }
 }
