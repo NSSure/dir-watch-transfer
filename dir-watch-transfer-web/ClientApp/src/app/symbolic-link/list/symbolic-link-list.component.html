@@ -1,14 +1,24 @@
-<table class="table">
-  <thead class="thead-light">
-    <tr>
-      <th>Name</th>
-      <th>Source</th>
-      <th>Target</th>
-    </tr>
-  </thead>
-  <tbody *ngFor="let symbolicLink of symbolicLinks">
-    <td>{{symbolicLink.name}}</td>
-    <td>{{symbolicLink.source}}</td>
-    <td>{{symbolicLink.target}}</td>
-  </tbody>
-</table>
+<div class="card">
+  <div class="card-header">
+    Existing Symbolic Links
+  </div>
+  <table class="table" *ngIf="symbolicLinks.length !== 0">
+    <thead class="thead-light">
+      <tr>
+        <th>Name</th>
+        <th>Source</th>
+        <th>Target</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let symbolicLink of symbolicLinks">
+        <td>{{symbolicLink.name}}</td>
+        <td>{{symbolicLink.source}}</td>
+        <td>{{symbolicLink.target}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="card-body" *ngIf="symbolicLinks.length === 0">
+    You have not configured any symbolic links.
+  </div>
+</div>

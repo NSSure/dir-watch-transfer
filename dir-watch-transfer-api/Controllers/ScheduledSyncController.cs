@@ -7,8 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DirWatcherTransfer.Api.Controllers
 {
+    [ApiController]
     [Route("api/scheduled/sync")]
-    public class ScheduledSyncController : Controller
+    public class ScheduledSyncController : ControllerBase
     {
         [HttpPost]
         [Route("add")]

@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./sync-list.component.css']
 })
 export class SyncListComponent {
-  
+  syncs: Array<any> = [];
 }

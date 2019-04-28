@@ -27,11 +27,6 @@ namespace DirWatchTransfer
                 configuration.RootPath = "ClientApp/dist";
             });
 
-            services.AddCors(options => options.AddPolicy("CorsPolicy", builder =>
-            {
-               builder.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:4200").AllowCredentials();
-            }));
-
             services.AddSignalR();
 
             services.AddCors();
@@ -49,9 +44,6 @@ namespace DirWatchTransfer
                 app.UseHsts();
             }
 
-            app.UseCors("CorsPolicy");
-
-            app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
             app.UseMvc(routes => { routes.MapRoute(name: "default", template: "{controller}/{action=Index}/{id?}"); });

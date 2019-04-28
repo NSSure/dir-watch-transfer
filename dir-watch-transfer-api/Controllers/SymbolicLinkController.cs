@@ -7,8 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DirWatchTransfer.Api.Controllers
 {
+    [ApiController]
     [Route("api/symbolic/link")]
-    public class SymbolicLinkController : Controller
+    public class SymbolicLinkController : ControllerBase
     {
         [HttpPost]
         [Route("add")]
@@ -32,10 +33,6 @@ namespace DirWatchTransfer.Api.Controllers
         {
             try
             {
-                // await DirWatchTransferApp.FileSystemProxyHub.Invoke("FileCopied", @"c:\", @"e:\");
-                // await DirWatchTransferApp.HubConnection.InvokeAsync("FileCopied");
-                // await this.hub.Clients.All.SendAsync("FileCopied");
-
                 SymbolicLinkRepository symbolicLinkRepo = new SymbolicLinkRepository();
                 List<SymbolicLink> symbolicLinks = await symbolicLinkRepo.ListAllAsync();
                 return StatusCode(200, symbolicLinks);

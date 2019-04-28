@@ -1,37 +1,41 @@
 <div class="app h-100">
   <app-nav-menu></app-nav-menu>
-  <div class="d-flex flex-fill">
-    <div class="side-bar">
-      <div class="list-group">
-        <a href="#" class="list-group-item list-group-item-action">
-          <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1"><i class="fa fa-link fa-lg"></i> Link Created</h5>
-            <small>3 days ago</small>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-3">
+        <div class="side-bar">
+          <div class="mb-4">
+            <symbolic-link-add></symbolic-link-add>
           </div>
-          <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius
-            blandit.</p>
-          <small>Donec id elit non mi porta.</small>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action">
-          <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">List group item heading</h5>
-            <small class="text-muted">3 days ago</small>
+          <symbolic-link-list></symbolic-link-list>
+        </div>
+      </div>
+      <div class="col-6">
+        <router-outlet style="overflow-y: auto;"></router-outlet>
+      </div>
+      <div class="col-3">
+        <div class="card">
+          <div class="card-header">
+            Application Activity History
           </div>
-          <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius
-            blandit.</p>
-          <small class="text-muted">Donec id elit non mi porta.</small>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action">
-          <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">List group item heading</h5>
-            <small class="text-muted">3 days ago</small>
+          <div class="list-group list-group-flush" *ngIf="false">
+            <div class="list-group-item list-group-item-success">
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1"><i class="fa fa-link fa-lg"></i> Link Created</h5>
+                <small>3 days ago</small>
+              </div>
+              <p class="mb-1">
+                Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius
+                blandit.
+              </p>
+              <small>Donec id elit non mi porta.</small>
+            </div>
           </div>
-          <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius
-            blandit.</p>
-          <small class="text-muted">Donec id elit non mi porta.</small>
-        </a>
+          <div class="card-body">
+            There is no application activity to report.
+          </div>
+        </div>
       </div>
     </div>
-    <router-outlet style="overflow-y: auto;"></router-outlet>
   </div>
 </div>

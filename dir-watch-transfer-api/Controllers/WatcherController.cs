@@ -7,8 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DirWatchTransfer.Core.Controllers
 {
+    [ApiController]
     [Route("api/watcher")]
-    public class WatcherController : Controller
+    public class WatcherController : ControllerBase
     {
         [HttpPost]
         [Route("add")]

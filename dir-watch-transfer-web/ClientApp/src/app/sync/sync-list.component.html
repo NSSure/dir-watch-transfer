@@ -1,21 +1,25 @@
-<sync-add></sync-add>
-<table class="table">
-  <thead class="thead-light">
-    <tr>
-      <th>Symbolic Link</th>
-      <th>Enabled</th>
-      <th>Scheduled</th>
-      <th>Last Scan</th>
-      <th>Interval</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-  </tbody>
-</table>
+<div class="syncs">
+  <table class="table" *ngIf="syncs.length !== 0">
+    <thead class="thead-light">
+      <tr>
+        <th>Symbolic Link</th>
+        <th>Enabled</th>
+        <th>Scheduled</th>
+        <th>Last Scan</th>
+        <th>Interval</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="syncs.length === 0" class="px-5 py-5">
+    There are no syncs configured for any of your symbolic links.
+  </div>
+</div>

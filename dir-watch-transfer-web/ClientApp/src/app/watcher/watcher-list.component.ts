@@ -6,13 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./watcher-list.component.css']
 })
 export class WatcherListComponent {
-  isExpanded = false;
-
-  collapse() {
-    this.isExpanded = false;
-  }
-
-  toggle() {
-    this.isExpanded = !this.isExpanded;
-  }
+  watchers: Array<any> = [];
 }

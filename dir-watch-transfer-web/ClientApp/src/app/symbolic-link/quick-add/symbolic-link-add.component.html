@@ -1,26 +1,34 @@
-<form *ngIf="symbolicLink">
-  <div class="row">
-    <div class="col">
-      <input type="text" class="form-control" name="name" [(ngModel)]="symbolicLink.name" placeholder="Symbolic link name" />
-    </div>
-    <div class="col">
-      <div class="input-group mb-3">
-        <input type="text" class="form-control" name="source" [(ngModel)]="symbolicLink.source" placeholder="Source Directory" />
-        <div class="input-group-append">
-          <button type="button" class="btn btn-secondary">...</button>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="input-group mb-3">
-        <input type="text" class="form-control" name="target" [(ngModel)]="symbolicLink.target" placeholder="Target Directory" />
-        <div class="input-group-append">
-          <button type="button" class="btn btn-secondary">...</button>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <button type="button" class="btn btn-success" (click)="add()">Create link</button>
-    </div>
+<div class="card">
+  <div class="card-header">
+    Create New Symbolic Link
   </div>
-</form>
+  <div class="card-body">
+    <form *ngIf="symbolicLink">
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" class="form-control" name="name" [(ngModel)]="symbolicLink.name" placeholder="Symbolic link name" />
+      </div>
+      <div class="form-group">
+        <label>Source Directory</label>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" name="source" [(ngModel)]="symbolicLink.source" placeholder="Source Directory" />
+          <div class="input-group-append">
+            <button type="button" class="btn btn-secondary">...</button>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Target Directory</label>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" name="target" [(ngModel)]="symbolicLink.target" placeholder="Target Directory" />
+          <div class="input-group-append">
+            <button type="button" class="btn btn-secondary">...</button>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn btn-success" (click)="add()">Create link</button>
+      </div>
+    </form>
+  </div>
+</div>

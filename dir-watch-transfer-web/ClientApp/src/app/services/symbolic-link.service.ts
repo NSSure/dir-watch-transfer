@@ -6,12 +6,11 @@ import SymbolicLink from '../model/symbolic-link';
 export class SymbolicLinkService {
     constructor(private http: HttpClient) { }
 
-    configUrl = 'https://localhost:44318/api/symbolic/link/';
+    configUrl = 'http://localhost:8081/api/symbolic/link/';
 
     httpOptions = {
         headers: new HttpHeaders({
-            'Content-Type': 'application/json',
-            'Authorization': 'my-auth-token'
+            'Content-Type': 'application/json'
         })
     };
 

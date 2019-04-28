@@ -4,7 +4,6 @@ using DirWatchTransfer.Core.DB;
 using DirWatchTransfer.Core.SignalR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -26,6 +25,12 @@ namespace DirWatchTransfer.Api
                 }
             }
 
+            services.AddCors(options => options.AddPolicy("CorsPolicy", builder =>
+            {
+                builder.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin().AllowCredentials();
+            }));
+
+            services.AddMvc();
             services.AddSignalR();
             services.AddRepositories();
         }
@@ -37,6 +42,9 @@ namespace DirWatchTransfer.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+            
+            app.UseCors("CorsPolicy");
+            app.UseMvc();
 
             app.UseSignalR((options) =>
             {
