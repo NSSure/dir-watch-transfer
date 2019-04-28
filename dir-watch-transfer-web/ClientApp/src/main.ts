@@ -20,12 +20,12 @@ if (environment.production) {
 platformBrowserDynamic(providers).bootstrapModule(AppModule)
   .catch(err => console.log(err));
 
-const connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:44318/hub").build();
-connection.start().catch(err => document.write(err));
+//const connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:44318/hub").build();
+//connection.start().catch(err => document.write(err));
 
-connection.on("onFileCopied", (username: string, message: string) => {
-  let m = document.createElement("div");
+//connection.on("onFileCopied", (username: string, message: string) => {
+//  let m = document.createElement("div");
 
-  m.innerHTML = `<div class="message-author">${username}</div><div>${message}</div>`;
-  document.body.appendChild(m);
-});
+//  m.innerHTML = `<div class="message-author">${username}</div><div>${message}</div>`;
+//  document.body.appendChild(m);
+//});

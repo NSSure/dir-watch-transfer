@@ -3,7 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
-    <RootNamespace>dir_watch_transfer_api</RootNamespace>
+    <RootNamespace>DirWatchTransfer.Api</RootNamespace>
+    <AssemblyName>DirWatchTransfer.Api</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

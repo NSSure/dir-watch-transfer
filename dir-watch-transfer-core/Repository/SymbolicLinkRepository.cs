@@ -1,4 +1,6 @@
 ﻿using DirWatchTransfer.Core.Entity;
+using DirWatchTransfer.Core.Enum;
+using DirWatchTransfer.Core.Interface;
 using DirWatchTransfer.Core.Model;
 using DirWatchTransfer.Core.Utility;
 using DirWatchTransfer.DB;
@@ -6,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace DirWatchTransfer.Core.Repository
 {
-    public class SymbolicLinkRepository : BaseRepository<SymbolicLink>
+    [RepositoryConfig(RequestInjectionState.Scoped)]
+    public class SymbolicLinkRepository : BaseRepository<SymbolicLink>, IRepository
     {
         public SymbolicLinkRepository()
         {

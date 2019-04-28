@@ -1,9 +1,12 @@
 ﻿using DirWatchTransfer.Core.Entity;
+using DirWatchTransfer.Core.Enum;
+using DirWatchTransfer.Core.Interface;
 using DirWatchTransfer.DB;
 
 namespace DirWatchTransfer.Core.Repository
 {
-    public class ActivityHistoryRepository : BaseRepository<ActivityHistory>
+    [RepositoryConfig(RequestInjectionState.Scoped)]
+    public class ActivityHistoryRepository : BaseRepository<ActivityHistory>, IRepository
     {
 
     }

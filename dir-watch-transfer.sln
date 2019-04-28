@@ -13,9 +13,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dir-watch-transfer-web", "dir-watch-transfer-web\dir-watch-transfer-web.csproj", "{957FA69C-B298-4D29-81C8-DCA6B2075E26}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dir-watch-transfer-api", "dir-watch-transfer-api\dir-watch-transfer-api.csproj", "{414F6C13-F953-4E9E-885C-3B7B89EF7029}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dir-watch-transfer-api", "dir-watch-transfer-api\dir-watch-transfer-api.csproj", "{414F6C13-F953-4E9E-885C-3B7B89EF7029}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dir-watch-transfer-core", "dir-watch-transfer-core\dir-watch-transfer-core.csproj", "{A6D63EF6-1639-4665-8EE2-8B29A0685E3A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dir-watch-transfer-core", "dir-watch-transfer-core\dir-watch-transfer-core.csproj", "{A6D63EF6-1639-4665-8EE2-8B29A0685E3A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

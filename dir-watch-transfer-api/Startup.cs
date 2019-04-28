@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using DirWatchTransfer.Core.DB;
+using DirWatchTransfer.Core.SignalR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -24,6 +25,9 @@ namespace DirWatchTransfer.Api
                     context.Database.Migrate();
                 }
             }
+
+            services.AddSignalR();
+            services.AddRepositories();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -34,9 +38,9 @@ namespace DirWatchTransfer.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            app.Run(async (context) =>
+            app.UseSignalR((options) =>
             {
-                await context.Response.WriteAsync("Hello World!");
+                options.MapHub<FileSystemHub>("/hub");
             });
         }
     }

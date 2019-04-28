@@ -22,7 +22,7 @@
   },
   "targets": {
     ".NETCoreApp,Version=v2.2": {
-      "dir-watch-transfer-api/1.0.0": {
+      "DirWatchTransfer.Api/1.0.0": {
         "dependencies": {
           "DirWatchTransfer.Core": "1.0.0",
           "Microsoft.AspNetCore.App": "2.2.0",
@@ -31,10 +31,10 @@
           "Microsoft.NETCore.App": "2.2.0"
         },
         "runtime": {
-          "dir-watch-transfer-api.dll": {}
+          "DirWatchTransfer.Api.dll": {}
         },
         "compile": {
-          "dir-watch-transfer-api.dll": {}
+          "DirWatchTransfer.Api.dll": {}
         }
       },
       "EntityFramework/6.2.0": {
@@ -3587,7 +3587,7 @@
     }
   },
   "libraries": {
-    "dir-watch-transfer-api/1.0.0": {
+    "DirWatchTransfer.Api/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

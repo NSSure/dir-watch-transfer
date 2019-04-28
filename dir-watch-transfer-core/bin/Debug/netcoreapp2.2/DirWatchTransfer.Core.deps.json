@@ -16,7 +16,8 @@
           "System.Data.SQLite": "1.0.110",
           "System.Data.SQLite.Core": "1.0.110",
           "System.Data.SQLite.EF6": "1.0.110",
-          "System.Data.SQLite.Linq": "1.0.110"
+          "System.Data.SQLite.Linq": "1.0.110",
+          "Microsoft.AspNetCore.SignalR.Core": "1.1.0.0"
         },
         "runtime": {
           "DirWatchTransfer.Core.dll": {}
@@ -832,6 +833,14 @@
           "System.Threading": "4.0.11",
           "System.Xml.ReaderWriter": "4.0.11"
         }
+      },
+      "Microsoft.AspNetCore.SignalR.Core/1.1.0.0": {
+        "runtime": {
+          "Microsoft.AspNetCore.SignalR.Core.dll": {
+            "assemblyVersion": "1.1.0.0",
+            "fileVersion": "1.1.0.18316"
+          }
+        }
       }
     }
   },
@@ -1386,6 +1395,11 @@
       "sha512": "sha512-Mk2mKmPi0nWaoiYeotq1dgeNK1fqWh61+EK+w4Wu8SWuTYLzpUnschb59bJtGywaPq7SmTuPf44wrXRwbIrukg==",
       "path": "system.xml.xdocument/4.0.11",
       "hashPath": "system.xml.xdocument.4.0.11.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.SignalR.Core/1.1.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

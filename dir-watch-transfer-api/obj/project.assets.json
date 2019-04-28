@@ -12839,7 +12839,7 @@
     "version": "1.0.0",
     "restore": {
       "projectUniqueName": "C:\\Users\\Nick\\Documents\\Programming\\dir-watch-transfer\\dir-watch-transfer-api\\dir-watch-transfer-api.csproj",
-      "projectName": "dir-watch-transfer-api",
+      "projectName": "DirWatchTransfer.Api",
       "projectPath": "C:\\Users\\Nick\\Documents\\Programming\\dir-watch-transfer\\dir-watch-transfer-api\\dir-watch-transfer-api.csproj",
       "packagesPath": "C:\\Users\\Nick\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Nick\\Documents\\Programming\\dir-watch-transfer\\dir-watch-transfer-api\\obj\\",

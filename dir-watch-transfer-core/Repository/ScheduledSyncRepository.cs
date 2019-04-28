@@ -1,9 +1,12 @@
 ﻿using DirWatchTransfer.Core.Entity;
+using DirWatchTransfer.Core.Enum;
+using DirWatchTransfer.Core.Interface;
 using DirWatchTransfer.DB;
 
 namespace DirWatchTransfer.Core.Repository
 {
-    public class ScheduledSyncRepository : BaseRepository<ScheduledSync>
+    [RepositoryConfig(RequestInjectionState.Scoped)]
+    public class ScheduledSyncRepository : BaseRepository<ScheduledSync>, IRepository
     {
 
     }
