@@ -9,7 +9,7 @@ namespace DirWatchTransfer.Api
     {
         public static List<Type> ListIRepositoryClasses()
         {
-            return AppDomain.CurrentDomain.GetAssemblies().SelectMany(x => x.GetTypes()).Where(x => typeof(IRepository).IsAssignableFrom(x) && !x.IsInterface && !x.IsAbstract).ToList();
+            return AppDomain.CurrentDomain.GetAssemblies().SelectMany(x => x.GetTypes()).Where(x => typeof(IInjection).IsAssignableFrom(x) && !x.IsInterface && !x.IsAbstract).ToList();
         }
     }
 }

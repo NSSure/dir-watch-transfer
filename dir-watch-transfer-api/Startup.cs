@@ -27,10 +27,20 @@ namespace DirWatchTransfer.Api
                 }
             }
 
-            services.AddCors(options => options.AddPolicy("CorsPolicy", builder =>
-            {
-                builder.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin().AllowCredentials();
-            }));
+            //services.AddCors(options => options.AddPolicy("CorsPolicy", builder =>
+            //{
+            //    builder.AllowAnyOrigin()
+            //            .AllowAnyMethod()
+            //            .AllowAnyHeader()
+            //            .AllowCredentials()
+            //            .WithOrigins("http://localhost:8080");
+
+            //    builder.AllowAnyOrigin()
+            //            .AllowAnyMethod()
+            //            .AllowAnyHeader()
+            //            .AllowCredentials()
+            //            .WithOrigins("http://localhost:4200");
+            //}));
 
             services.AddMvc();
             services.AddSignalR();
@@ -44,8 +54,15 @@ namespace DirWatchTransfer.Api
             {
                 app.UseDeveloperExceptionPage();
             }
-            
-            app.UseCors("CorsPolicy");
+
+            app.UseCors(builder =>
+            {
+                builder.WithOrigins("http://localhost:8080")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials();
+            });
+
             app.UseMvc();
 
             app.UseSignalR((options) =>

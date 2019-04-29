@@ -5,31 +5,31 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
-import { SyncListComponent } from './sync/sync-list.component';
-import { WatcherListComponent } from './watcher/list/watcher-list.component';
-import { WatcherAddComponent } from './watcher/add/watcher-add.component';
-import { SymbolicLinkAddComponent } from './symbolic-link/quick-add/symbolic-link-add.component';
-import { SymbolicLinkListComponent } from './symbolic-link/list/symbolic-link-list.component';
-import { SyncAddComponent } from './sync/quick-add/sync-add.component';
+import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
+import { HomeComponent } from './components/home/home.component';
+import { SyncListComponent } from './components/sync/sync-list.component';
+import { WatcherListComponent } from './components/watcher/list/watcher-list.component';
+import { WatcherAddComponent } from './components/watcher/add/watcher-add.component';
+import { SymbolicLinkAddComponent } from './components/symbolic-link/quick-add/symbolic-link-add.component';
+import { SymbolicLinkListComponent } from './components/symbolic-link/list/symbolic-link-list.component';
+import { SyncAddComponent } from './components/sync/quick-add/sync-add.component';
 import { SymbolicLinkService } from './services/symbolic-link.service';
+import { SignalRService } from './services/signalr.service';
+import { ActivityComponent } from './components/activity/activity.component';
+import { ActivityService } from './services/activity.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
     SyncListComponent,
     SyncAddComponent,
     WatcherListComponent,
     WatcherAddComponent,
     SymbolicLinkAddComponent,
-    SymbolicLinkListComponent
+    SymbolicLinkListComponent,
+    ActivityComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -37,11 +37,11 @@ import { SymbolicLinkService } from './services/symbolic-link.service';
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
     ])
   ],
   providers: [
+    SignalRService,
+    ActivityService,
     SymbolicLinkService,
     {
       provide: APP_INITIALIZER,

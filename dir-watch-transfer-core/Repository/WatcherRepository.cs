@@ -6,7 +6,7 @@ using DirWatchTransfer.DB;
 namespace DirWatchTransfer.Core.Repository
 {
     [InjectionConfig(RequestInjectionState.Scoped)]
-    public class WatcherRepository : BaseRepository<Watcher>, IRepository
+    public class WatcherRepository : BaseRepository<Watcher>, IInjection
     {
 
     }

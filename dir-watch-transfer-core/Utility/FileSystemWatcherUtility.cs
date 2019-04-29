@@ -1,7 +1,9 @@
 ﻿using DirWatchTransfer.Core.Entity;
+using DirWatchTransfer.Core.Interface;
 using DirWatchTransfer.Core.Model;
 using DirWatchTransfer.Core.Repository;
-using System;
+using DirWatchTransfer.Core.SignalR;
+using Microsoft.AspNetCore.SignalR;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
@@ -9,19 +11,28 @@ using System.Threading.Tasks;
 namespace DirWatchTransfer.Core.Utility
 {
     [InjectionConfig(Enum.RequestInjectionState.Scoped)]
-    public class FileSystemWatcherUtility
+    public class FileSystemWatcherUtility : IInjection
     {
         private readonly WatcherRepository watcherRepo;
         private readonly SymbolicLinkRepository symbolicLinkRepo;
+        private readonly IHubContext<FileSystemHub> fileSystemHubContext;
 
-        public FileSystemWatcherUtility(WatcherRepository watcherRepo, SymbolicLinkRepository symbolicLinkRepo)
+        public FileSystemWatcherUtility(WatcherRepository watcherRepo, SymbolicLinkRepository symbolicLinkRepo, IHubContext<FileSystemHub> fileSystemHubContext)
         {
             this.watcherRepo = watcherRepo;
             this.symbolicLinkRepo = symbolicLinkRepo;
+            this.fileSystemHubContext = fileSystemHubContext;
         }
 
         public async Task StartWatcher(long watcherID)
         {
+            if (DirWatcherTransferApp.Monitors.ContainsKey(watcherID))
+            {
+                throw new System.Exception("Watcher already has monitor running. Please end the existing monitor before starting a new one.");
+            }
+
+            bool isTripped = false;
+
             Watcher watcher = await this.watcherRepo.FirstOrDefaultAsync(a => a.ID == watcherID);
             SymbolicLink symbolicLink = await this.symbolicLinkRepo.FirstOrDefaultAsync(a => a.ID == watcher.SymbolicLinkID);
 
@@ -29,10 +40,29 @@ namespace DirWatchTransfer.Core.Utility
 
             fileSystemMonitor.CopyCompletedAction = async (fileSystemEventArgs) =>
             {
-                CopyDiagnostics copyDiagnostics = await this.SyncLinkedFile(fileSystemEventArgs.Name, fileSystemEventArgs.FullPath);
+                if (!isTripped)
+                {
+                    isTripped = true;
+
+                    CopyDiagnostics copyDiagnostics = await this.SyncLinkedFile(fileSystemEventArgs.Name, fileSystemEventArgs.FullPath);
+                    await this.fileSystemHubContext.Clients.All.SendAsync("onFileCopied");
+
+                    isTripped = false;
+                }
             };
 
             fileSystemMonitor.StartWatcher(symbolicLink.Source, this.ProcessWatcherFilters(watcher));
+            DirWatcherTransferApp.Monitors.Add(watcherID, fileSystemMonitor);
+        }
+
+        public async Task StopWatcher(long watcherID)
+        {
+            if (DirWatcherTransferApp.Monitors.ContainsKey(watcherID))
+            {
+                FileSystemMonitor fileSystemMonitor = DirWatcherTransferApp.Monitors[watcherID];
+                fileSystemMonitor.StopWatcher();
+                DirWatcherTransferApp.Monitors.Remove(watcherID);
+            }
         }
 
         public async Task ForceCopy(long symbolicLinkID)

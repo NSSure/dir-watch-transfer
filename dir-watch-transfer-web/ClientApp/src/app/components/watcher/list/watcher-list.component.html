@@ -15,7 +15,8 @@
         <span class="badge badge-pill mr-1" [ngClass]="{'badge-success': watcher.watchSecurity, 'badge-secondary': !watcher.watchSecurity}">security</span>
       </div>
 
-      <button type="button" class="btn btn-secondary btn-sm" (click)="startWatcher(watcher)">Start watcher</button>
+      <button type="button" class="btn btn-secondary btn-sm" *ngIf="!watcher.isRunning" (click)="startWatcher(watcher)">Start watcher</button>
+      <button type="button" class="btn btn-danger btn-sm" *ngIf="watcher.isRunning" (click)="stopWatcher(watcher)">Stop watcher</button>
     </div>
   </div>
   <div *ngIf="watchers.length === 0" class="px-5 py-5">

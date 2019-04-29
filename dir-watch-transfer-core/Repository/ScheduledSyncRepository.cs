@@ -6,7 +6,7 @@ using DirWatchTransfer.DB;
 namespace DirWatchTransfer.Core.Repository
 {
     [InjectionConfig(RequestInjectionState.Scoped)]
-    public class ScheduledSyncRepository : BaseRepository<ScheduledSync>, IRepository
+    public class ScheduledSyncRepository : BaseRepository<ScheduledSync>, IInjection
     {
 
     }

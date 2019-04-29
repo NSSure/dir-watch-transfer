@@ -1,12 +1,10 @@
-﻿using System;
+﻿using DirWatchTransfer.Core.Model;
 using System.Collections.Generic;
-using System.Text;
-using System.Threading;
 
 namespace DirWatchTransfer.Core
 {
     public partial class DirWatcherTransferApp
     {
-
+        public static Dictionary<long, FileSystemMonitor> Monitors { get; set; } = new Dictionary<long, FileSystemMonitor>();
     }
 }

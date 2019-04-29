@@ -6,7 +6,7 @@ using DirWatchTransfer.DB;
 namespace DirWatchTransfer.Core.Repository
 {
     [InjectionConfig(RequestInjectionState.Scoped)]
-    public class ActivityHistoryRepository : BaseRepository<ActivityHistory>, IRepository
+    public class ActivityHistoryRepository : BaseRepository<ActivityHistory>, IInjection
     {
 
     }

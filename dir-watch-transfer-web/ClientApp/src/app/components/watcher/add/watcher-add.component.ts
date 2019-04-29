@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { SymbolicLinkService } from '../../services/symbolic-link.service';
-import SymbolicLink from '../../model/symbolic-link';
-import { WatcherService } from '../../services/watcher.service';
+import { SymbolicLinkService } from '../../../services/symbolic-link.service';
+import SymbolicLink from '../../../model/symbolic-link';
+import { WatcherService } from '../../../services/watcher.service';
 
 @Component({
   selector: 'watcher-add',

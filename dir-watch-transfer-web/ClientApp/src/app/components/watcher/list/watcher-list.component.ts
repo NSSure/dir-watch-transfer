@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WatcherService } from 'src/app/services/watcher.service';
-import { SymbolicLinkService } from '../../services/symbolic-link.service';
+import { SymbolicLinkService } from '../../../services/symbolic-link.service';
 
 @Component({
   selector: 'watcher-list',
@@ -27,6 +27,12 @@ export class WatcherListComponent implements OnInit {
   }
 
   startWatcher(watcher) {
+    watcher.isRunning = true;
     this.watcherService.startWatcher(watcher.id).subscribe();
+  }
+
+  stopWatcher(watcher) {
+    watcher.isRunning = false;
+    this.watcherService.stopWatcher(watcher.id).subscribe();
   }
 }

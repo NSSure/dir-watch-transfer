@@ -65,5 +65,20 @@ namespace DirWatchTransfer.Core.Controllers
                 return StatusCode(500, ex);
             }
         }
+
+        [HttpPost]
+        [Route("stop")]
+        public async Task<IActionResult> Stop([FromBody] long watcherID)
+        {
+            try
+            {
+                await this.fileSystemWatcherUtil.StopWatcher(watcherID);
+                return StatusCode(200);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
+        }
     }
 }

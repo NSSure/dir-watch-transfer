@@ -6,7 +6,7 @@ using DirWatchTransfer.DB;
 namespace DirWatchTransfer.Core.Repository
 {
     [InjectionConfig(RequestInjectionState.Scoped)]
-    public class SymbolicLinkRepository : BaseRepository<SymbolicLink>, IRepository
+    public class SymbolicLinkRepository : BaseRepository<SymbolicLink>, IInjection
     {
 
     }

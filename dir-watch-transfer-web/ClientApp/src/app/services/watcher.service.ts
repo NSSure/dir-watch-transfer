@@ -18,4 +18,8 @@ export class WatcherService extends BaseService {
   startWatcher(watcherId: number) {
     return this.http.post(this.apiUrl + 'start', watcherId);
   }
+
+  stopWatcher(watcherId: number) {
+    return this.http.post(this.apiUrl + 'stop', watcherId);
+  }
 }
