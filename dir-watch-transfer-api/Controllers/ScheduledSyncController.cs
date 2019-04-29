@@ -11,14 +11,20 @@ namespace DirWatcherTransfer.Api.Controllers
     [Route("api/scheduled/sync")]
     public class ScheduledSyncController : ControllerBase
     {
+        private ScheduledSyncRepository scheduledSyncRepo;
+
+        public ScheduledSyncController(ScheduledSyncRepository scheduledSyncRepo)
+        {
+            this.scheduledSyncRepo = scheduledSyncRepo;
+        }
+
         [HttpPost]
         [Route("add")]
         public async Task<IActionResult> Add([FromBody] ScheduledSync scheduledSync)
         {
             try
             {
-                ScheduledSyncRepository scheduledSyncRepo = new ScheduledSyncRepository();
-                await scheduledSyncRepo.AddAsync(scheduledSync);
+                await this.scheduledSyncRepo.AddAsync(scheduledSync);
                 return StatusCode(200);
             }
             catch (Exception ex)
@@ -33,8 +39,7 @@ namespace DirWatcherTransfer.Api.Controllers
         {
             try
             {
-                ScheduledSyncRepository scheduledSyncRepo = new ScheduledSyncRepository();
-                List<ScheduledSync> scheduledSyncs = await scheduledSyncRepo.ListAllAsync();
+                List<ScheduledSync> scheduledSyncs = await this.scheduledSyncRepo.ListAllAsync();
                 return StatusCode(200, scheduledSyncs);
             }
             catch(Exception ex)

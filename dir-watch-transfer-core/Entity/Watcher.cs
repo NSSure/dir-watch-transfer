@@ -5,16 +5,6 @@ namespace DirWatchTransfer.Core.Entity
 {
     public class Watcher
     {
-        public Watcher()
-        {
-            this.Monitor = new Monitor();
-        }
-
-        public Watcher(Action<CopyDiagnostics> copyCompletedCallback)
-        {
-            this.Monitor = new Monitor(copyCompletedCallback);
-        }
-
         public int ID { get; set; }
         public int SymbolicLinkID { get; set; }
         public bool Recursive { get; set; }
@@ -25,6 +15,5 @@ namespace DirWatchTransfer.Core.Entity
         public bool WatchLastAccess { get; set; }
         public bool WatchCreationTime { get; set; }
         public bool WatchSecurity { get; set; }
-        public Monitor Monitor { get; set; }
     }
 }

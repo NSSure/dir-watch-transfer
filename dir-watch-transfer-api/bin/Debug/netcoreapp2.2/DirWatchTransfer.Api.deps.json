@@ -773,6 +773,7 @@
       "DirWatchTransfer.Core/1.0.0": {
         "dependencies": {
           "EntityFramework": "6.2.0",
+          "Microsoft.AspNetCore.Http.Abstractions": "2.2.0",
           "Microsoft.EntityFrameworkCore": "2.2.4",
           "Microsoft.EntityFrameworkCore.Design": "2.2.4",
           "Microsoft.EntityFrameworkCore.Sqlite": "2.2.4",

@@ -1,4 +1,6 @@
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-core\bin\Debug\netcoreapp2.2\DirWatchTransfer.Core.deps.json
+C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-core\bin\Debug\netcoreapp2.2\DirWatchTransfer.Core.runtimeconfig.json
+C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-core\bin\Debug\netcoreapp2.2\DirWatchTransfer.Core.runtimeconfig.dev.json
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-core\bin\Debug\netcoreapp2.2\DirWatchTransfer.Core.dll
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-core\bin\Debug\netcoreapp2.2\DirWatchTransfer.Core.pdb
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-core\bin\Debug\netcoreapp2.2\Microsoft.AspNetCore.SignalR.Core.dll
@@ -9,5 +11,3 @@ C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-core\o
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-core\obj\Debug\netcoreapp2.2\dir-watch-transfer-core.csproj.CopyComplete
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-core\obj\Debug\netcoreapp2.2\DirWatchTransfer.Core.dll
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-core\obj\Debug\netcoreapp2.2\DirWatchTransfer.Core.pdb
-C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-core\bin\Debug\netcoreapp2.2\DirWatchTransfer.Core.runtimeconfig.json
-C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-core\bin\Debug\netcoreapp2.2\DirWatchTransfer.Core.runtimeconfig.dev.json

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DirWatchTransfer.Core.Migrations
 {
     [DbContext(typeof(DirWatchTransferContext))]
-    [Migration("20190428042138_InitialCreate")]
+    [Migration("20190428225418_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

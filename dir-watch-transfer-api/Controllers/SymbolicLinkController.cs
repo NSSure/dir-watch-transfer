@@ -11,14 +11,20 @@ namespace DirWatchTransfer.Api.Controllers
     [Route("api/symbolic/link")]
     public class SymbolicLinkController : ControllerBase
     {
+        private SymbolicLinkRepository symbolicLinkRepo;
+
+        public SymbolicLinkController(SymbolicLinkRepository symbolicLinkRepo)
+        {
+            this.symbolicLinkRepo = symbolicLinkRepo;
+        }
+
         [HttpPost]
         [Route("add")]
         public async Task<IActionResult> Add([FromBody] SymbolicLink symbolicLink)
         {
             try
             {
-                SymbolicLinkRepository symbolicLinkRepo = new SymbolicLinkRepository();
-                await symbolicLinkRepo.AddAsync(symbolicLink);
+                await this.symbolicLinkRepo.AddAsync(symbolicLink);
                 return StatusCode(200);
             }
             catch (Exception ex)
@@ -33,8 +39,7 @@ namespace DirWatchTransfer.Api.Controllers
         {
             try
             {
-                SymbolicLinkRepository symbolicLinkRepo = new SymbolicLinkRepository();
-                List<SymbolicLink> symbolicLinks = await symbolicLinkRepo.ListAllAsync();
+                List<SymbolicLink> symbolicLinks = await this.symbolicLinkRepo.ListAllAsync();
                 return StatusCode(200, symbolicLinks);
             }
             catch(Exception ex)

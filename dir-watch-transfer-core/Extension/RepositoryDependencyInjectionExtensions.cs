@@ -8,13 +8,13 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public static class RepositoryDependencyInjectionExtensions
     {
-        public static void AddRepositories(this IServiceCollection services)
+        public static void AddInjections(this IServiceCollection services)
         {
             List<Type> repositories = RepositoryLookup.ListIRepositoryClasses();
 
             repositories.ForEach((repository) =>
             {
-                RepositoryConfigAttribute repositoryConfig = Attribute.GetCustomAttribute(repository, typeof(RepositoryConfigAttribute)) as RepositoryConfigAttribute;
+                InjectionConfigAttribute repositoryConfig = Attribute.GetCustomAttribute(repository, typeof(InjectionConfigAttribute)) as InjectionConfigAttribute;
 
                 if (repositoryConfig != null)
                 {
@@ -37,12 +37,12 @@ namespace Microsoft.Extensions.DependencyInjection
                     }
                     else
                     {
-                        Console.WriteLine($"{repository.FullName} - is being ignored through its RepositoryConfigAttribute. So you will not be able to use DI to resolve this member.");
+                        Console.WriteLine($"{repository.FullName} - is being ignored through its InjectionConfigAttribute. So you will not be able to use DI to resolve this member.");
                     }
                 }
                 else
                 {
-                    Console.WriteLine($"{repository.FullName} - is not decorated with the RepositoryConfigAttribute. So you will not be able to use DI to resolve this member.");
+                    Console.WriteLine($"{repository.FullName} - is not decorated with the InjectionConfigAttribute. So you will not be able to use DI to resolve this member.");
                 }
             });
         }

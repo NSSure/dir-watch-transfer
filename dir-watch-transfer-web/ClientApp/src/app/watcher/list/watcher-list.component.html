@@ -1,0 +1,24 @@
+<div class="watchers">
+  <div class="list-group list-group-flush" *ngIf="watchers.length !== 0">
+    <div class="list-group-item" *ngFor="let watcher of watchers">
+      <div class="d-flex w-100 justify-content-between">
+        <h6 class="mb-1">{{watcher.symbolicLink.name}}</h6>
+      </div>
+      <div><code>{{watcher.symbolicLink.source}}</code>&nbsp;&nbsp;<i class="fa fa-link"></i>&nbsp;&nbsp;<code>{{watcher.symbolicLink.target}}</code></div>
+      <div class="mb-3">
+        <span class="badge badge-pill mr-1" [ngClass]="{'badge-success': watcher.watchFileName, 'badge-secondary': !watcher.watchFileName}">file name</span>
+        <span class="badge badge-pill mr-1" [ngClass]="{'badge-success': watcher.watchDirectoryName, 'badge-secondary': !watcher.watchDirectoryName}">directory name</span>
+        <span class="badge badge-pill mr-1" [ngClass]="{'badge-success': watcher.watchSize, 'badge-secondary': !watcher.watchSize}">size</span>
+        <span class="badge badge-pill mr-1" [ngClass]="{'badge-success': watcher.watchLastWrite, 'badge-secondary': !watcher.watchLastWrite}">last write</span>
+        <span class="badge badge-pill mr-1" [ngClass]="{'badge-success': watcher.watchLastAccess, 'badge-secondary': !watcher.watchLastAccess}">last access</span>
+        <span class="badge badge-pill mr-1" [ngClass]="{'badge-success': watcher.watchCreationTime, 'badge-secondary': !watcher.watchCreationTime}">creation time</span>
+        <span class="badge badge-pill mr-1" [ngClass]="{'badge-success': watcher.watchSecurity, 'badge-secondary': !watcher.watchSecurity}">security</span>
+      </div>
+
+      <button type="button" class="btn btn-secondary btn-sm" (click)="startWatcher(watcher)">Start watcher</button>
+    </div>
+  </div>
+  <div *ngIf="watchers.length === 0" class="px-5 py-5">
+    There no are watchers configured for any of your symbolic links.
+  </div>
+</div>

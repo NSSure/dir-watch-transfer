@@ -1,24 +1,27 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import SymbolicLink from '../model/symbolic-link';
+import { BaseService } from './base-service';
 
 @Injectable()
-export class SymbolicLinkService {
-    constructor(private http: HttpClient) { }
+export class SymbolicLinkService extends BaseService {
+  get apiUrl() {
+    return `${this.baseUrl}symbolic/link/`
+  }
 
-    configUrl = 'http://localhost:8081/api/symbolic/link/';
+  private _symbolicLinks: Array<SymbolicLink>;
 
-    httpOptions = {
-        headers: new HttpHeaders({
-            'Content-Type': 'application/json'
-        })
-    };
+  get symbolicLinks(): any {
+    return this._symbolicLinks;
+  }
 
-    addSymbolicLink(symbolicLink: SymbolicLink) {
-        return this.http.post(this.configUrl + 'add', symbolicLink, this.httpOptions);
-    }
+  addSymbolicLink(symbolicLink: SymbolicLink) {
+    return this.http.post(this.apiUrl + 'add', symbolicLink, this.httpOptions);
+  }
 
-    listSymbolicLinks() {
-        return this.http.get<Array<SymbolicLink>>(this.configUrl + 'list');
-    }
+  listSymbolicLinks(): Promise<any> {
+    return this.http.get<Array<SymbolicLink>>(this.apiUrl + 'list').toPromise().then(symbolicLinks => {
+      this._symbolicLinks = symbolicLinks;
+    });
+  }
 }

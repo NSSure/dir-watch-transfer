@@ -3,17 +3,17 @@ using System;
 
 namespace DirWatchTransfer
 {
-    public class RepositoryConfigAttribute : Attribute
+    public class InjectionConfigAttribute : Attribute
     {
         public RequestInjectionState RequestInjectionState;
         public bool IsIgnored;
 
-        public RepositoryConfigAttribute(RequestInjectionState requestInjectionState)
+        public InjectionConfigAttribute(RequestInjectionState requestInjectionState)
         {
             this.RequestInjectionState = requestInjectionState;
         }
 
-        public RepositoryConfigAttribute(RequestInjectionState requestInjectionState, bool isIgnored = false)
+        public InjectionConfigAttribute(RequestInjectionState requestInjectionState, bool isIgnored = false)
         {
             this.RequestInjectionState = requestInjectionState;
             this.IsIgnored = isIgnored;

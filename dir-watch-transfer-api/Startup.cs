@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using DirWatchTransfer.Core.DB;
 using DirWatchTransfer.Core.SignalR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -32,7 +34,7 @@ namespace DirWatchTransfer.Api
 
             services.AddMvc();
             services.AddSignalR();
-            services.AddRepositories();
+            services.AddInjections();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

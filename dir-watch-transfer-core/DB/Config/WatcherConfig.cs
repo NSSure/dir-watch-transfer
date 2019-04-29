@@ -19,8 +19,6 @@ namespace DirWatchTransfer.Core.DB.Config
             builder.Property(p => p.WatchLastAccess);
             builder.Property(p => p.WatchCreationTime);
             builder.Property(p => p.WatchSecurity);
-
-            builder.Ignore(p => p.Monitor);
         }
     }
 }

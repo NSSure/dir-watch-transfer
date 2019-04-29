@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using DirWatchTransfer.Core.Entity;
 using DirWatchTransfer.Core.Repository;
+using DirWatchTransfer.Core.Utility;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DirWatchTransfer.Core.Controllers
@@ -11,14 +12,22 @@ namespace DirWatchTransfer.Core.Controllers
     [Route("api/watcher")]
     public class WatcherController : ControllerBase
     {
+        private readonly WatcherRepository watcherRepo;
+        private readonly FileSystemWatcherUtility fileSystemWatcherUtil;
+
+        public WatcherController(WatcherRepository watcherRepository, FileSystemWatcherUtility fileSystemWatcherUtil)
+        {
+            this.watcherRepo = watcherRepository;
+            this.fileSystemWatcherUtil = fileSystemWatcherUtil;
+        }
+
         [HttpPost]
         [Route("add")]
         public async Task<IActionResult> Add([FromBody] Watcher watcher)
         {
             try
             {
-                WatcherRepository watcherRepo = new WatcherRepository();
-                await watcherRepo.AddAsync(watcher);
+                await this.watcherRepo.AddAsync(watcher);
                 return StatusCode(200);
             }
             catch (Exception ex)
@@ -33,8 +42,7 @@ namespace DirWatchTransfer.Core.Controllers
         {
             try
             {
-                WatcherRepository watcherRepo = new WatcherRepository();
-                List<Watcher> watchers = await watcherRepo.ListAllAsync();
+                List<Watcher> watchers = await this.watcherRepo.ListAllAsync();
                 return StatusCode(200, watchers);
             }
             catch(Exception ex)
@@ -44,12 +52,13 @@ namespace DirWatchTransfer.Core.Controllers
         }
 
         [HttpPost]
-        [Route("copy/force")]
-        public async Task<IActionResult> ForceCopy([FromBody] long watcherID)
+        [Route("start")]
+        public async Task<IActionResult> Start([FromBody] long watcherID)
         {
             try
             {
-                return StatusCode(200, true);
+                await this.fileSystemWatcherUtil.StartWatcher(watcherID);
+                return StatusCode(200);
             }
             catch (Exception ex)
             {
