@@ -15,5 +15,14 @@ namespace DirWatchTransfer.Core.Entity
         public bool WatchLastAccess { get; set; }
         public bool WatchCreationTime { get; set; }
         public bool WatchSecurity { get; set; }
+        public int AttributeCount { get; set; }
+        public int CopyCount { get; set; }
+        public int FileNameCount { get; set; }
+        public int DirectoryNameCount { get; set; }
+        public int SizeCount { get; set; }
+        public int LastWriteCount { get; set; }
+        public int LastAccessCount { get; set; }
+        public int CreationTimeCount { get; set; }
+        public int SecurityCount { get; set; }
     }
 }

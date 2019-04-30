@@ -8,5 +8,7 @@ namespace DirWatchTransfer.Core.Entity
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime DateAdded { get; set; }
+        public int EntityID { get; set; }
+        public string Data { get; set; }
     }
 }

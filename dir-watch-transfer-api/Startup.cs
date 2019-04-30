@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using DirWatchTransfer.Core.DB;
+﻿using DirWatchTransfer.Core.DB;
 using DirWatchTransfer.Core.SignalR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.SignalR;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DirWatchTransfer.Api
@@ -17,30 +12,7 @@ namespace DirWatchTransfer.Api
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            using (DirWatchTransferContext context = new DirWatchTransferContext())
-            {
-                List<string> pendingMigrations = context.Database.GetPendingMigrations().ToList();
-
-                if (pendingMigrations.Count != 0)
-                {
-                    context.Database.Migrate();
-                }
-            }
-
-            //services.AddCors(options => options.AddPolicy("CorsPolicy", builder =>
-            //{
-            //    builder.AllowAnyOrigin()
-            //            .AllowAnyMethod()
-            //            .AllowAnyHeader()
-            //            .AllowCredentials()
-            //            .WithOrigins("http://localhost:8080");
-
-            //    builder.AllowAnyOrigin()
-            //            .AllowAnyMethod()
-            //            .AllowAnyHeader()
-            //            .AllowCredentials()
-            //            .WithOrigins("http://localhost:4200");
-            //}));
+            DirWatchTransferContext.Initialize();
 
             services.AddMvc();
             services.AddSignalR();
@@ -57,10 +29,7 @@ namespace DirWatchTransfer.Api
 
             app.UseCors(builder =>
             {
-                builder.WithOrigins("http://localhost:8080")
-                    .AllowAnyHeader()
-                    .AllowAnyMethod()
-                    .AllowCredentials();
+                builder.WithOrigins("http://localhost:8080").AllowAnyHeader().AllowAnyMethod().AllowCredentials();
             });
 
             app.UseMvc();

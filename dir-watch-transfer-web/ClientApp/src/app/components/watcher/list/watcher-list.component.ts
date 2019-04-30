@@ -27,6 +27,7 @@ export class WatcherListComponent implements OnInit {
   }
 
   startWatcher(watcher) {
+    (<any>window).$Toast.show("Watcher started successfully");
     watcher.isRunning = true;
     this.watcherService.startWatcher(watcher.id).subscribe();
   }

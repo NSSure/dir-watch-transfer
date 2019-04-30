@@ -38,14 +38,21 @@ namespace DirWatchTransfer.Core.Utility
 
             FileSystemMonitor fileSystemMonitor = new FileSystemMonitor();
 
-            fileSystemMonitor.CopyCompletedAction = async (fileSystemEventArgs) =>
+            fileSystemMonitor.CopyCompletedAction = async (notifyFilter, fileSystemEventArgs) =>
             {
                 if (!isTripped)
                 {
                     isTripped = true;
-
+                    
                     CopyDiagnostics copyDiagnostics = await this.SyncLinkedFile(fileSystemEventArgs.Name, fileSystemEventArgs.FullPath);
                     await this.fileSystemHubContext.Clients.All.SendAsync("onFileCopied");
+
+                    // Update counts.
+                    if (notifyFilter != null)
+                    {
+                        await this.symbolicLinkRepo.IncrementCount(fileSystemEventArgs.FullPath.Replace(@"\" + fileSystemEventArgs.Name, string.Empty), (NotifyFilters)notifyFilter);
+                        await this.watcherRepo.IncrementCount(watcher, (NotifyFilters)notifyFilter);
+                    }
 
                     isTripped = false;
                 }
@@ -60,7 +67,18 @@ namespace DirWatchTransfer.Core.Utility
             if (DirWatcherTransferApp.Monitors.ContainsKey(watcherID))
             {
                 FileSystemMonitor fileSystemMonitor = DirWatcherTransferApp.Monitors[watcherID];
-                fileSystemMonitor.StopWatcher();
+
+                fileSystemMonitor.StopWatcher(
+                    NotifyFilters.Attributes | 
+                    NotifyFilters.CreationTime | 
+                    NotifyFilters.DirectoryName | 
+                    NotifyFilters.FileName | 
+                    NotifyFilters.LastAccess | 
+                    NotifyFilters.LastWrite |
+                    NotifyFilters.Security | 
+                    NotifyFilters.Size
+                );
+
                 DirWatcherTransferApp.Monitors.Remove(watcherID);
             }
         }

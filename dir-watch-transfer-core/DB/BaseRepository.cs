@@ -114,5 +114,10 @@ namespace DirWatchTransfer.DB
         {
             return await this.Table.ToListAsync();
         }
+
+        public async Task<int> CountAsync(Expression<Func<TEntity, bool>> expression)
+        {
+            return await this.Table.CountAsync(expression);
+        }
     }
 }

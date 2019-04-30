@@ -30,6 +30,7 @@
     "jquery": "^3.4.0",
     "popper.js": "^1.14.3",
     "rxjs": "^6.0.0",
+    "vue-sure-toast": "^1.2.0",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
