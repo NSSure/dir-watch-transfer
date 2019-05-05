@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LogService } from '../../services/log.service';
 
 @Component({
   selector: 'app-nav-menu',
@@ -7,6 +8,8 @@ import { Component } from '@angular/core';
 })
 export class NavMenuComponent {
   isExpanded = false;
+
+  constructor(private logService: LogService) { }
 
   collapse() {
     this.isExpanded = false;

@@ -1,0 +1,92 @@
+<div class="card">
+  <div class="card-header">
+    Settings
+  </div>
+  <div class="card-body">
+    <form>
+      <div class="mb-4">
+        <div class="form-group">
+          <label for="LogFilePath">Log File Path</label>
+          <input type="text" class="form-control" name="logFilePath" [(ngModel)]="settingsService.settings.logFilePath" placeholder="C:\Users\[User]\AppData\DirWatchTransfer" />
+          <small class="form-text text-muted">Default log file location as follows C:\Users\[User]\AppData\DirWatchTransfer</small>
+        </div>
+        <div class="form-group">
+          <label for="LogFileFormat">Log File Format</label>
+          <input type="text" class="form-control" name="logFileFormat" [(ngModel)]="settingsService.settings.logFilePath" placeholder="NotifyFilters, SourcePath, TargetPath, ElaspedTime, Timestamp" />
+          <small class="form-text text-muted">Default format is as follows NotifyFilters, SourcePath, TargetPath, ElaspedTime, Timestamp</small>
+        </div>
+      </div>
+      <div class="mb-4">
+        <h5 class="mb-1">Notifications</h5>
+        <small>Manage your notification settings. Enable/disable whatever notifications you want to recieve (toggles BOTH toasts and desktop notifications)</small>
+        <hr />
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" name="enableNotifications" [(ngModel)]="settingsService.settings.enableNotifications" />
+          <label class="form-check-label" for="enableNotifications">
+            Enable notifications
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" name="enableNewWatcherNotifications" [(ngModel)]="settingsService.settings.enableNewWatcherNotifications" />
+          <label class="form-check-label" for="enableNewWatcherNotifications">
+            Enable new watcher notifications
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" name="enableNewSyncNotifications" [(ngModel)]="settingsService.settings.enableNewSyncNotifications" />
+          <label class="form-check-label" for="enableNewSyncNotifications">
+            Enable new sync notifications
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" name="enableWatcherFileSyncsNotifications" [(ngModel)]="settingsService.settings.enableWatcherFileSyncsNotifications" />
+          <label class="form-check-label" for="enableWatcherFileSyncsNotifications">
+            Enable watcher file syncs notifications
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" name="enableForcedDirectoryCopiesNotifications" [(ngModel)]="settingsService.settings.enableForcedDirectoryCopiesNotifications" />
+          <label class="form-check-label" for="enableForcedDirectoryCopiesNotifications">
+            Enable force directory copy notifications
+          </label>
+        </div>
+      </div>
+      <div class="mb-4">
+        <h5 class="mb-1">Logging</h5>
+        <small>Manage your logging settings. Enable/disable what actions get written to the log file.</small>
+        <hr />
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" name="logNewSymbolicLinks" [(ngModel)]="settingsService.settings.logNewSymbolicLinks" />
+          <label class="form-check-label" for="logNewSymbolicLinks">
+            Log new symbolic links
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" name="logNewWatchers" [(ngModel)]="settingsService.settings.logNewWatchers" />
+          <label class="form-check-label" for="logNewWatchers">
+            Log new watchers
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" name="logNewSyncs" [(ngModel)]="settingsService.settings.logNewSyncs" />
+          <label class="form-check-label" for="logNewSyncs">
+            Log new syncs
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" name="logWatcherFileSyncs" [(ngModel)]="settingsService.settings.logWatcherFileSyncs" />
+          <label class="form-check-label" for="logWatcherFileSyncs">
+            Log watcher file syncs
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" name="logForcedDirectoryCopies" [(ngModel)]="settingsService.settings.logForcedDirectoryCopies" />
+          <label class="form-check-label" for="logForcedDirectoryCopies">
+            Log forced directory copies
+          </label>
+        </div>
+      </div>
+      <button type="button" class="btn btn-success">Apply Settings</button>
+    </form>
+  </div>
+</div>

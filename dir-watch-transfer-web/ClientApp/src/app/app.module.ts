@@ -1,9 +1,8 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 import { HomeComponent } from './components/home/home.component';
@@ -17,6 +16,9 @@ import { SymbolicLinkService } from './services/symbolic-link.service';
 import { SignalRService } from './services/signalr.service';
 import { ActivityComponent } from './components/activity/activity.component';
 import { ActivityService } from './services/activity.service';
+import { LogService } from './services/log.service';
+import { SettingsComponent } from './components/settings/settings.component';
+import { SettingsService } from './services/settings.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { ActivityService } from './services/activity.service';
     WatcherAddComponent,
     SymbolicLinkAddComponent,
     SymbolicLinkListComponent,
-    ActivityComponent
+    ActivityComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -37,16 +40,24 @@ import { ActivityService } from './services/activity.service';
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: 'settings', component: SettingsComponent, pathMatch: 'full' },
     ])
   ],
   providers: [
     SignalRService,
     ActivityService,
     SymbolicLinkService,
+    LogService,
+    SettingsService,
     {
       provide: APP_INITIALIZER,
-      useFactory: (symbolicLinkService: SymbolicLinkService) => function () { return symbolicLinkService.listSymbolicLinks() },
-      deps: [SymbolicLinkService],
+      useFactory: (symbolicLinkService: SymbolicLinkService, settingsService: SettingsService) => function () {
+        return Promise.all([
+          symbolicLinkService.listSymbolicLinks(),
+          settingsService.get()
+        ]);
+      },
+      deps: [SymbolicLinkService, SettingsService],
       multi: true
     }
   ],

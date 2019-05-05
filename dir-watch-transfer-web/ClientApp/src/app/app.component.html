@@ -1,8 +1,8 @@
 <div class="app h-100">
   <app-nav-menu></app-nav-menu>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-3">
+  <div class="container-fluid" style="display: flex; flex-direction: column; flex: 1;">
+    <div class="row h-100">
+      <div class="col-lg-3 col-md-12 p-4" style="background-color: #eeeeee;">
         <div class="side-bar">
           <div class="mb-4">
             <symbolic-link-add></symbolic-link-add>
@@ -12,10 +12,10 @@
           </div>
         </div>
       </div>
-      <div class="col-5">
+      <div class="col-lg-5 col-md-12 p-4">
         <router-outlet style="overflow-y: auto;"></router-outlet>
       </div>
-      <div class="col-4">
+      <div class="col-lg-4 col-md-12 p-4" style="background-color: #eeeeee;">
         <div class="mb-4">
           <symbolic-link-list></symbolic-link-list>
         </div>

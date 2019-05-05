@@ -31,6 +31,9 @@ namespace Microsoft.Extensions.DependencyInjection
                             case RequestInjectionState.Singleton:
                                 services.AddSingleton(repository);
                                 break;
+                            case RequestInjectionState.NotInjected:
+                                // Do nothing class is not being injected.
+                                break;
                             default:
                                 throw new Exception("The request injection state supplied for the repository is not an allowed value.");
                         }

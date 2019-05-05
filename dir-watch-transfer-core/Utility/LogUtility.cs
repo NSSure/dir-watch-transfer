@@ -1,4 +1,5 @@
 ﻿using DirWatchTransfer.Core.Entity;
+using DirWatchTransfer.Core.Interface;
 using DirWatchTransfer.Core.Model;
 using DirWatchTransfer.Core.Repository;
 using System;
@@ -8,7 +9,8 @@ using System.Threading.Tasks;
 
 namespace DirWatchTransfer.Core.Utility
 {
-    public class LogUtility
+    [InjectionConfig(Enum.RequestInjectionState.NotInjected)]
+    public class LogUtility : IInjection
     {
         public static async Task WriteToLog(NotifyFilters? notifyFilter, CopyDiagnostics copyDiagnostics)
         {
@@ -22,6 +24,11 @@ namespace DirWatchTransfer.Core.Utility
                 byte[] logAddendumBytes = new UTF8Encoding(true).GetBytes(logAddendum);
                 await fileStream.WriteAsync(logAddendumBytes, 0, logAddendumBytes.Length);
             }
+        }
+
+        public static void OpenDirectory()
+        {
+            System.Diagnostics.Process.Start(Environment.GetEnvironmentVariable("WINDIR") + @"\explorer.exe", Constants.ApplicationPath);
         }
     }
 }
