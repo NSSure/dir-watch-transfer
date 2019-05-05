@@ -100,6 +100,11 @@ namespace DirWatchTransfer.DB
             }
         }
 
+        public async Task<TEntity> FirstOrDefaultAsync()
+        {
+            return await this.Table.FirstOrDefaultAsync();
+        }
+
         public async Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> expression)
         {
             return await this.Table.FirstOrDefaultAsync(expression);

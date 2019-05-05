@@ -1,8 +1,10 @@
 ﻿using DirWatchTransfer.Core.DB;
 using DirWatchTransfer.Core.SignalR;
+using DirWatchTransfer.Core.Utility;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using System.IO;
 
 namespace DirWatchTransfer.Api
 {
@@ -13,6 +15,8 @@ namespace DirWatchTransfer.Api
         public void ConfigureServices(IServiceCollection services)
         {
             DirWatchTransferContext.Initialize();
+
+
 
             services.AddMvc();
             services.AddSignalR();

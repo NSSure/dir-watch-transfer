@@ -28,27 +28,31 @@ namespace DirWatchTransfer.Core.Model
 
         }
 
-        public void StartWatcher(string sourcePath, NotifyFilters notifyFilters)
+        public void StartWatcher(string sourcePath, NotifyFilters configuredNotifyFilters)
         {
             if (!Directory.Exists(sourcePath))
             {
                 Directory.CreateDirectory(sourcePath);
             }
 
-            foreach (NotifyFilters notifyFilter in System.Enum.GetValues(notifyFilters.GetType()))
+            foreach (NotifyFilters notifyFilter in System.Enum.GetValues(configuredNotifyFilters.GetType()))
             {
-                FileSystemWatcher fileSystemWatcher = new FileSystemWatcher();
+                if (notifyFilter == configuredNotifyFilters)
+                {
+                    FileSystemWatcher fileSystemWatcher = new FileSystemWatcher();
 
-                fileSystemWatcher.Path = sourcePath;
-                fileSystemWatcher.IncludeSubdirectories = true;
-                fileSystemWatcher.NotifyFilter = notifyFilter;
-                fileSystemWatcher.Created += FileSystemWatcher_Created;
-                fileSystemWatcher.Changed += (FileSystemEventHandler)Delegate.CreateDelegate(typeof(FileSystemEventHandler), this, this.GetType().GetMethod(this.eventMap[notifyFilter]));
+                    fileSystemWatcher.Path = sourcePath;
+                    fileSystemWatcher.IncludeSubdirectories = true;
+                    fileSystemWatcher.NotifyFilter = notifyFilter;
+                    fileSystemWatcher.Created += FileSystemWatcher_Created;
+                    fileSystemWatcher.Changed += (FileSystemEventHandler)Delegate.CreateDelegate(typeof(FileSystemEventHandler), this, this.GetType().GetMethod(this.eventMap[notifyFilter]));
 
-                // Begin watching directory
-                fileSystemWatcher.EnableRaisingEvents = true;
+                    // Begin watching directory
+                    fileSystemWatcher.EnableRaisingEvents = true;
 
-                this.watchers.Add(notifyFilter, fileSystemWatcher);
+                    this.watchers.Add(notifyFilter, fileSystemWatcher);
+                } 
+
             }
         }
 
@@ -107,7 +111,7 @@ namespace DirWatchTransfer.Core.Model
             this.CopyCompletedAction?.Invoke(NotifyFilters.Security, e);
         }
 
-        private void SymbolicLinkWatcher_Size_Changed(object sender, FileSystemEventArgs e)
+        public void SymbolicLinkWatcher_Size_Changed(object sender, FileSystemEventArgs e)
         {
             this.CopyCompletedAction?.Invoke(NotifyFilters.Size, e);
         }

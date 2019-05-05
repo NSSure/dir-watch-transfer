@@ -69,6 +69,10 @@
               "version": "[2.2.0, )",
               "autoReferenced": true
             },
+            "Microsoft.Toolkit.Uwp.Notifications": {
+              "target": "Package",
+              "version": "[5.1.1, )"
+            },
             "SQLite": {
               "target": "Package",
               "version": "[3.13.0, )"

@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.2",
-    "signature": "47ae9751250e2657a766b032726d9e2d1b15beea"
+    "signature": "833372243a5d7f1dbe86edb8f94c62f12d0b8168"
   },
   "compilationOptions": {
     "defines": [
@@ -235,6 +235,20 @@
         },
         "compile": {
           "lib/netstandard2.0/Microsoft.EntityFrameworkCore.Sqlite.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.Notifications/5.1.1": {
+        "dependencies": {
+          "NETStandard.Library": "2.0.3"
+        },
+        "runtime": {
+          "lib/netstandard1.4/Microsoft.Toolkit.Uwp.Notifications.dll": {
+            "assemblyVersion": "5.1.0.0",
+            "fileVersion": "5.1.1.182"
+          }
+        },
+        "compile": {
+          "lib/netstandard1.4/Microsoft.Toolkit.Uwp.Notifications.dll": {}
         }
       },
       "Microsoft.VisualStudio.Web.CodeGeneration/2.2.3": {
@@ -777,6 +791,7 @@
           "Microsoft.EntityFrameworkCore": "2.2.4",
           "Microsoft.EntityFrameworkCore.Design": "2.2.4",
           "Microsoft.EntityFrameworkCore.Sqlite": "2.2.4",
+          "Microsoft.Toolkit.Uwp.Notifications": "5.1.1",
           "SQLite": "3.13.0",
           "SQLite.CodeFirst": "1.5.2.28",
           "System.Data.SQLite": "1.0.110",
@@ -4003,6 +4018,13 @@
       "sha512": "sha512-RezSS0Tli9yfjIJIrwyB334gHymL6/Oy9YM47NyE4kCT0eLkZjs4VKptnX6Pvl8+12oP1gTDvuYZhrhpxfOFoA==",
       "path": "microsoft.entityframeworkcore.sqlite.core/2.2.4",
       "hashPath": "microsoft.entityframeworkcore.sqlite.core.2.2.4.nupkg.sha512"
+    },
+    "Microsoft.Toolkit.Uwp.Notifications/5.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Zyor4ije90fWcHjnD2+ADVX/yFC38n8VfnmJ3HWMCEh4itcoDdxHODAVXn91e03I00zWbx7WGVXkXIV3SDy32Q==",
+      "path": "microsoft.toolkit.uwp.notifications/5.1.1",
+      "hashPath": "microsoft.toolkit.uwp.notifications.5.1.1.nupkg.sha512"
     },
     "Microsoft.VisualStudio.Web.CodeGeneration/2.2.3": {
       "type": "package",

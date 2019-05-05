@@ -12,6 +12,7 @@ namespace DirWatchTransfer.Core.DB
         public DbSet<Watcher> Watcher { get; set; }
         public DbSet<ScheduledSync> ScheduledSync { get; set; }
         public DbSet<ActivityHistory> ActivityHistory { get; set; }
+        public DbSet<Settings> Settings { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -27,6 +28,7 @@ namespace DirWatchTransfer.Core.DB
             modelBuilder.ApplyConfiguration(new ActivityHistoryConfig());
             modelBuilder.ApplyConfiguration(new ScheduledSyncConfig());
             modelBuilder.ApplyConfiguration(new WatcherConfig());
+            modelBuilder.ApplyConfiguration(new SettingsConfig());
         }
 
         public static void Initialize()
@@ -38,6 +40,17 @@ namespace DirWatchTransfer.Core.DB
                 if (pendingMigrations.Count != 0)
                 {
                     context.Database.Migrate();
+                }
+
+                Settings defaultSettings = context.Settings.FirstOrDefault();
+
+                if (defaultSettings == null)
+                {
+                    // Initialize default settings look at the property comment summaries for more details.
+                    defaultSettings = new Settings();
+
+                    context.Settings.Add(defaultSettings);
+                    context.SaveChanges();
                 }
             }
         }

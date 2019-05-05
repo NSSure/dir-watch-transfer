@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore;
+﻿using DirWatchTransfer.Core;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace DirWatchTransfer.Api
 {
@@ -7,6 +9,12 @@ namespace DirWatchTransfer.Api
     {
         public static void Main(string[] args)
         {
+            // Initialize application directory.
+            if (!Directory.Exists(Constants.ApplicationPath))
+            {
+                Directory.CreateDirectory(Constants.ApplicationPath);
+            }
+
             CreateWebHostBuilder(args).Build().Run();
         }
 

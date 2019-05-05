@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DirWatchTransfer.Core.Migrations
 {
     [DbContext(typeof(DirWatchTransferContext))]
-    [Migration("20190428225418_InitialCreate")]
+    [Migration("20190505040614_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,9 +23,13 @@ namespace DirWatchTransfer.Core.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Data");
+
                     b.Property<DateTime>("DateAdded");
 
                     b.Property<string>("Description");
+
+                    b.Property<int>("EntityID");
 
                     b.Property<string>("Title");
 
@@ -52,12 +56,66 @@ namespace DirWatchTransfer.Core.Migrations
                     b.ToTable("ScheduledSync");
                 });
 
+            modelBuilder.Entity("DirWatchTransfer.Core.Entity.Settings", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("EnableForcedDirectoryCopiesNotifications");
+
+                    b.Property<bool>("EnableNewSymbolicLinkNotifications");
+
+                    b.Property<bool>("EnableNewSyncNotifications");
+
+                    b.Property<bool>("EnableNewWatcherNotifications");
+
+                    b.Property<bool>("EnableNotifications");
+
+                    b.Property<bool>("EnableWatcherFileSyncsNotifications");
+
+                    b.Property<string>("LogFileFormat");
+
+                    b.Property<string>("LogFilePath");
+
+                    b.Property<bool>("LogForcedDirectoryCopies");
+
+                    b.Property<bool>("LogNewSymbolicLinks");
+
+                    b.Property<bool>("LogNewSyncs");
+
+                    b.Property<bool>("LogNewWatchers");
+
+                    b.Property<bool>("LogWatcherFileSyncs");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Settings");
+                });
+
             modelBuilder.Entity("DirWatchTransfer.Core.Entity.SymbolicLink", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("AttributeCount");
+
+                    b.Property<int>("CopyCount");
+
+                    b.Property<int>("CreationTimeCount");
+
+                    b.Property<int>("DirectoryNameCount");
+
+                    b.Property<int>("FileNameCount");
+
+                    b.Property<int>("LastAccessCount");
+
+                    b.Property<int>("LastWriteCount");
+
                     b.Property<string>("Name");
+
+                    b.Property<int>("SecurityCount");
+
+                    b.Property<int>("SizeCount");
 
                     b.Property<string>("Source");
 
@@ -73,7 +131,25 @@ namespace DirWatchTransfer.Core.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("AttributeCount");
+
+                    b.Property<int>("CopyCount");
+
+                    b.Property<int>("CreationTimeCount");
+
+                    b.Property<int>("DirectoryNameCount");
+
+                    b.Property<int>("FileNameCount");
+
+                    b.Property<int>("LastAccessCount");
+
+                    b.Property<int>("LastWriteCount");
+
                     b.Property<bool>("Recursive");
+
+                    b.Property<int>("SecurityCount");
+
+                    b.Property<int>("SizeCount");
 
                     b.Property<int>("SymbolicLinkID");
 

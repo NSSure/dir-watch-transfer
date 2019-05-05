@@ -38,14 +38,18 @@ namespace DirWatchTransfer.Core.Utility
 
             FileSystemMonitor fileSystemMonitor = new FileSystemMonitor();
 
+            // This actions gets fired when a file changes.
             fileSystemMonitor.CopyCompletedAction = async (notifyFilter, fileSystemEventArgs) =>
             {
                 if (!isTripped)
                 {
                     isTripped = true;
                     
+                    // Sync the changed file with the target file and update the SignalR clients of the copied file.
                     CopyDiagnostics copyDiagnostics = await this.SyncLinkedFile(fileSystemEventArgs.Name, fileSystemEventArgs.FullPath);
-                    await this.fileSystemHubContext.Clients.All.SendAsync("onFileCopied");
+                    await this.fileSystemHubContext.Clients.All.SendAsync("onFileCopied", copyDiagnostics);
+
+                    await LogUtility.WriteToLog(notifyFilter, copyDiagnostics);
 
                     // Update counts.
                     if (notifyFilter != null)

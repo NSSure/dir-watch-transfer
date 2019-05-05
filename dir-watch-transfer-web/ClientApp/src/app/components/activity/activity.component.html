@@ -5,14 +5,14 @@
   <div class="list-group list-group-flush" *ngIf="activityService.activityHistory.length !== 0">
     <div class="list-group-item" *ngFor="let activity of activityService.activityHistory">
       <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1"><i class="fa fa-link fa-lg"></i> {{activity.title}}</h5>
-        <small>3 days ago</small>
+        <h5 class="mb-1"><i class="fa fa-link"></i> File copied successfully</h5>
       </div>
       <p class="mb-1">
-        Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius
-        blandit.
+        <code>{{activity.sourcePath}}</code><br />
+        <span>to</span><br />
+        <code>{{activity.targetPath}}</code>
       </p>
-      <small>Donec id elit non mi porta.</small>
+      <small>({{activity.elapsedTime}} ms)</small>
     </div>
   </div>
   <div class="card-body" *ngIf="activityService.activityHistory.length === 0">
