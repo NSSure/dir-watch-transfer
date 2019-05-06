@@ -23,12 +23,21 @@ namespace DirWatchTransfer.Core.Utility
             {
                 byte[] logAddendumBytes = new UTF8Encoding(true).GetBytes(logAddendum);
                 await fileStream.WriteAsync(logAddendumBytes, 0, logAddendumBytes.Length);
+
+                byte[] newline = Encoding.ASCII.GetBytes(Environment.NewLine);
+                await fileStream.WriteAsync(newline, 0, newline.Length);
             }
         }
 
         public static void OpenDirectory()
         {
             System.Diagnostics.Process.Start(Environment.GetEnvironmentVariable("WINDIR") + @"\explorer.exe", Constants.ApplicationPath);
+        }
+
+        public static async Task<string> GetLog()
+        {
+            string content = await File.ReadAllTextAsync(Constants.LogFilePath);
+            return content;
         }
     }
 }

@@ -10,4 +10,8 @@ export class LogService extends BaseService {
   openDirectory() {
     this.http.get(this.apiUrl + 'open/directory').subscribe();
   }
+
+  getLog() {
+    return this.http.get<any>(this.apiUrl + 'get');
+  }
 }

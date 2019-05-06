@@ -16,6 +16,7 @@
               Logs
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" [routerLink]='["/log"]'>View Log</a>
               <a class="dropdown-item" href="#" (click)="logService.openDirectory()">Open Log Directory</a>
             </div>
           </li>
@@ -27,7 +28,7 @@
               Help
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">About</a>
+              <a class="dropdown-item" [routerLink]='["/about"]'>About</a>
               <a class="dropdown-item" href="https://github.com/NSSure/dir-watch-transfer" target="_blank">Source code</a>
               <div class="dropdown-divider"></div>
               <h6 class="dropdown-header">Version</h6>

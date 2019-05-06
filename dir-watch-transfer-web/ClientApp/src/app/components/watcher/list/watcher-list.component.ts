@@ -9,21 +9,52 @@ import { SymbolicLinkService } from '../../../services/symbolic-link.service';
   providers: [WatcherService]
 })
 export class WatcherListComponent implements OnInit {
-  watchers: Array<any> = [];
+  groupedWatchers: Array<any> = [];
+
+  actionPropertyMap: Array<any> = [
+    { name: 'watchFileName', display: 'File name' },
+    { name: 'watchDirectoryName', display: 'Directory name' },
+    { name: 'watchSize', display: 'Size' },
+    { name: 'watchLastWrite', display: 'Last write' },
+    { name: 'watchLastAccess', display: 'Last access' },
+    { name: 'watchCreationTime', display: 'Creation time' },
+    { name: 'watchSecurity', display: 'Security' },
+  ];
 
   constructor(private watcherService: WatcherService, private symbolicLinkService: SymbolicLinkService) {
 
   }
 
   ngOnInit() {
-    this.watcherService.listWatchers().subscribe((watchers) => {
-      this.watchers = watchers
+    this.watcherService.groupedWatchers().subscribe((groupedWatchers) => {
+      this.groupedWatchers = groupedWatchers;
 
-      this.watchers.forEach((watcher) => {
-        let symbolicLink = this.symbolicLinkService.symbolicLinks.find(x => x.id == watcher.symbolicLinkID);
-        watcher.symbolicLink = symbolicLink;
-      })
+      this.groupedWatchers.forEach((grouped) => {
+        let symbolicLink = this.symbolicLinkService.symbolicLinks.find(x => x.id == grouped.symbolicLinkID);
+        grouped.symbolicLink = symbolicLink;
+
+        grouped.watchers.forEach((watcher) => {
+          watcher.actions = this.buildActionString(watcher);
+        });
+      });
     });
+  }
+
+  buildActionString(watcher) {
+    let actions: string = "";
+
+    this.actionPropertyMap.forEach((propertyMap) => {
+      if (watcher[propertyMap.name]) {
+        if (actions == "") {
+          actions = propertyMap.display;
+        }
+        else {
+          actions += `, ${propertyMap.display}`;
+        }
+      }
+    });
+
+    return actions;
   }
 
   startWatcher(watcher) {

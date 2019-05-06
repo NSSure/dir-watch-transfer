@@ -1,25 +1,51 @@
 <div class="watchers">
-  <div class="list-group list-group-flush" *ngIf="watchers.length !== 0">
-    <div class="list-group-item" *ngFor="let watcher of watchers">
+  <div class="list-group list-group-flush" *ngIf="groupedWatchers.length !== 0">
+    <div class="list-group-item" *ngFor="let grouped of groupedWatchers">
       <div class="d-flex w-100 justify-content-between">
-        <h6 class="mb-1">{{watcher.symbolicLink.name}}</h6>
+        <h6 class="mb-1"></h6>
       </div>
-      <div><code>{{watcher.symbolicLink.source}}</code>&nbsp;&nbsp;<i class="fa fa-link"></i>&nbsp;&nbsp;<code>{{watcher.symbolicLink.target}}</code></div>
       <div class="mb-3">
-        <span class="badge badge-pill mr-1" [ngClass]="{'badge-success': watcher.watchFileName, 'badge-secondary': !watcher.watchFileName}">file name</span>
-        <span class="badge badge-pill mr-1" [ngClass]="{'badge-success': watcher.watchDirectoryName, 'badge-secondary': !watcher.watchDirectoryName}">directory name</span>
-        <span class="badge badge-pill mr-1" [ngClass]="{'badge-success': watcher.watchSize, 'badge-secondary': !watcher.watchSize}">size</span>
-        <span class="badge badge-pill mr-1" [ngClass]="{'badge-success': watcher.watchLastWrite, 'badge-secondary': !watcher.watchLastWrite}">last write</span>
-        <span class="badge badge-pill mr-1" [ngClass]="{'badge-success': watcher.watchLastAccess, 'badge-secondary': !watcher.watchLastAccess}">last access</span>
-        <span class="badge badge-pill mr-1" [ngClass]="{'badge-success': watcher.watchCreationTime, 'badge-secondary': !watcher.watchCreationTime}">creation time</span>
-        <span class="badge badge-pill mr-1" [ngClass]="{'badge-success': watcher.watchSecurity, 'badge-secondary': !watcher.watchSecurity}">security</span>
+        <h6 class="mb-0">{{grouped.symbolicLink.name}}</h6>
+        <small><code>{{grouped.symbolicLink.source}}</code> - <code>{{grouped.symbolicLink.target}}</code></small>
       </div>
+      <table class="table table-sm">
+        <thead class="thead-light">
+          <tr>
+            <th>Start/Stop</th>
+            <th>Filters</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let watcher of grouped.watchers" [ngClass]="{'table-danger': watcher.isRunning}">
+            <td>
+              <a href="#" class="text-decoration-none" *ngIf="!watcher.isRunning" (click)="startWatcher(watcher)">Start</a>
+              <a href="#" class="text-decoration-none" *ngIf="watcher.isRunning" (click)="stopWatcher(watcher)">Stop</a>
+            </td>
+            <td>
+              {{watcher.actions}}
 
-      <button type="button" class="btn btn-secondary btn-sm" *ngIf="!watcher.isRunning" (click)="startWatcher(watcher)">Start watcher</button>
-      <button type="button" class="btn btn-danger btn-sm" *ngIf="watcher.isRunning" (click)="stopWatcher(watcher)">Stop watcher</button>
+              <!--<span *ngIf="watcher.watchFileName">File name</span>
+              <span *ngIf="watcher.watchDirectoryName">, Directory name</span>
+              <span *ngIf="watcher.watchSize">Size</span>
+              <span *ngIf="watcher.watchLastWrite">, Last write</span>
+              <span *ngIf="watcher.watchLastAccess">, Last access</span>
+              <span *ngIf="watcher.watchCreationTime">, Creation time</span>
+              <span *ngIf="watcher.watchSecurity">, Security</span>-->
+
+              <!--<span class="badge badge-pill mr-1" [ngClass]="{'badge-success': watcher.watchFileName, 'badge-secondary': !watcher.watchFileName}">file name</span>
+              <span class="badge badge-pill mr-1" [ngClass]="{'badge-success': watcher.watchDirectoryName, 'badge-secondary': !watcher.watchDirectoryName}">directory name</span>
+              <span class="badge badge-pill mr-1" [ngClass]="{'badge-success': watcher.watchSize, 'badge-secondary': !watcher.watchSize}">size</span>
+              <span class="badge badge-pill mr-1" [ngClass]="{'badge-success': watcher.watchLastWrite, 'badge-secondary': !watcher.watchLastWrite}">last write</span>
+              <span class="badge badge-pill mr-1" [ngClass]="{'badge-success': watcher.watchLastAccess, 'badge-secondary': !watcher.watchLastAccess}">last access</span>
+              <span class="badge badge-pill mr-1" [ngClass]="{'badge-success': watcher.watchCreationTime, 'badge-secondary': !watcher.watchCreationTime}">creation time</span>
+              <span class="badge badge-pill mr-1" [ngClass]="{'badge-success': watcher.watchSecurity, 'badge-secondary': !watcher.watchSecurity}">security</span>-->
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
-  <div *ngIf="watchers.length === 0" class="px-5 py-5">
+  <div *ngIf="groupedWatchers.length === 0" class="px-5 py-5">
     There no are watchers configured for any of your symbolic links.
   </div>
 </div>

@@ -15,6 +15,10 @@ export class WatcherService extends BaseService {
     return this.http.get<Array<any>>(this.apiUrl + 'list');
   }
 
+  groupedWatchers() {
+    return this.http.get<any>(this.apiUrl + 'grouped');
+  }
+
   startWatcher(watcherId: number) {
     return this.http.post(this.apiUrl + 'start', watcherId);
   }

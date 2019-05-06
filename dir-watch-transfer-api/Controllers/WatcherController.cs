@@ -51,6 +51,20 @@ namespace DirWatchTransfer.Core.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("grouped")]
+        public async Task<IActionResult> Grouped()
+        {
+            try
+            {
+                return StatusCode(200, await this.watcherRepo.GroupBySymbolicLink());
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
+        }
+
         [HttpPost]
         [Route("start")]
         public async Task<IActionResult> Start([FromBody] long watcherID)

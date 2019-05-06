@@ -36,6 +36,13 @@
   <ItemGroup>
     <None Remove="ClientApp\src\app\model\copy-diagnostics.ts" />
     <None Remove="ClientApp\src\app\model\settings.ts" />
+    <None Remove="ClientApp\src\YellowFolderOpen.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="ClientApp\YellowFolderOpen.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

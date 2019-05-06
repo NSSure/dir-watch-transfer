@@ -19,6 +19,8 @@ import { ActivityService } from './services/activity.service';
 import { LogService } from './services/log.service';
 import { SettingsComponent } from './components/settings/settings.component';
 import { SettingsService } from './services/settings.service';
+import { LogComponent } from './components/log/log.component';
+import { AboutComponent } from './components/about/about.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { SettingsService } from './services/settings.service';
     SymbolicLinkAddComponent,
     SymbolicLinkListComponent,
     ActivityComponent,
-    SettingsComponent
+    SettingsComponent,
+    LogComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -41,6 +45,8 @@ import { SettingsService } from './services/settings.service';
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'settings', component: SettingsComponent, pathMatch: 'full' },
+      { path: 'log', component: LogComponent, pathMatch: 'full' },
+      { path: 'about', component: AboutComponent, pathMatch: 'full' },
     ])
   ],
   providers: [
