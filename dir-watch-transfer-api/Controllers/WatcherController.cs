@@ -36,6 +36,21 @@ namespace DirWatchTransfer.Core.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("delete")]
+        public async Task<IActionResult> Delete([FromBody] int watcherID)
+        {
+            try
+            {
+                await this.fileSystemWatcherUtil.DeleteWatcher(watcherID);
+                return StatusCode(200);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
+        }
+
         [HttpGet]
         [Route("list")]
         public async Task<IActionResult> List()
@@ -67,7 +82,7 @@ namespace DirWatchTransfer.Core.Controllers
 
         [HttpPost]
         [Route("start")]
-        public async Task<IActionResult> Start([FromBody] long watcherID)
+        public async Task<IActionResult> Start([FromBody] int watcherID)
         {
             try
             {

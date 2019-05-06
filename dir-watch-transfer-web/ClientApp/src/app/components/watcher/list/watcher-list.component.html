@@ -13,6 +13,7 @@
           <tr>
             <th>Start/Stop</th>
             <th>Filters</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -21,24 +22,9 @@
               <a href="#" class="text-decoration-none" *ngIf="!watcher.isRunning" (click)="startWatcher(watcher)">Start</a>
               <a href="#" class="text-decoration-none" *ngIf="watcher.isRunning" (click)="stopWatcher(watcher)">Stop</a>
             </td>
+            <td>{{watcher.actions}}</td>
             <td>
-              {{watcher.actions}}
-
-              <!--<span *ngIf="watcher.watchFileName">File name</span>
-              <span *ngIf="watcher.watchDirectoryName">, Directory name</span>
-              <span *ngIf="watcher.watchSize">Size</span>
-              <span *ngIf="watcher.watchLastWrite">, Last write</span>
-              <span *ngIf="watcher.watchLastAccess">, Last access</span>
-              <span *ngIf="watcher.watchCreationTime">, Creation time</span>
-              <span *ngIf="watcher.watchSecurity">, Security</span>-->
-
-              <!--<span class="badge badge-pill mr-1" [ngClass]="{'badge-success': watcher.watchFileName, 'badge-secondary': !watcher.watchFileName}">file name</span>
-              <span class="badge badge-pill mr-1" [ngClass]="{'badge-success': watcher.watchDirectoryName, 'badge-secondary': !watcher.watchDirectoryName}">directory name</span>
-              <span class="badge badge-pill mr-1" [ngClass]="{'badge-success': watcher.watchSize, 'badge-secondary': !watcher.watchSize}">size</span>
-              <span class="badge badge-pill mr-1" [ngClass]="{'badge-success': watcher.watchLastWrite, 'badge-secondary': !watcher.watchLastWrite}">last write</span>
-              <span class="badge badge-pill mr-1" [ngClass]="{'badge-success': watcher.watchLastAccess, 'badge-secondary': !watcher.watchLastAccess}">last access</span>
-              <span class="badge badge-pill mr-1" [ngClass]="{'badge-success': watcher.watchCreationTime, 'badge-secondary': !watcher.watchCreationTime}">creation time</span>
-              <span class="badge badge-pill mr-1" [ngClass]="{'badge-success': watcher.watchSecurity, 'badge-secondary': !watcher.watchSecurity}">security</span>-->
+              <a href="#" class="text-danger" (click)="deleteWatcher(watcher)"><i class="fa fa-close fa-lg"></i></a>
             </td>
           </tr>
         </tbody>

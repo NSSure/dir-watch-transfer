@@ -24,7 +24,7 @@ namespace DirWatchTransfer.Core.Utility
             this.fileSystemHubContext = fileSystemHubContext;
         }
 
-        public async Task StartWatcher(long watcherID)
+        public async Task StartWatcher(int watcherID)
         {
             if (DirWatcherTransferApp.Monitors.ContainsKey(watcherID))
             {
@@ -85,6 +85,12 @@ namespace DirWatchTransfer.Core.Utility
 
                 DirWatcherTransferApp.Monitors.Remove(watcherID);
             }
+        }
+
+        public async Task DeleteWatcher(int watcherID)
+        {
+            await this.StopWatcher(watcherID);
+            await this.watcherRepo.DeleteAsync(watcherID);
         }
 
         public async Task ForceCopy(long symbolicLinkID)

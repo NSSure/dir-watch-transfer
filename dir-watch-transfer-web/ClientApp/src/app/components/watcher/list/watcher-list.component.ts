@@ -67,4 +67,8 @@ export class WatcherListComponent implements OnInit {
     watcher.isRunning = false;
     this.watcherService.stopWatcher(watcher.id).subscribe();
   }
+
+  deleteWatcher(watcher) {
+    this.watcherService.deleteWatcher(watcher.id);
+  }
 }

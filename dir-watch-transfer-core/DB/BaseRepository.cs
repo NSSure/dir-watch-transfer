@@ -100,6 +100,20 @@ namespace DirWatchTransfer.DB
             }
         }
 
+        public async Task DeleteAsync(int id)
+        {
+            try
+            {
+                TEntity entity = this.Table.Find(id);
+                this.Context.Remove(entity);
+                await this.Context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
         public async Task<TEntity> FirstOrDefaultAsync()
         {
             return await this.Table.FirstOrDefaultAsync();

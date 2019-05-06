@@ -11,6 +11,10 @@ export class WatcherService extends BaseService {
     return this.http.post(this.apiUrl + 'add', watcher, this.httpOptions);
   }
 
+  deleteWatcher(watcherId: any) {
+    return this.http.post(this.apiUrl + 'delete', watcherId);
+  }
+
   listWatchers() {
     return this.http.get<Array<any>>(this.apiUrl + 'list');
   }
