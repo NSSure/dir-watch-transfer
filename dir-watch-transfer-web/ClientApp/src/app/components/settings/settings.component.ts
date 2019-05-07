@@ -8,4 +8,9 @@ import Settings from '../../model/settings';
 })
 export class SettingsComponent {
   constructor(private settingsService: SettingsService) { }
+
+  reinitializeDatabase() {
+    this.settingsService.reinitializeDatabase().subscribe();
+    window.location.reload();
+  }
 }

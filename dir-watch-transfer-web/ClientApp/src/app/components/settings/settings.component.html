@@ -86,7 +86,13 @@
           </label>
         </div>
       </div>
-      <button type="button" class="btn btn-success">Apply Settings</button>
+      <button type="button" class="btn btn-success mb-4">Apply Settings</button>
+      <div class="mb-4">
+        <h5 class="mb-1">Destructive</h5>
+        <small>Destructive actions that cannot be undone.</small>
+        <hr />
+        <button type="button" class="btn btn-danger" (click)="reinitializeDatabase()">Reinitialize Database</button>
+      </div>
     </form>
   </div>
 </div>

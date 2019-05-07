@@ -3,6 +3,15 @@ html, body {
   background-color: #f7f7f7;
 }
 
+.loader {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: center;
+  text-align: center;
+}
+
 .list-group-item {
   user-select: none;
 }

@@ -3,6 +3,7 @@ using DirWatchTransfer.Core.Entity;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace DirWatchTransfer.Core.DB
 {
@@ -52,6 +53,22 @@ namespace DirWatchTransfer.Core.DB
                     context.Settings.Add(defaultSettings);
                     context.SaveChanges();
                 }
+            }
+        }
+
+        /// <summary>
+        /// Drops and recreates the database. (Warning this DELETES any and all data in the existing database).
+        /// </summary>
+        /// <returns></returns>
+        public static async Task ReinitializeDatabase()
+        {
+            using (DirWatchTransferContext context = new DirWatchTransferContext())
+            {
+                // Delete the database.
+                await context.Database.EnsureDeletedAsync();
+
+                // Reinitialize the database from scratch.
+                Initialize();
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using DirWatchTransfer.Core.Entity;
 using DirWatchTransfer.Core.Model;
+using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -7,7 +8,7 @@ namespace DirWatchTransfer.Core
 {
     public partial class DirWatcherTransferApp
     {
-        public static Dictionary<long, FileSystemMonitor> Monitors { get; set; } = new Dictionary<long, FileSystemMonitor>();
+        public static Dictionary<Tuple<int, int>, FileSystemMonitor> Monitors { get; set; } = new Dictionary<Tuple<int, int>, FileSystemMonitor>();
 
         public static Dictionary<NotifyFilters, string> SymbolicLinkNotifyFilterCountMap = new Dictionary<NotifyFilters, string>()
         {

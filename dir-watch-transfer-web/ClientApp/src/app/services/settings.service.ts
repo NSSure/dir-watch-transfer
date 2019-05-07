@@ -19,4 +19,8 @@ export class SettingsService extends BaseService {
       this._settings = settings;
     });
   }
+
+  reinitializeDatabase() {
+    return this.http.get(this.apiUrl + 'destructive/database/reinitialize')
+  }
 }

@@ -26,15 +26,17 @@ namespace DirWatchTransfer.Core.Utility
 
         public async Task StartWatcher(int watcherID)
         {
-            if (DirWatcherTransferApp.Monitors.ContainsKey(watcherID))
-            {
-                throw new System.Exception("Watcher already has monitor running. Please end the existing monitor before starting a new one.");
-            }
-
             bool isTripped = false;
 
             Watcher watcher = await this.watcherRepo.FirstOrDefaultAsync(a => a.ID == watcherID);
             SymbolicLink symbolicLink = await this.symbolicLinkRepo.FirstOrDefaultAsync(a => a.ID == watcher.SymbolicLinkID);
+
+            System.Tuple<int, int> monitorKey = new System.Tuple<int, int>(watcher.SymbolicLinkID, watcher.ID);
+
+            if (DirWatcherTransferApp.Monitors.ContainsKey(monitorKey))
+            {
+                throw new System.Exception("Watcher already has monitor running. Please end the existing monitor before starting a new one.");
+            }
 
             FileSystemMonitor fileSystemMonitor = new FileSystemMonitor();
 
@@ -63,28 +65,28 @@ namespace DirWatchTransfer.Core.Utility
             };
 
             fileSystemMonitor.StartWatcher(symbolicLink.Source, this.ProcessWatcherFilters(watcher));
-            DirWatcherTransferApp.Monitors.Add(watcherID, fileSystemMonitor);
+            DirWatcherTransferApp.Monitors.Add(monitorKey, fileSystemMonitor);
         }
 
         public async Task StopWatcher(long watcherID)
         {
-            if (DirWatcherTransferApp.Monitors.ContainsKey(watcherID))
-            {
-                FileSystemMonitor fileSystemMonitor = DirWatcherTransferApp.Monitors[watcherID];
+            //if (DirWatcherTransferApp.Monitors.ContainsKey(watcherID))
+            //{
+            //    FileSystemMonitor fileSystemMonitor = DirWatcherTransferApp.Monitors[watcherID];
 
-                fileSystemMonitor.StopWatcher(
-                    NotifyFilters.Attributes | 
-                    NotifyFilters.CreationTime | 
-                    NotifyFilters.DirectoryName | 
-                    NotifyFilters.FileName | 
-                    NotifyFilters.LastAccess | 
-                    NotifyFilters.LastWrite |
-                    NotifyFilters.Security | 
-                    NotifyFilters.Size
-                );
+            //    fileSystemMonitor.StopWatcher(
+            //        NotifyFilters.Attributes | 
+            //        NotifyFilters.CreationTime | 
+            //        NotifyFilters.DirectoryName | 
+            //        NotifyFilters.FileName | 
+            //        NotifyFilters.LastAccess | 
+            //        NotifyFilters.LastWrite |
+            //        NotifyFilters.Security | 
+            //        NotifyFilters.Size
+            //    );
 
-                DirWatcherTransferApp.Monitors.Remove(watcherID);
-            }
+            //    DirWatcherTransferApp.Monitors.Remove(watcherID);
+            //}
         }
 
         public async Task DeleteWatcher(int watcherID)
