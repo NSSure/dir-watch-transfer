@@ -33,5 +33,61 @@ namespace DirWatchTransfer.Core
             { NotifyFilters.Security, nameof(Watcher.SecurityCount) },
             { NotifyFilters.Size, nameof(Watcher.SizeCount) }
         };
+
+        public static NotifyFilters ProcessWatcherFiltersAsPiped(Watcher watcher)
+        {
+            NotifyFilters filters = NotifyFilters.Size;
+
+            if (watcher.WatchFileName)
+                filters = filters | NotifyFilters.FileName;
+
+            if (watcher.WatchDirectoryName)
+                filters = filters | NotifyFilters.DirectoryName;
+
+            if (watcher.WatchSize)
+                filters = filters | NotifyFilters.Size;
+
+            if (watcher.WatchLastWrite)
+                filters = filters | NotifyFilters.LastWrite;
+
+            if (watcher.WatchLastAccess)
+                filters = filters | NotifyFilters.LastAccess;
+
+            if (watcher.WatchCreationTime)
+                filters = filters | NotifyFilters.CreationTime;
+
+            if (watcher.WatchSecurity)
+                filters = filters | NotifyFilters.Security;
+
+            return filters;
+        }
+
+        public static List<NotifyFilters> ProcessWatcherFiltersAsList(Watcher watcher)
+        {
+            List<NotifyFilters> filters = new List<NotifyFilters>();
+
+            if (watcher.WatchFileName)
+                filters.Add(NotifyFilters.FileName);
+
+            if (watcher.WatchDirectoryName)
+                filters.Add(NotifyFilters.DirectoryName);
+
+            if (watcher.WatchSize)
+                filters.Add(NotifyFilters.Size);
+
+            if (watcher.WatchLastWrite)
+                filters.Add(NotifyFilters.LastWrite);
+
+            if (watcher.WatchLastAccess)
+                filters.Add(NotifyFilters.LastAccess);
+
+            if (watcher.WatchCreationTime)
+                filters.Add(NotifyFilters.CreationTime);
+
+            if (watcher.WatchSecurity)
+                filters.Add(NotifyFilters.Security);
+
+            return filters;
+        }
     }
 }

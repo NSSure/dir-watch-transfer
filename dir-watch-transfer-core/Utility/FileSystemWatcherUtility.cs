@@ -43,12 +43,23 @@ namespace DirWatchTransfer.Core.Utility
             // This actions gets fired when a file changes.
             fileSystemMonitor.CopyCompletedAction = async (notifyFilter, fileSystemEventArgs) =>
             {
-                if (!isTripped)
+                // TODO: Implement a better way to check for visual studio temp files. This will fail if the actual file have a "~" in the name.
+                if (!isTripped && fileSystemEventArgs.Name.Contains("~") && !fileSystemEventArgs.Name.EndsWith("~"))
                 {
                     isTripped = true;
+
+                    string fileName = fileSystemEventArgs.Name;
+                    string filePath = fileSystemEventArgs.FullPath;
+
+                    if (fileSystemEventArgs.Name.Contains("~") && !fileSystemEventArgs.Name.EndsWith("~"))
+                    {
+                        // Remove the vs caching name format.
+                        fileName = fileSystemEventArgs.Name.Remove(fileSystemEventArgs.Name.LastIndexOf("~"));
+                        filePath = fileSystemEventArgs.FullPath.Replace(fileSystemEventArgs.Name, fileName);
+                    }
                     
                     // Sync the changed file with the target file and update the SignalR clients of the copied file.
-                    CopyDiagnostics copyDiagnostics = await this.SyncLinkedFile(fileSystemEventArgs.Name, fileSystemEventArgs.FullPath);
+                    CopyDiagnostics copyDiagnostics = await this.SyncLinkedFile(fileName, filePath);
                     await this.fileSystemHubContext.Clients.All.SendAsync("onFileCopied", copyDiagnostics);
 
                     await LogUtility.WriteToLog(notifyFilter, copyDiagnostics);
@@ -64,7 +75,7 @@ namespace DirWatchTransfer.Core.Utility
                 }
             };
 
-            fileSystemMonitor.StartWatcher(symbolicLink.Source, this.ProcessWatcherFilters(watcher));
+            fileSystemMonitor.StartWatcher(symbolicLink.Source, DirWatcherTransferApp.ProcessWatcherFiltersAsList(watcher));
             DirWatcherTransferApp.Monitors.Add(monitorKey, fileSystemMonitor);
         }
 
@@ -151,34 +162,6 @@ namespace DirWatchTransfer.Core.Utility
                 TargetPath = symbolicLink.Target,
                 ElapsedTime = stopwatch.ElapsedMilliseconds
             };
-        }
-
-        public NotifyFilters ProcessWatcherFilters(Watcher watcher)
-        {
-            NotifyFilters filters = NotifyFilters.Size;
-
-            if (watcher.WatchFileName)
-                filters = filters | NotifyFilters.FileName;
-
-            if (watcher.WatchDirectoryName)
-                filters = filters | NotifyFilters.DirectoryName;
-
-            if (watcher.WatchSize)
-                filters = filters | NotifyFilters.Size;
-
-            if (watcher.WatchLastWrite)
-                filters = filters | NotifyFilters.LastWrite;
-
-            if (watcher.WatchLastAccess)
-                filters = filters | NotifyFilters.LastAccess;
-
-            if (watcher.WatchCreationTime)
-                filters = filters | NotifyFilters.CreationTime;
-
-            if (watcher.WatchSecurity)
-                filters = filters | NotifyFilters.Security;
-
-            return filters;
         }
     }
 }

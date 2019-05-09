@@ -17,7 +17,16 @@ namespace DirWatchTransfer.Core.Utility
             // TODO: Enforce the users log settings.
             Settings defaultSettings = await new SettingsRepository().FirstOrDefaultAsync();
 
-            string logAddendum = $"{System.Enum.GetName(typeof(NotifyFilters), notifyFilter)},{copyDiagnostics.SourcePath},{copyDiagnostics.TargetPath},{copyDiagnostics.ElapsedTime} (ms),{DateTime.Now}";
+            string logAddendum = string.Empty;
+
+            if (notifyFilter != null)
+            {
+                logAddendum = $"{System.Enum.GetName(typeof(NotifyFilters), notifyFilter)},{copyDiagnostics.SourcePath},{copyDiagnostics.TargetPath},{copyDiagnostics.ElapsedTime} (ms),{DateTime.Now}";
+            }
+            else
+            {
+                logAddendum = $"VS Cache File,{copyDiagnostics.SourcePath},{copyDiagnostics.TargetPath},{copyDiagnostics.ElapsedTime} (ms),{DateTime.Now}";
+            }
 
             using (FileStream fileStream = new FileStream(Constants.LogFilePath, FileMode.Append))
             {
