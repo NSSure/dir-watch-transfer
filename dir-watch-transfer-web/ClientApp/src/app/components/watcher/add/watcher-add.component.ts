@@ -6,8 +6,7 @@ import { WatcherService } from '../../../services/watcher.service';
 @Component({
   selector: 'watcher-add',
   templateUrl: './watcher-add.component.html',
-  styleUrls: ['./watcher-add.component.css'],
-  providers: [WatcherService]
+  styleUrls: ['./watcher-add.component.css']
 })
 export class WatcherAddComponent implements OnInit {
   watcher: any = {};
@@ -20,6 +19,6 @@ export class WatcherAddComponent implements OnInit {
   }
 
   addWatcher() {
-    this.watcherService.addWatcher(this.watcher).subscribe();
+    this.watcherService.addWatcher(this.watcher).subscribe(() => this.watcherService.newWatcherAdded(this.watcher));
   }
 }

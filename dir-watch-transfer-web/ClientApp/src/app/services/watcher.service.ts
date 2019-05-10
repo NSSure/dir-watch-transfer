@@ -1,10 +1,19 @@
 import { Injectable } from '@angular/core';
 import { BaseService } from './base-service';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class WatcherService extends BaseService {
   get apiUrl() {
     return `${this.baseUrl}watcher/`
+  }
+
+  private _newWatcherSource = new BehaviorSubject<any>(null);
+
+  newWatcher$ = this._newWatcherSource.asObservable();
+
+  newWatcherAdded(watcher) {
+    this._newWatcherSource.next(watcher);
   }
 
   addWatcher(watcher: any) {

@@ -7,3 +7,4 @@ C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-servic
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-service\obj\Debug\dir-watch-transfer-service.csproj.CoreCompileInputs.cache
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-service\obj\Debug\DirWatchTransfer.Service.exe
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-service\obj\Debug\DirWatchTransfer.Service.pdb
+C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-service\obj\Debug\dir-watch-transfer-service.csprojAssemblyReference.cache

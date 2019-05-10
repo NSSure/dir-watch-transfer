@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { WatcherService } from 'src/app/services/watcher.service';
 import { SymbolicLinkService } from '../../../services/symbolic-link.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'watcher-list',
   templateUrl: './watcher-list.component.html',
-  styleUrls: ['./watcher-list.component.css'],
-  providers: [WatcherService]
+  styleUrls: ['./watcher-list.component.css']
 })
 export class WatcherListComponent implements OnInit {
   groupedWatchers: Array<any> = [];
+
+  newWatcherSubscription: Subscription;
 
   actionPropertyMap: Array<any> = [
     { name: 'watchFileName', display: 'File name' },
@@ -26,6 +28,13 @@ export class WatcherListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.newWatcherSubscription = this.watcherService.newWatcher$.subscribe((watcher) => {
+      if (watcher) {
+        let group = this.groupedWatchers.find(x => x.symbolicLink.id === watcher.symbolicLinkId);
+        group.watchers.push(watcher);
+      }
+    });
+
     this.watcherService.groupedWatchers().subscribe((groupedWatchers) => {
       this.groupedWatchers = groupedWatchers;
 
@@ -38,6 +47,10 @@ export class WatcherListComponent implements OnInit {
         });
       });
     });
+  }
+
+  ngOnDestroy() {
+    this.newWatcherSubscription.unsubscribe();
   }
 
   buildActionString(watcher) {
@@ -69,6 +82,8 @@ export class WatcherListComponent implements OnInit {
   }
 
   deleteWatcher(watcher) {
-    this.watcherService.deleteWatcher(watcher.id);
+    if (confirm("Are sure you want to delete this watcher?")) {
+      this.watcherService.deleteWatcher(watcher.id);
+    }
   }
 }

@@ -21,6 +21,7 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { SettingsService } from './services/settings.service';
 import { LogComponent } from './components/log/log.component';
 import { AboutComponent } from './components/about/about.component';
+import { WatcherService } from './services/watcher.service';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { AboutComponent } from './components/about/about.component';
     SymbolicLinkService,
     LogService,
     SettingsService,
+    WatcherService,
     {
       provide: APP_INITIALIZER,
       useFactory: (symbolicLinkService: SymbolicLinkService, settingsService: SettingsService) => function () {

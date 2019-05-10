@@ -10,7 +10,9 @@ export class SettingsComponent {
   constructor(private settingsService: SettingsService) { }
 
   reinitializeDatabase() {
-    this.settingsService.reinitializeDatabase().subscribe();
-    window.location.reload();
+    if (confirm("Are sure your want to reinitialize the database? All existing data will be lost.")) {
+      this.settingsService.reinitializeDatabase().subscribe();
+      window.location.reload();
+    }
   }
 }
