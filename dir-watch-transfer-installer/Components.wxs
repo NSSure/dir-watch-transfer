@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Fragment>
+    <ComponentGroup Id="ProductComponents">
+      <!-- Shortcut. --> 
+      <ComponentRef Id="MainAppShortcut"  />
+    </ComponentGroup>
+    <DirectoryRef Id="INSTALLFOLDER" FileSource="..\dir-watch-transfer-web\bin\Debug\netcoreapp2.2\win-$(var.Platform)\publish">
+      <!-- Shortcut to main application -->
+      <Component Id="MainAppShortcut" Guid="{FFE6B7B7-DFE0-4092-B992-8222E3975FCF}">
+        <Shortcut Id="ShortcutMainAppShortcut"
+                  Name="DirWatchTransfer_$(var.Platform)" 
+                  Target="[INSTALLFOLDER]DirWatchTransfer.exe" 
+                  Directory="InstallShortcutMenuFolder"
+                  WorkingDirectory="INSTALLFOLDER" />
+        <RegistryValue Id="RegShortcutKey" Root="HKCU" Key="SOFTWARE\DirWatchTransfer" Name="Shortcut" Value="1" Type="integer" KeyPath="yes" />
+        <RemoveFolder Id="RemoveStartMenu" Directory="InstallShortcutMenuFolder" On="uninstall" />
+      </Component>
+    </DirectoryRef>
+  </Fragment>
+</Wix>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      
+      <!-- Application shortcut. -->
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="InstallShortcutMenuFolder" Name="DirWatchTransfer"></Directory>
+      </Directory>
+      
+      <!-- ProgramFiles64Folder -->
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLFOLDER" Name="DirWatchTransfer" />
+      </Directory>
+      
+    </Directory>
+  </Fragment>
+</Wix>

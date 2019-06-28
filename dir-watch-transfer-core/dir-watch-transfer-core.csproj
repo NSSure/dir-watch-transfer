@@ -17,13 +17,6 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.2.4" />
-    <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" Version="5.1.1" />
-    <PackageReference Include="SQLite" Version="3.13.0" />
-    <PackageReference Include="SQLite.CodeFirst" Version="1.5.2.28" />
-    <PackageReference Include="System.Data.SQLite" Version="1.0.110" />
-    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.110" />
-    <PackageReference Include="System.Data.SQLite.EF6" Version="1.0.110" />
-    <PackageReference Include="System.Data.SQLite.Linq" Version="1.0.110" />
   </ItemGroup>
 
   <ItemGroup>

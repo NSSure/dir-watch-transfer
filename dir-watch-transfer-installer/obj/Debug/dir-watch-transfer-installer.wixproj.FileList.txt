@@ -1,0 +1,9 @@
+obj\Debug\Components.wixobj
+obj\Debug\Directories.wixobj
+obj\Debug\Product.wixobj
+obj\Debug\dir-watch-transfer-installer.wixproj.BindContentsFileListnull.txt
+obj\Debug\dir-watch-transfer-installer.wixproj.BindOutputsFileListnull.txt
+obj\Debug\dir-watch-transfer-installer.wixproj.BindBuiltOutputsFileListnull.txt
+C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-installer\bin\Debug\DirWatchTransfer-Debug-x86.msi
+C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-installer\bin\Debug\DirWatchTransfer-Debug-x86.wixpdb
+obj\Debug\ComponentsGenerated.wixobj

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <?if $(var.Platform)=x64?>
+  <?define ProductCode = {70C3D9F4-C5DF-4AA7-853D-3D26A2605757}?>
+  <?else?>
+  <?define ProductCode = {7880DFE1-3FF7-42E1-BB3F-8BB9E5FD4A0B}?>
+  <?endif?>
+  
+	<Product Id="0301EABC-61E7-4C3A-931B-9D50F1F056B9" 
+           Name="DirWatchTransfer" 
+           Language="1033" 
+           Version="$(var.BuildVersion)" 
+           Manufacturer="NSSure" 
+           UpgradeCode="5434f8a1-abf1-4140-a403-086f54e48cae">
+    
+		<Package InstallerVersion="200" 
+             Compressed="yes" 
+             InstallScope="perMachine"
+             Manufacturer="NSSure"
+             Description="Create directory links and watchers for copying file contents."
+             Comments="Thanks for using the program!" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of DirWatchTransfer is already installed." />
+		<MediaTemplate EmbedCab="yes" />
+
+    <!--<Icon Id="icon.ico" SourceFile="${var.dir-watch-transfer-web.ProjectDir}\app.ico" />-->
+
+    <!-- Use the icon.ico icon for this installer -->
+    <!--<Property Id="ARPPRODUCTICON">icon.ico</Property>-->
+    <Property Id="ARPURLINFOABOUT">https://www.nsgordon.com/</Property>
+
+    <UIRef Id="WixUI_Minimal" />
+
+    <!--<WixVariable Id="WixUILicenseRtf" Value="Assets\Agreement.rtf" />-->
+
+		<Feature Id="ProductFeature" Title="DirWatchTransfer" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+      <ComponentGroupRef Id="PublishedComponents" />
+		</Feature>
+	</Product>
+</Wix>

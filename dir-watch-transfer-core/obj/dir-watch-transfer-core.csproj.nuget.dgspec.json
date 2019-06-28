@@ -26,7 +26,6 @@
           "netcoreapp2.2"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -68,34 +67,6 @@
               "target": "Package",
               "version": "[2.2.0, )",
               "autoReferenced": true
-            },
-            "Microsoft.Toolkit.Uwp.Notifications": {
-              "target": "Package",
-              "version": "[5.1.1, )"
-            },
-            "SQLite": {
-              "target": "Package",
-              "version": "[3.13.0, )"
-            },
-            "SQLite.CodeFirst": {
-              "target": "Package",
-              "version": "[1.5.2.28, )"
-            },
-            "System.Data.SQLite": {
-              "target": "Package",
-              "version": "[1.0.110, )"
-            },
-            "System.Data.SQLite.Core": {
-              "target": "Package",
-              "version": "[1.0.110, )"
-            },
-            "System.Data.SQLite.EF6": {
-              "target": "Package",
-              "version": "[1.0.110, )"
-            },
-            "System.Data.SQLite.Linq": {
-              "target": "Package",
-              "version": "[1.0.110, )"
             }
           },
           "imports": [

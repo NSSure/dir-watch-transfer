@@ -48,6 +48,7 @@ C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\bin
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\bin\Debug\System.Data.SQLite.xml
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\bin\Debug\System.Data.SQLite.dll.config
+C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\obj\Debug\dir-watch-transfer-ui.csprojAssemblyReference.cache
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\obj\Debug\dir_watch_transfer_ui.Forms.CreateSymbolicLinkForm.resources
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\obj\Debug\dir_watch_transfer_ui.MainForm.resources
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\obj\Debug\dir_watch_transfer_ui.Properties.Resources.resources
@@ -56,4 +57,3 @@ C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\obj
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\obj\Debug\dir-watch-transfer-ui.csproj.CopyComplete
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\obj\Debug\dir-watch-transfer-ui.exe
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\obj\Debug\dir-watch-transfer-ui.pdb
-C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\obj\Debug\dir-watch-transfer-ui.csprojAssemblyReference.cache

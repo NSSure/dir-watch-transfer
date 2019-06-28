@@ -1,0 +1,2 @@
+C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-installer\bin\Debug\DirWatchTransfer-Debug-x86.msi
+C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-installer\bin\Debug\DirWatchTransfer-Debug-x86.wixpdb

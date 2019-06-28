@@ -1,6 +1,7 @@
+using DirWatchTransfer.Core.DB;
+using DirWatchTransfer.Core.SignalR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,7 +20,7 @@ namespace DirWatchTransfer
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            DirWatchTransferContext.Initialize();
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -27,9 +28,10 @@ namespace DirWatchTransfer
                 configuration.RootPath = "ClientApp/dist";
             });
 
+            //services.AddCors();
+            services.AddMvc();
             services.AddSignalR();
-
-            services.AddCors();
+            services.AddInjections();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider provider)
@@ -44,9 +46,19 @@ namespace DirWatchTransfer
                 app.UseHsts();
             }
 
+            //app.UseCors(builder =>
+            //{
+            //    builder.WithOrigins("http://localhost:8080").AllowAnyHeader().AllowAnyMethod().AllowCredentials();
+            //});
+
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
-            app.UseMvc(routes => { routes.MapRoute(name: "default", template: "{controller}/{action=Index}/{id?}"); });
+            app.UseMvc();
+
+            app.UseSignalR((options) =>
+            {
+                options.MapHub<FileSystemHub>("/hub");
+            });
 
             app.UseSpa(spa =>
             {
