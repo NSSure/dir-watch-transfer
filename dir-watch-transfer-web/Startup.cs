@@ -1,4 +1,4 @@
-using DirWatchTransfer.Core.DB;
+ using DirWatchTransfer.Core.DB;
 using DirWatchTransfer.Core.SignalR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -28,7 +28,14 @@ namespace DirWatchTransfer
                 configuration.RootPath = "ClientApp/dist";
             });
 
-            //services.AddCors();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll", builder =>
+                {
+                    builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+                });
+            });
+
             services.AddMvc();
             services.AddSignalR();
             services.AddInjections();
@@ -46,10 +53,7 @@ namespace DirWatchTransfer
                 app.UseHsts();
             }
 
-            //app.UseCors(builder =>
-            //{
-            //    builder.WithOrigins("http://localhost:8080").AllowAnyHeader().AllowAnyMethod().AllowCredentials();
-            //});
+            app.UseCors("AllowAll");
 
             app.UseStaticFiles();
             app.UseSpaStaticFiles();

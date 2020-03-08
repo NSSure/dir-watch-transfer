@@ -106,9 +106,12 @@ namespace dir_watch_transfer_ui.Utilities
             {
                 long fileLength = sourceFile.Length;
 
-                if (IsFileLocked(new FileInfo(targetPath)))
+                if (File.Exists(targetPath))
                 {
-                    return;
+                    if (IsFileLocked(new FileInfo(targetPath)))
+                    {
+                        return;
+                    }
                 }
 
                 using (FileStream targetFile = new FileStream(targetPath, FileMode.Create, FileAccess.Write))

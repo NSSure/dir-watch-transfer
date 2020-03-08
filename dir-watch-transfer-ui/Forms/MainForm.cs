@@ -79,7 +79,7 @@ namespace dir_watch_transfer_ui
 
             foreach (SymbolicLink symbolicLink in DirWatchTransferApp.SymbolicLinks)
             {
-                this.AddSymbolicLinkToList(symbolicLink.Name, symbolicLink.Source, symbolicLink.Target, ignoreHistoryLog: true);
+                this.AddSymbolicLinkToList(symbolicLink.Name, symbolicLink.Source, symbolicLink.Target, "Stopped", ignoreHistoryLog: true);
             }
 
             base.CreateHandle();
@@ -90,9 +90,9 @@ namespace dir_watch_transfer_ui
         /// </summary>
         /// <param name="sourcePath">Path of the source directory.</param>
         /// <param name="targetPath">Path of the target directory.</param>
-        private void AddSymbolicLinkToList(string name, string sourcePath, string targetPath, bool ignoreHistoryLog = false)
+        private void AddSymbolicLinkToList(string name, string sourcePath, string targetPath, string statusText, bool ignoreHistoryLog = false)
         {
-            string[] data = new string[] { name, sourcePath, targetPath };
+            string[] data = new string[] { name, sourcePath, targetPath, statusText };
             ListViewItem item = new ListViewItem(data);
             item.UseItemStyleForSubItems = false;
             // ListViewItem.ListViewSubItem statusSubItem = item.SubItems[2];
@@ -119,7 +119,7 @@ namespace dir_watch_transfer_ui
             }
 
             // UI methods.
-            this.AddSymbolicLinkToList(symbolicLink.Name, symbolicLink.Source, symbolicLink.Target);
+            this.AddSymbolicLinkToList(symbolicLink.Name, symbolicLink.Source, symbolicLink.Target, "Stopped");
         }
 
         private void AddHistoryItem(string text, int imageIndex, bool ignore = false)
@@ -165,7 +165,7 @@ namespace dir_watch_transfer_ui
 
             this.AutoSizeColumns(this.listSymbolicLinks);
             this.AutoSizeColumns(this.listWatchers);
-            this.AutoSizeColumns(this.listSyncs);
+            //this.AutoSizeColumns(this.listSyncs);
         }
 
         private void listSymbolicLinks_Resize(object sender, EventArgs e)
@@ -215,8 +215,8 @@ namespace dir_watch_transfer_ui
 
             foreach (ListViewItem item in listSymbolicLinks.Items)
             {
-                item.SubItems[2].ForeColor = this.ColorSuccess;
-                item.SubItems[2].Text = "Watching...";
+                item.SubItems[3].ForeColor = this.ColorSuccess;
+                item.SubItems[3].Text = "Watching...";
             }
 
             this.AddHistoryItem($"Initialized the watcher(s) for ({DirWatchTransferApp.SymbolicLinks.Count}) symbolic links", DirWatchTransferApp.TimeImageConfig.ImageIndex);
@@ -235,8 +235,8 @@ namespace dir_watch_transfer_ui
 
             foreach (ListViewItem item in listSymbolicLinks.Items)
             {
-                item.SubItems[2].ForeColor = this.ColorDanger;
-                item.SubItems[2].Text = "Stopped";
+                item.SubItems[3].ForeColor = this.ColorDanger;
+                item.SubItems[3].Text = "Stopped";
             }
 
             this.AddHistoryItem($"Stopped the watcher(s) for ({DirWatchTransferApp.SymbolicLinks.Count}) symbolic links", DirWatchTransferApp.StatusOfflineConfig.ImageIndex);
@@ -256,6 +256,11 @@ namespace dir_watch_transfer_ui
         #endregion
 
         private void ListSyncs_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void splitContent_Panel1_Paint(object sender, PaintEventArgs e)
         {
 
         }

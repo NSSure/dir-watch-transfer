@@ -262,7 +262,6 @@
 ..\dir-watch-transfer-web\bin\Debug\netcoreapp2.2\win-x86\publish\System.Resources.Reader.dll
 ..\dir-watch-transfer-web\bin\Debug\netcoreapp2.2\win-x86\publish\System.Diagnostics.Process.dll
 ..\dir-watch-transfer-web\bin\Debug\netcoreapp2.2\win-x86\publish\System.IO.UnmanagedMemoryStream.dll
-..\dir-watch-transfer-web\bin\Debug\netcoreapp2.2\win-x86\publish\ClientApp\dist\css\thanatos.css
 ..\dir-watch-transfer-web\bin\Debug\netcoreapp2.2\win-x86\publish\Microsoft.Extensions.Logging.Console.dll
 ..\dir-watch-transfer-web\bin\Debug\netcoreapp2.2\win-x86\publish\System.Threading.Tasks.Dataflow.dll
 ..\dir-watch-transfer-web\bin\Debug\netcoreapp2.2\win-x86\publish\Microsoft.Extensions.DependencyInjection.dll
@@ -376,6 +375,7 @@
 ..\dir-watch-transfer-web\bin\Debug\netcoreapp2.2\win-x86\publish\Microsoft.AspNetCore.Server.Kestrel.Core.dll
 ..\dir-watch-transfer-web\bin\Debug\netcoreapp2.2\win-x86\publish\System.Collections.NonGeneric.dll
 ..\dir-watch-transfer-web\bin\Debug\netcoreapp2.2\win-x86\publish\System.Runtime.InteropServices.WindowsRuntime.dll
+..\dir-watch-transfer-web\bin\Debug\netcoreapp2.2\win-x86\publish\wwwroot\images\app.ico
 ..\dir-watch-transfer-web\bin\Debug\netcoreapp2.2\win-x86\publish\System.Threading.Overlapped.dll
 ..\dir-watch-transfer-web\bin\Debug\netcoreapp2.2\win-x86\publish\api-ms-win-core-synch-l1-1-0.dll
 ..\dir-watch-transfer-web\bin\Debug\netcoreapp2.2\win-x86\publish\web.config

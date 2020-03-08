@@ -2,6 +2,7 @@
 using DirWatchTransfer.Core.Entity;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,7 +19,7 @@ namespace DirWatchTransfer.Core.DB
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlite("Data Source=DirWatchTransferContext");
+            optionsBuilder.UseSqlite($"Data Source={Path.Combine(Constants.ApplicationPath, "DirWatchTransferContext")}");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

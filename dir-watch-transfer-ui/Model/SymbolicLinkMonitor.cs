@@ -90,14 +90,22 @@ namespace dir_watch_transfer_ui.Model
 
         private void SymbolicLinkWatcher_Created(object sender, FileSystemEventArgs e)
         {
-            CopyDiagnostics copyDiagnostics = new SymbolicLinkUtility().SyncLinkedFile(e.Name, e.FullPath);
-            this.CopyCompletedAction?.Invoke(copyDiagnostics);
+            // Ignore visual studio temp files.
+            if (!e.Name.EndsWith("~"))
+            {
+                CopyDiagnostics copyDiagnostics = new SymbolicLinkUtility().SyncLinkedFile(e.Name, e.FullPath);
+                this.CopyCompletedAction?.Invoke(copyDiagnostics);
+            }
         }
 
         private void SymbolicLinkWatcher_Changed(object sender, FileSystemEventArgs e)
         {
-            CopyDiagnostics copyDiagnostics = new SymbolicLinkUtility().SyncLinkedFile(e.Name, e.FullPath);
-            this.CopyCompletedAction?.Invoke(copyDiagnostics);
+            // Ignore visual studio temp files.
+            if (!e.Name.EndsWith("~"))
+            {
+                CopyDiagnostics copyDiagnostics = new SymbolicLinkUtility().SyncLinkedFile(e.Name, e.FullPath);
+                this.CopyCompletedAction?.Invoke(copyDiagnostics);
+            }
         }
     }
 }

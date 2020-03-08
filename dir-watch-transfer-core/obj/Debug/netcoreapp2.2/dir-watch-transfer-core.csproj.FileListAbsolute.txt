@@ -8,7 +8,6 @@ C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-core\b
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-core\bin\Debug\netcoreapp2.2\Microsoft.AspNetCore.SignalR.Core.xml
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-core\bin\Debug\netcoreapp2.2\Microsoft.IdentityModel.Protocols.pdb
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-core\bin\Debug\netcoreapp2.2\Microsoft.IdentityModel.Protocols.xml
-C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-core\obj\Debug\netcoreapp2.2\dir-watch-transfer-core.csproj.CoreCompileInputs.cache
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-core\obj\Debug\netcoreapp2.2\dir-watch-transfer-core.AssemblyInfoInputs.cache
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-core\obj\Debug\netcoreapp2.2\dir-watch-transfer-core.AssemblyInfo.cs
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-core\obj\Debug\netcoreapp2.2\dir-watch-transfer-core.csproj.CopyComplete

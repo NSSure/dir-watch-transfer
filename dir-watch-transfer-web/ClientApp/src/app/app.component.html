@@ -1,31 +1,32 @@
 <div class="app h-100">
-  <app-nav-menu></app-nav-menu>
-  <div class="container-fluid" style="display: flex; flex-direction: column; flex: 1;">
-    <div class="row h-100">
-      <div class="col-lg-3 col-md-12 p-4" style="background-color: #eeeeee;">
-        <div class="side-bar">
-          <div class="mb-4">
-            <symbolic-link-add></symbolic-link-add>
+  <div class="row">
+    <div class="col">
+      <app-nav-menu></app-nav-menu>
+    </div>
+    <div class="col-10">
+      <div class="container-fluid" style="display: flex; flex-direction: column; flex: 1;">
+        <div class="row h-100">
+          <div class="col-lg-3 col-md-12 p-4" style="background-color: #eeeeee;">
+            <div class="side-bar">
+              <div class="mb-4">
+                <symbolic-link-add></symbolic-link-add>
+              </div>
+              <div class="mb-4">
+                <watcher-add></watcher-add>
+              </div>
+            </div>
           </div>
-          <div class="mb-4">
-            <watcher-add></watcher-add>
+          <div class="col-lg-6 col-md-12 p-4">
+            <router-outlet style="overflow-y: auto;"></router-outlet>
+          </div>
+          <div class="col-lg-3 col-md-12 p-4" style="background-color: #eeeeee;">
+            <div class="mb-4">
+              <symbolic-link-list></symbolic-link-list>
+            </div>
+            <activity></activity>
           </div>
         </div>
-      </div>
-      <div class="col-lg-5 col-md-12 p-4">
-        <router-outlet style="overflow-y: auto;"></router-outlet>
-      </div>
-      <div class="col-lg-4 col-md-12 p-4" style="background-color: #eeeeee;">
-        <div class="mb-4">
-          <symbolic-link-list></symbolic-link-list>
-        </div>
-        <activity></activity>
       </div>
     </div>
   </div>
-  <!--<nav class="navbar fixed-bottom navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-top box-shadow ">
-    <span class="navbar-text">
-      34 Symbolic link(s) // 12 watcher(s) // 4 active watcher(s) // 0 sync(s)
-    </span>
-  </nav>-->
 </div>

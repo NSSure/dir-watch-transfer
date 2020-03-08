@@ -70,12 +70,12 @@ namespace dir_watch_transfer_ui.Utilities
             };
         }
 
-        public CopyDiagnostics SyncLinkedDirectory(string sourcePath)
+        public CopyDiagnostics SyncLinkedDirectory(string symbolicLinkName)
         {
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            SymbolicLink symbolicLink = DirWatchTransferApp.SymbolicLinks.FirstOrDefault(a => a.Source == sourcePath);
+            SymbolicLink symbolicLink = DirWatchTransferApp.SymbolicLinks.FirstOrDefault(a => a.Name == symbolicLinkName);
 
             CopyUtility copyUtility = new CopyUtility();
             copyUtility.CopyDirectory(symbolicLink.Source, symbolicLink.Target);

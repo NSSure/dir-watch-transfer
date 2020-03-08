@@ -31,6 +31,13 @@ export class WatcherListComponent implements OnInit {
     this.newWatcherSubscription = this.watcherService.newWatcher$.subscribe((watcher) => {
       if (watcher) {
         let group = this.groupedWatchers.find(x => x.symbolicLink.id === watcher.symbolicLinkId);
+
+        if (!group) {
+          group = {};
+          group.watchers = new Array<any>();
+          this.groupedWatchers.push(group);
+        }
+
         group.watchers.push(watcher);
       }
     });
