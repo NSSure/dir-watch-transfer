@@ -55,3 +55,5 @@ C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\obj
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\obj\Debug\dir-watch-transfer-ui.csproj.CopyComplete
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\obj\Debug\dir-watch-transfer-ui.exe
 C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\obj\Debug\dir-watch-transfer-ui.pdb
+C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\obj\Debug\dir-watch-transfer-ui.csprojAssemblyReference.cache
+C:\Users\Nick\Documents\Programming\dir-watch-transfer\dir-watch-transfer-ui\obj\Debug\dir_watch_transfer_ui.Forms.CreateWatcher.resources

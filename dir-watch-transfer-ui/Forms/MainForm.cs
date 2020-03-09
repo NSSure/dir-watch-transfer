@@ -45,14 +45,15 @@ namespace dir_watch_transfer_ui
             this.Height = 600;
 
             this.listSymbolicLinks.DoubleBuffer();
-            this.listWatchers.DoubleBuffer();
-            this.listSyncs.DoubleBuffer();
 
             // Register control events.
             menuItemAddLink.Click += MenuItemAddLink_Click;
             listSymbolicLinks.MouseClick += listSymbolicLinks_MouseClick;
+
             contextItemStartWatchingLink.Click += ContextItemStartWatchingLink_Click;
             contextItemForceCopy.Click += ContextItemForceCopy_Click;
+            contextItemCreateAsWatcher.Click += ContextItemCreateAsWatcher_Click;
+
             listSymbolicLinks.Resize += listSymbolicLinks_Resize;
             startWatchers.Click += StartWatchers_Click;
             stopWatchers.Click += StopWatchers_Click;
@@ -164,8 +165,6 @@ namespace dir_watch_transfer_ui
             });
 
             this.AutoSizeColumns(this.listSymbolicLinks);
-            this.AutoSizeColumns(this.listWatchers);
-            //this.AutoSizeColumns(this.listSyncs);
         }
 
         private void listSymbolicLinks_Resize(object sender, EventArgs e)
@@ -192,22 +191,33 @@ namespace dir_watch_transfer_ui
 
         private void ContextItemStartWatchingLink_Click(object sender, EventArgs e)
         {
+            string _symbolicLinkName = listSymbolicLinks.FocusedItem.Text;
+
+            SymbolicLink _symbolicLink = DirWatchTransferApp.SymbolicLinks.FirstOrDefault(a => a.Name == _symbolicLinkName);
+
+            listSymbolicLinks.FocusedItem.SubItems[3].ForeColor = this.ColorSuccess;
+            listSymbolicLinks.FocusedItem.SubItems[3].Text = "Watching...";
+
+            this.SymbolicLinkUtil.StartLinkWatcher(_symbolicLink, this.OnCopyCompleted);
         }
 
         private void ContextItemForceCopy_Click(object sender, EventArgs e)
         {
-            string sourcePath = listSymbolicLinks.FocusedItem.Text;
-            CopyDiagnostics copyDiagnostics = this.SymbolicLinkUtil.SyncLinkedDirectory(sourcePath);
+            string _symbolicLinkName = listSymbolicLinks.FocusedItem.Text;
+            CopyDiagnostics copyDiagnostics = this.SymbolicLinkUtil.SyncLinkedDirectory(_symbolicLinkName);
 
             this.AddHistoryItem($"Directory contents copied from {copyDiagnostics.SourcePath} to {copyDiagnostics.TargetPath} ({copyDiagnostics.ElapsedTime} ms)", DirWatchTransferApp.StatusInformationImageConfig.ImageIndex);
         }
 
+        private void ContextItemCreateAsWatcher_Click(object sender, EventArgs e)
+        {
+            CreateWatcher createWatcherForm = new CreateWatcher();
+            createWatcherForm.ShowDialog(this);
+        }
+
         private void StartWatchers_Click(object sender, EventArgs e)
         {
-            this.SymbolicLinkUtil.BulkStartWatchers(this.OnCopyCompleted);
-
-            // Remove "Start watchers" menu item for main menu.
-            watchersToolStripMenuItem.DropDownItems.RemoveAt(0);
+            this.SymbolicLinkUtil.BulkStartLinkWatchers(this.OnCopyCompleted);
 
             // Add a "Stop watchers" menu item to the main menu.
             startWatchers.Enabled = false;
@@ -225,9 +235,6 @@ namespace dir_watch_transfer_ui
         private void StopWatchers_Click(object sender, EventArgs e)
         {
             this.SymbolicLinkUtil.BulkStopWatchers();
-
-            // Remove "Start watchers" menu item for main menu.
-            watchersToolStripMenuItem.DropDownItems.RemoveAt(0);
 
             // Add a "Stop watchers" menu item to the main menu.
             startWatchers.Enabled = true;

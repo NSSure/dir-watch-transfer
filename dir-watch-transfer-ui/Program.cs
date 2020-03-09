@@ -1,10 +1,4 @@
-﻿using dir_watch_transfer_ui.DB;
-using dir_watch_transfer_ui.Model;
-using System;
-using System.Collections.Generic;
-using System.Data.SQLite;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows.Forms;
 
 namespace dir_watch_transfer_ui

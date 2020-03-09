@@ -96,6 +96,12 @@
     <Compile Include="Forms\CreateSymbolicLinkForm.Designer.cs">
       <DependentUpon>CreateSymbolicLinkForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\CreateWatcher.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CreateWatcher.Designer.cs">
+      <DependentUpon>CreateWatcher.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -112,6 +118,9 @@
     <Compile Include="Utilities\SymbolicLinkUtility.cs" />
     <EmbeddedResource Include="Forms\CreateSymbolicLinkForm.resx">
       <DependentUpon>CreateSymbolicLinkForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CreateWatcher.resx">
+      <DependentUpon>CreateWatcher.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

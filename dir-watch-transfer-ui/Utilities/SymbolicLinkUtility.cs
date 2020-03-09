@@ -23,7 +23,13 @@ namespace dir_watch_transfer_ui.Utilities
             return base.AddAsync(entity);
         }
 
-        public void BulkStartWatchers(Action<CopyDiagnostics> copyCompleted)
+        public void StartLinkWatcher(SymbolicLink symbolicLink, Action<CopyDiagnostics> copyCompleted)
+        {
+            symbolicLink.Monitor = new SymbolicLinkMonitor(copyCompleted);
+            symbolicLink.Monitor.StartWatcher(symbolicLink.Source);
+        }
+
+        public void BulkStartLinkWatchers(Action<CopyDiagnostics> copyCompleted)
         {
             foreach (SymbolicLink symbolicLink in DirWatchTransferApp.SymbolicLinks)
             {

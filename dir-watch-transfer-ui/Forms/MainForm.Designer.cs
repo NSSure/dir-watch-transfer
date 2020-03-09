@@ -50,10 +50,11 @@
             this.nameColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.sourceColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.targetColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.statColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.contextItemStartWatchingLink = new System.Windows.Forms.ToolStripMenuItem();
             this.contextItemForceCopy = new System.Windows.Forms.ToolStripMenuItem();
-            this.createLinkWatcherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextItemCreateAsWatcher = new System.Windows.Forms.ToolStripMenuItem();
             this.listHistory = new System.Windows.Forms.ListView();
             this.mainTabs = new System.Windows.Forms.TabControl();
             this.managementTab = new System.Windows.Forms.TabPage();
@@ -63,27 +64,11 @@
             this.scheduledColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lastSyncColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.intervalColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.listSyncs = new System.Windows.Forms.ListView();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.symbolicLinkColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.statusColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.listWatchers = new System.Windows.Forms.ListView();
-            this.mainSplitContainer = new System.Windows.Forms.SplitContainer();
-            this.statColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.menuStrip1.SuspendLayout();
             this.contextMenu.SuspendLayout();
             this.mainTabs.SuspendLayout();
             this.managementTab.SuspendLayout();
             this.sessionHistoryTab.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.mainSplitContainer)).BeginInit();
-            this.mainSplitContainer.Panel1.SuspendLayout();
-            this.mainSplitContainer.Panel2.SuspendLayout();
-            this.mainSplitContainer.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -226,9 +211,10 @@
             this.listSymbolicLinks.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listSymbolicLinks.FullRowSelect = true;
             this.listSymbolicLinks.HideSelection = false;
-            this.listSymbolicLinks.Location = new System.Drawing.Point(3, 3);
+            this.listSymbolicLinks.Location = new System.Drawing.Point(0, 0);
+            this.listSymbolicLinks.Margin = new System.Windows.Forms.Padding(0);
             this.listSymbolicLinks.Name = "listSymbolicLinks";
-            this.listSymbolicLinks.Size = new System.Drawing.Size(1484, 447);
+            this.listSymbolicLinks.Size = new System.Drawing.Size(1490, 940);
             this.listSymbolicLinks.TabIndex = 0;
             this.listSymbolicLinks.TileSize = new System.Drawing.Size(268, 44);
             this.listSymbolicLinks.UseCompatibleStateImageBehavior = false;
@@ -248,33 +234,37 @@
             this.targetColumn.Text = "Target";
             this.targetColumn.Width = 58;
             // 
+            // statColumn
+            // 
+            this.statColumn.Text = "Status";
+            // 
             // contextMenu
             // 
             this.contextMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.contextItemStartWatchingLink,
             this.contextItemForceCopy,
-            this.createLinkWatcherToolStripMenuItem});
+            this.contextItemCreateAsWatcher});
             this.contextMenu.Name = "contextMenu";
-            this.contextMenu.Size = new System.Drawing.Size(229, 100);
+            this.contextMenu.Size = new System.Drawing.Size(241, 133);
             // 
             // contextItemStartWatchingLink
             // 
             this.contextItemStartWatchingLink.Name = "contextItemStartWatchingLink";
-            this.contextItemStartWatchingLink.Size = new System.Drawing.Size(228, 32);
+            this.contextItemStartWatchingLink.Size = new System.Drawing.Size(240, 32);
             this.contextItemStartWatchingLink.Text = "Start watching link";
             // 
             // contextItemForceCopy
             // 
             this.contextItemForceCopy.Name = "contextItemForceCopy";
-            this.contextItemForceCopy.Size = new System.Drawing.Size(228, 32);
+            this.contextItemForceCopy.Size = new System.Drawing.Size(240, 32);
             this.contextItemForceCopy.Text = "Force copy";
             // 
-            // createLinkWatcherToolStripMenuItem
+            // contextItemCreateAsWatcher
             // 
-            this.createLinkWatcherToolStripMenuItem.Name = "createLinkWatcherToolStripMenuItem";
-            this.createLinkWatcherToolStripMenuItem.Size = new System.Drawing.Size(228, 32);
-            this.createLinkWatcherToolStripMenuItem.Text = "Create as watcher";
+            this.contextItemCreateAsWatcher.Name = "contextItemCreateAsWatcher";
+            this.contextItemCreateAsWatcher.Size = new System.Drawing.Size(240, 32);
+            this.contextItemCreateAsWatcher.Text = "Create as watcher";
             // 
             // listHistory
             // 
@@ -283,9 +273,10 @@
             this.listHistory.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listHistory.FullRowSelect = true;
             this.listHistory.HideSelection = false;
-            this.listHistory.Location = new System.Drawing.Point(3, 3);
+            this.listHistory.Location = new System.Drawing.Point(0, 0);
+            this.listHistory.Margin = new System.Windows.Forms.Padding(0);
             this.listHistory.Name = "listHistory";
-            this.listHistory.Size = new System.Drawing.Size(1484, 447);
+            this.listHistory.Size = new System.Drawing.Size(1490, 940);
             this.listHistory.TabIndex = 7;
             this.listHistory.UseCompatibleStateImageBehavior = false;
             this.listHistory.View = System.Windows.Forms.View.List;
@@ -295,19 +286,20 @@
             this.mainTabs.Controls.Add(this.managementTab);
             this.mainTabs.Controls.Add(this.sessionHistoryTab);
             this.mainTabs.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mainTabs.Location = new System.Drawing.Point(0, 0);
+            this.mainTabs.Location = new System.Drawing.Point(0, 25);
+            this.mainTabs.Margin = new System.Windows.Forms.Padding(0);
             this.mainTabs.Name = "mainTabs";
             this.mainTabs.SelectedIndex = 0;
-            this.mainTabs.Size = new System.Drawing.Size(1498, 486);
+            this.mainTabs.Size = new System.Drawing.Size(1498, 973);
             this.mainTabs.TabIndex = 1;
             // 
             // managementTab
             // 
             this.managementTab.Controls.Add(this.listSymbolicLinks);
             this.managementTab.Location = new System.Drawing.Point(4, 29);
+            this.managementTab.Margin = new System.Windows.Forms.Padding(0);
             this.managementTab.Name = "managementTab";
-            this.managementTab.Padding = new System.Windows.Forms.Padding(3);
-            this.managementTab.Size = new System.Drawing.Size(1490, 453);
+            this.managementTab.Size = new System.Drawing.Size(1490, 940);
             this.managementTab.TabIndex = 0;
             this.managementTab.Text = "Management";
             this.managementTab.UseVisualStyleBackColor = true;
@@ -316,9 +308,9 @@
             // 
             this.sessionHistoryTab.Controls.Add(this.listHistory);
             this.sessionHistoryTab.Location = new System.Drawing.Point(4, 29);
+            this.sessionHistoryTab.Margin = new System.Windows.Forms.Padding(0);
             this.sessionHistoryTab.Name = "sessionHistoryTab";
-            this.sessionHistoryTab.Padding = new System.Windows.Forms.Padding(3);
-            this.sessionHistoryTab.Size = new System.Drawing.Size(1490, 453);
+            this.sessionHistoryTab.Size = new System.Drawing.Size(1490, 940);
             this.sessionHistoryTab.TabIndex = 1;
             this.sessionHistoryTab.Text = "Session History";
             this.sessionHistoryTab.UseVisualStyleBackColor = true;
@@ -353,100 +345,11 @@
             this.intervalColumn.Text = "Interval";
             this.intervalColumn.Width = 193;
             // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.listSyncs);
-            this.tabPage2.Location = new System.Drawing.Point(4, 29);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1490, 450);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Syncs";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // listSyncs
-            // 
-            this.listSyncs.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listSyncs.HideSelection = false;
-            this.listSyncs.Location = new System.Drawing.Point(3, 3);
-            this.listSyncs.Name = "listSyncs";
-            this.listSyncs.Size = new System.Drawing.Size(1484, 444);
-            this.listSyncs.TabIndex = 0;
-            this.listSyncs.UseCompatibleStateImageBehavior = false;
-            this.listSyncs.View = System.Windows.Forms.View.Details;
-            this.listSyncs.SelectedIndexChanged += new System.EventHandler(this.ListSyncs_SelectedIndexChanged);
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.listWatchers);
-            this.tabPage1.Location = new System.Drawing.Point(4, 29);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1490, 450);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Watchers";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1498, 483);
-            this.tabControl1.TabIndex = 0;
-            // 
-            // symbolicLinkColumn
-            // 
-            this.symbolicLinkColumn.Text = "Symbolic Link";
-            // 
-            // statusColumn
-            // 
-            this.statusColumn.Text = "Status";
-            // 
-            // listWatchers
-            // 
-            this.listWatchers.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.symbolicLinkColumn,
-            this.statusColumn});
-            this.listWatchers.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listWatchers.HideSelection = false;
-            this.listWatchers.Location = new System.Drawing.Point(3, 3);
-            this.listWatchers.Name = "listWatchers";
-            this.listWatchers.Size = new System.Drawing.Size(1484, 444);
-            this.listWatchers.TabIndex = 0;
-            this.listWatchers.UseCompatibleStateImageBehavior = false;
-            this.listWatchers.View = System.Windows.Forms.View.Details;
-            // 
-            // mainSplitContainer
-            // 
-            this.mainSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mainSplitContainer.Location = new System.Drawing.Point(0, 25);
-            this.mainSplitContainer.Name = "mainSplitContainer";
-            this.mainSplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // mainSplitContainer.Panel1
-            // 
-            this.mainSplitContainer.Panel1.Controls.Add(this.mainTabs);
-            // 
-            // mainSplitContainer.Panel2
-            // 
-            this.mainSplitContainer.Panel2.Controls.Add(this.tabControl1);
-            this.mainSplitContainer.Size = new System.Drawing.Size(1498, 973);
-            this.mainSplitContainer.SplitterDistance = 486;
-            this.mainSplitContainer.TabIndex = 2;
-            // 
-            // statColumn
-            // 
-            this.statColumn.Text = "Status";
-            // 
             // MainForm
             // 
             this.BackColor = System.Drawing.SystemColors.Menu;
             this.ClientSize = new System.Drawing.Size(1498, 998);
-            this.Controls.Add(this.mainSplitContainer);
+            this.Controls.Add(this.mainTabs);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
@@ -460,13 +363,6 @@
             this.mainTabs.ResumeLayout(false);
             this.managementTab.ResumeLayout(false);
             this.sessionHistoryTab.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabControl1.ResumeLayout(false);
-            this.mainSplitContainer.Panel1.ResumeLayout(false);
-            this.mainSplitContainer.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.mainSplitContainer)).EndInit();
-            this.mainSplitContainer.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -484,7 +380,7 @@
         private System.Windows.Forms.ContextMenuStrip contextMenu;
         private System.Windows.Forms.ToolStripMenuItem contextItemStartWatchingLink;
         private System.Windows.Forms.ToolStripMenuItem contextItemForceCopy;
-        private System.Windows.Forms.ToolStripMenuItem createLinkWatcherToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem contextItemCreateAsWatcher;
         private System.Windows.Forms.ColumnHeader nameColumn;
         private System.Windows.Forms.ToolStripMenuItem syncsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
@@ -507,14 +403,6 @@
         private System.Windows.Forms.ColumnHeader scheduledColumn;
         private System.Windows.Forms.ColumnHeader lastSyncColumn;
         private System.Windows.Forms.ColumnHeader intervalColumn;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.ListView listSyncs;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.ListView listWatchers;
-        private System.Windows.Forms.ColumnHeader symbolicLinkColumn;
-        private System.Windows.Forms.ColumnHeader statusColumn;
-        private System.Windows.Forms.SplitContainer mainSplitContainer;
         private System.Windows.Forms.ColumnHeader statColumn;
     }
 }

@@ -49,15 +49,20 @@ namespace dir_watch_transfer_ui.Forms
             {
                 Source = txtSourceDirectory.Text,
                 Target = txtTargetDirectory.Text,
-                WatchFileName = chkFileName.Checked,
-                WatchDirectoryName = chkDirectoryName.Checked,
-                WatchSize = chkSize.Checked,
-                WatchLastWrite = chkLastWrite.Checked,
-                WatchLastAccess = chkLastAccess.Checked,
-                WatchCreationTime = chkCreationTime.Checked,
-                WatchSecurity = chkSecurity.Checked,
+                //WatchFileName = chkFileName.Checked,
+                //WatchDirectoryName = chkDirectoryName.Checked,
+                //WatchSize = chkSize.Checked,
+                //WatchLastWrite = chkLastWrite.Checked,
+                //WatchLastAccess = chkLastAccess.Checked,
+                //WatchCreationTime = chkCreationTime.Checked,
+                //WatchSecurity = chkSecurity.Checked,
                 Monitor = new SymbolicLinkMonitor()
             });
+        }
+
+        private void btnCreateWatcher_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }
