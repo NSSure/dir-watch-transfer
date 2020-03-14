@@ -1,42 +1,34 @@
- <header>
-  <nav class='navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow'>
-    <div class="container">
-      <a class="navbar-brand" [routerLink]='["/"]'>Test</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-label="Toggle navigation"
-        [attr.aria-expanded]="isExpanded" (click)="toggle()">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" [ngClass]='{"show": isExpanded}'>
-        <ul class="navbar-nav flex-grow">
-          <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
-            <a class="nav-link text-dark" [routerLink]='["/"]'>Home</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Logs
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" [routerLink]='["/log"]'>View Log</a>
-              <a class="dropdown-item" href="#" (click)="logService.openDirectory()">Open Log Directory</a>
-            </div>
-          </li>
-          <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
-            <a class="nav-link text-dark" [routerLink]='["/settings"]'>Settings</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Help
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" [routerLink]='["/about"]'>About</a>
-              <a class="dropdown-item" href="https://github.com/NSSure/dir-watch-transfer" target="_blank">Source code</a>
-              <div class="dropdown-divider"></div>
-              <h6 class="dropdown-header">Version</h6>
-              <span class="dropdown-item-text">1.0.0</span>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-</header>
+<div class="nav nav-list border-default-right fill-white" style="height: 100%; width: 250px; padding: 30px;">
+  <ul class="nav-group">
+    <li class="item-header">
+      DirWatchTransfer
+    </li>
+    <li [routerLink]='["/"]'>
+      <a>Home</a>
+    </li>
+    <li [routerLink]='["/settings"]'>
+      <a>Settings</a>
+    </li>
+    <li class="item-header">
+      Logs
+    </li>
+    <li [routerLink]='["/log"]'>
+      <a>View Log</a>
+    </li>
+    <li (click)="logService.openDirectory()">
+      <a>Open Log Directory</a>
+    </li>
+    <li class="item-header">
+      Other
+    </li>
+    <li [routerLink]='["/about"]'>
+      <a>About</a>
+    </li>
+    <li href="https://github.com/NSSure/dir-watch-transfer">
+      <a>Source Code</a>
+    </li>
+    <li class="item-header">
+      Version 1.0.0
+    </li>
+  </ul>
+</div>

@@ -155,15 +155,6 @@ namespace dir_watch_transfer_ui
 
         private async void MainForm_Load(object sender, EventArgs e)
         {
-            await this.CreateSymbolicLink(new SymbolicLink()
-            {
-                Name = "Sample symbolic link",
-                Source = @"C:\DirTestSource",
-                Target = @"C:\DirTestTarget",
-                WatchSecurity = true,
-                Monitor = new SymbolicLinkMonitor()
-            });
-
             this.AutoSizeColumns(this.listSymbolicLinks);
         }
 
