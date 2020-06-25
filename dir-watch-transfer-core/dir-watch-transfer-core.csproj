@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
     <RootNamespace>DirWatchTransfer.Core</RootNamespace>
     <AssemblyName>DirWatchTransfer.Core</AssemblyName>
@@ -12,11 +12,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="EntityFramework" Version="6.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0-preview.5.20278.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.4" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.2.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.0-preview.5.20278.2" />
   </ItemGroup>
 
   <ItemGroup>

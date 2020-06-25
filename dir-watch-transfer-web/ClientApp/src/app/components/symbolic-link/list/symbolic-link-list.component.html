@@ -2,15 +2,26 @@
   <div class="card-header">
     Existing Symbolic Links!
   </div>
-  <div class="list-group list-group-flush" *ngIf="symbolicLinks.length !== 0">
-    <div class="list-group-item" *ngFor="let symbolicLink of symbolicLinks">
-      <div class="d-flex w-100 justify-content-between">
-        <h6 class="mb-1">{{symbolicLink.name}}</h6>
-      </div>
-      <code class="mb-1">{{symbolicLink.source}}</code><br />
-      <code>{{symbolicLink.target}}</code>
-    </div>
-  </div>
+  <table class="table mb-0">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Source</th>
+        <th>Target</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let symbolicLink of symbolicLinks">
+        <td>{{symbolicLink.name}}</td>
+        <td>
+          <code>{{symbolicLink.source}}</code>
+        </td>
+        <td>
+          <code>{{symbolicLink.target}}</code>
+        </td>
+      </tr>
+    </tbody>
+  </table>
   <div class="card-body" *ngIf="symbolicLinks.length === 0">
     You have not configured any symbolic links.
   </div>

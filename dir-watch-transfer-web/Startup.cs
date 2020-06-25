@@ -23,10 +23,10 @@ namespace DirWatchTransfer
             DirWatchTransferContext.Initialize();
 
             // In production, the Angular files will be served from this directory
-            services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "ClientApp/dist";
-            });
+            //services.AddSpaStaticFiles(configuration =>
+            //{
+            //    configuration.RootPath = "ClientApp/dist";
+            //});
 
             services.AddCors(options =>
             {
@@ -36,7 +36,10 @@ namespace DirWatchTransfer
                 });
             });
 
-            services.AddMvc();
+            services.AddMvc((options) => {
+                options.EnableEndpointRouting = false;
+            });
+
             services.AddSignalR();
             services.AddInjections();
         }
@@ -56,7 +59,7 @@ namespace DirWatchTransfer
             app.UseCors("AllowAll");
 
             app.UseStaticFiles();
-            app.UseSpaStaticFiles();
+            //app.UseSpaStaticFiles();
             app.UseMvc();
 
             app.UseSignalR((options) =>
@@ -73,6 +76,7 @@ namespace DirWatchTransfer
 
                 if (env.IsDevelopment())
                 {
+                    //spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });

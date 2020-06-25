@@ -6,9 +6,27 @@
     <li [routerLink]='["/"]'>
       <a>Home</a>
     </li>
-    <li [routerLink]='["/settings"]'>
-      <a>Settings</a>
+
+    <li class="item-header">
+      Symbolic Links
     </li>
+    <li [routerLink]='["/symbolic-link/add"]'>
+      <a>Add Symbolic Link</a>
+    </li>
+    <li [routerLink]='["/symbolic-links"]'>
+      <a>List Symbolic Links</a>
+    </li>
+
+    <li class="item-header">
+      Watchers
+    </li>
+    <li [routerLink]='["/watcher/add"]'>
+      <a>Add Watcher</a>
+    </li>
+    <li [routerLink]='["/watchers"]'>
+      <a>List Watchers</a>
+    </li>
+
     <li class="item-header">
       Logs
     </li>

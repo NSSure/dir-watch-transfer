@@ -45,6 +45,13 @@ import { WatcherService } from './services/watcher.service';
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
+
+      { path: 'symbolic-link/add', component: SymbolicLinkAddComponent, pathMatch: 'full' },
+      { path: 'symbolic-links', component: SymbolicLinkListComponent, pathMatch: 'full' },
+
+      { path: 'watcher/add', component: WatcherAddComponent, pathMatch: 'full' },
+      { path: 'watchers', component: WatcherListComponent, pathMatch: 'full' },
+
       { path: 'settings', component: SettingsComponent, pathMatch: 'full' },
       { path: 'log', component: LogComponent, pathMatch: 'full' },
       { path: 'about', component: AboutComponent, pathMatch: 'full' },
