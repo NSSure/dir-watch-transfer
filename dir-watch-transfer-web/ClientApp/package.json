@@ -55,7 +55,7 @@
     "lodash": ">=4.17.11",
     "extend": ">=3.0.2",
     "fstream": ">=1.0.12",
-    "tar": ">=2.2.2"
+    "tar": ">=6.1.2"
   },
   "optionalDependencies": {
     "node-sass": "^4.9.3",
